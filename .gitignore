@@ -1,5 +1,11 @@
 # Compiled class file
 *.class
+.idea/
+**/*.iml
+src/main/resources/output
+
+### Maven template
+**/target/
 
 # Log file
 *.log
