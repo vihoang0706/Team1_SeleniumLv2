@@ -2,7 +2,7 @@
 *.class
 .idea/
 **/*.iml
-src/main/resources/output
+test-output
 
 ### Maven template
 **/target/
