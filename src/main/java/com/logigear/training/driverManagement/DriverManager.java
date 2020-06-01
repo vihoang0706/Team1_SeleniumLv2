@@ -23,7 +23,6 @@ public abstract class DriverManager {
         switch (type) {
             case CHROME:
                ChromeDriverManager();
-               driver.manage().window().maximize();
                 break;
             default:
                 break;
