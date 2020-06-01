@@ -7,20 +7,17 @@ import com.logigear.training.page.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_001_LoginPage_VerifyLoginSuccessfully extends TestBase {
+public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository extends TestBase {
     @Test
     public void TC_001() {
         LoginPage loginPage = new LoginPage();
 
-        //Login to SampleRepository
+        //Pre-condition: Login to SampleRepository
         loginPage.login(GlobalVariables.SAMPLE_REPOSITORY,GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
 
-        //Verify that user login to SampleRepository successfully
-        HomePage homepage = new HomePage();
-        Assert.assertEquals(homepage.getWelcomeAccount(), GlobalVariables.VALID_USERNAME);
-        Assert.assertEquals(homepage.getRepository(), GlobalVariables.SAMPLE_REPOSITORY);
-
         //Logout and Login with repositoryLv2
+        HomePage homepage = new HomePage();
+        homepage.logout();
         loginPage.login(GlobalVariables.SAMPLE_REPOSITORY_LV2,GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
 
         //Verify that user login to SampleRepositoryLV2 successfully
