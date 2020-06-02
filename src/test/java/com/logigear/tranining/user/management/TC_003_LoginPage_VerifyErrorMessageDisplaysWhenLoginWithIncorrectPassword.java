@@ -15,6 +15,7 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
     public void TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword() {
         System.out.println("Login with valid username and invalid password");
         loginPage.login(GlobalVariables.VALID_USERNAME, GlobalVariables.INVALID_PASSWORD);
+
         Common.waitForAlertPresent(); // Wait for Alert present
         System.out.println("Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
