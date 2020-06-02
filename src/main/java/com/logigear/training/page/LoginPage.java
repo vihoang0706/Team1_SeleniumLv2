@@ -3,6 +3,7 @@ package com.logigear.training.page;
 import com.logigear.training.common.GlobalVariables;
 import org.openqa.selenium.By;
 import com.logigear.training.driverManagement.DriverManager;
+import org.openqa.selenium.support.ui.Select;
 
 public class LoginPage extends BasePage{
     private final By _cbbRepository = By.id("repository");
@@ -10,8 +11,10 @@ public class LoginPage extends BasePage{
     private final By _txtPassword = By.id("password");
     private final By _btnLogin = By.className("btn-login");
 
+
     public void setCbbRepository(String repository){
-        DriverManager.getWebDriver().findElement(_cbbRepository).sendKeys(repository);
+        Select dropdown = new Select(DriverManager.getWebDriver().findElement(_cbbRepository));
+        dropdown.selectByVisibleText(repository);
     }
 
     public void setTxtUsername(String username) {

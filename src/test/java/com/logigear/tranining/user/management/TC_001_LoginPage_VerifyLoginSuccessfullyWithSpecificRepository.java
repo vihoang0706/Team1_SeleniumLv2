@@ -11,13 +11,13 @@ public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository exte
     @Test
     public void TC_001() {
         LoginPage loginPage = new LoginPage();
+        HomePage homepage = new HomePage();
 
         //Login to SampleRepository
         loginPage.login(GlobalVariables.SAMPLE_REPOSITORY,GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
 
         //Verify that user login to SampleRepository successfully
-        HomePage homepage = new HomePage();
         Assert.assertEquals(homepage.getWelcomeAccount(), GlobalVariables.VALID_USERNAME);
-        Assert.assertEquals(homepage.getRepository(), GlobalVariables.SAMPLE_REPOSITORY_LV2);
+        Assert.assertEquals(homepage.getRepository(), GlobalVariables.SAMPLE_REPOSITORY);
     }
 }

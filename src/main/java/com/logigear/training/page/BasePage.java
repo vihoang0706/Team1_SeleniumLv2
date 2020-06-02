@@ -6,7 +6,7 @@ import com.logigear.training.driverManagement.DriverManager;
 
 public class BasePage {
     private final By _lblWelcomeAccount = By.xpath("//a[@href='#Welcome']");
-    private final By _lblRepository = By.xpath("//span[text()='SampleRepository']");
+    private final By _lblRepository = By.xpath("//a[@href='#Repository']/span");
     private final String _lblSubMenu = "//a[contains(text(),'%s')]";
 
     protected WebElement getLblWelcomeAccount() {
