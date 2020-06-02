@@ -15,6 +15,7 @@ public class TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLogi
     public void TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials() {
         System.out.println("Login with invalid username and invalid password");
         loginPage.login(GlobalVariables.INVALID_USERNAME, GlobalVariables.INVALID_PASSWORD);
+
         Common.waitForAlertPresent(); // Wait for Alert present
         System.out.println("Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
@@ -25,6 +26,5 @@ public class TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLogi
     public void PostCondition() {
         System.out.println("Close message");
         Common.acceptAlert();
-        closeWebDriver();
     }
 }
