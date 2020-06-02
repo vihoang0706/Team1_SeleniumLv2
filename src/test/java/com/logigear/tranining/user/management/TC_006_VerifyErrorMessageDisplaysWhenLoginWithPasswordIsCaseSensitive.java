@@ -15,23 +15,27 @@ public class TC_006_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensiti
 
     @Test
     public void TC_006_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive() {
-        // Login with the account has uppercase password
+        System.out.println("Login with the account has uppercase password");
         loginPage.login(GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
-        // VP: Observe the current page. Main page is displayed
+
+        System.out.println("VP: Observe the current page. Main page is displayed");
         String actualWelcomeUserName = dashboardPage.getWelcomeAccount();
         Assert.assertEquals(actualWelcomeUserName,GlobalVariables.VALID_USERNAME);
-        // Logout TA Dashboard
+
+        System.out.println("Logout TA Dashboard");
         dashboardPage.logout();
-        // Login with the above account but enter lowercase password
+
+        System.out.println("Login with the above account but enter lowercase password");
         loginPage.login(GlobalVariables.VALID_USERNAME, GlobalVariables.LOWERCASE_PASSWORD);
+
         Common.waitForAlertPresent(); // Wait for Alert present
-        // VP: Verify that Dashboard Error message \"Username or password is invalid\" appears";
+        System.out.println("VP: Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
         Assert.assertEquals(actualErrorMessage,GlobalVariables.INVALID_USERNAME_OR_PASSWORD_MSG);
     }
     @AfterClass
     public void PostCondition() {
-        // "Close message";
+        System.out.println("Close message");
         Common.acceptAlert();
     }
 }
