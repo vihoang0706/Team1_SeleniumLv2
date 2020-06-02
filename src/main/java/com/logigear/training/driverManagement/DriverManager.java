@@ -22,7 +22,7 @@ public abstract class DriverManager {
     public static void setDriverManager(DriverType type) {
         switch (type) {
             case CHROME:
-               ChromeDriverManager();
+                ChromeDriverManager();
                 break;
             default:
                 break;

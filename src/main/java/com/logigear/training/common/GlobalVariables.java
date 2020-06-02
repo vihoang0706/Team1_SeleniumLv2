@@ -13,6 +13,8 @@ public class GlobalVariables {
     public static final String VALID_PASSWORD = "TEST";
     public static final String INVALID_PASSWORD = "abc";
     public static final String INVALID_USERNAME = "abc";
+    public static final String SAMPLE_REPOSITORY = "SampleRepository";
+    public static final String SAMPLE_REPOSITORY_LV2 = "SampleRepositoryLV2";
     public static final String LOWERCASE_PASSWORD = "test";
 
     // Messages
