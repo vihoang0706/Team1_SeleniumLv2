@@ -1,6 +1,6 @@
 package com.logigear.tranining.user.management;
 
-import com.logigear.training.common.GlobalVariables;
+import com.logigear.training.common.Constants;
 import com.logigear.training.common.TestBase;
 import com.logigear.training.page.DashboardPage;
 import com.logigear.training.page.LoginPage;
@@ -21,7 +21,7 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
 
         //Main Steps
         System.out.println("Login with valid account for the first repository");
-        loginPage.login(GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
+        loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
         System.out.println("Choose another repository in Repository list");
         dashboardPage.switchRepository(repo);
@@ -33,7 +33,7 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
         }
         catch(InterruptedException ie){
         }
-        Assert.assertEquals(dashboardPage.getRepository(), GlobalVariables.SAMPLE_REPOSITORY_LV2);
+        Assert.assertEquals(dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY_LV2);
 
 
 

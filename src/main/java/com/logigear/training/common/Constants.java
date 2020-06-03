@@ -1,12 +1,12 @@
 package com.logigear.training.common;
 
-public class GlobalVariables {
+public class Constants {
     // AUT
     public static final String AUT = "http://155e15c0d830.ngrok.io/TADashboard/login.jsp";
     public static final int WAIT_TIME = 5;
 
     // Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v79.exe";
 
     // Login
     public static final String VALID_USERNAME = "test";
@@ -19,4 +19,8 @@ public class GlobalVariables {
 
     // Messages
     public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid";
+    public static final String PROJECT_PATH = System.getProperty("user.dir");
+    public static final String RESOURCES_PATH = PROJECT_PATH + "\\src\\main\\resources\\";
+    public static final String OUTPUT_PATH = PROJECT_PATH + "/test-output/testReport.html";
+
 }

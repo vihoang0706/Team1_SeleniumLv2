@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Common {
+public class CommonMethods {
     public static void waitForAlertPresent() {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), GlobalVariables.WAIT_TIME);
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Constants.WAIT_TIME);
         wait.until(ExpectedConditions.alertIsPresent());
     }
 

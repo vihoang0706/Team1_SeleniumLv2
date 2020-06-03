@@ -1,6 +1,6 @@
 package com.logigear.training.driverManagement;
 
-import com.logigear.training.common.GlobalVariables;
+import com.logigear.training.common.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -31,7 +31,7 @@ public abstract class DriverManager {
 
     public static void ChromeDriverManager() {
         ChromeOptions options = new ChromeOptions();
-        System.setProperty("webdriver.chrome.driver", GlobalVariables.CHROME_DRIVER_LOCATION);
+        System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_LOCATION);
         driver = new ChromeDriver(options);
     }
 }

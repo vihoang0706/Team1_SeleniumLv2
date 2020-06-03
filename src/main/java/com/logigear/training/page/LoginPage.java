@@ -1,6 +1,6 @@
 package com.logigear.training.page;
 
-import com.logigear.training.common.Common;
+import com.logigear.training.common.CommonMethods;
 import com.logigear.training.driverManagement.DriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -30,9 +30,9 @@ public class LoginPage {
     }
 
     public void login(String username, String password) {
-        Common.clearField(txtUsername);
+        CommonMethods.clearField(txtUsername);
         this.setTxtUsername(username);
-        Common.clearField(txtPassword);
+        CommonMethods.clearField(txtPassword);
         this.setTxtPassword(password);
         this.clickLogin();
     }
