@@ -17,14 +17,6 @@ public class DriverFactory {
     }
 
 
-    public static RemoteWebDriver createInstanceGrid(String browser, ExtentTest logTest) {
-        GridDriver driver = new GridDriver();
-        try {
-            return driver.initialDriver(browser, logTest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 }
 

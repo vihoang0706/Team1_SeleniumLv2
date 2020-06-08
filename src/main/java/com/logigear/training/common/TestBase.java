@@ -64,7 +64,7 @@ public class TestBase extends Utility {
         // Initial test report
         try {
             htmlReporter = new ExtentHtmlReporter(reportFilePath);
-            htmlReporter.loadXMLConfig(new File(PROJECT_PATH + "/resources/suites/config.xml"));
+            htmlReporter.loadXMLConfig(new File(PROJECT_PATH + "\\src\\main\\resources\\suites/config.xml"));
             report = new ExtentReports();
             report.attachReporter(htmlReporter);
             logSuite = createTestForExtentReport(report, "Initial Setup");
@@ -207,7 +207,7 @@ public class TestBase extends Utility {
 
 
         //Update test execution status to the testcaseList
-        testcaseList.add(testNameWithStatus + ": " + logMethod.getStatus());
+//        testcaseList.add(testNameWithStatus + ": " + logMethod.getStatus());
 
         // Quit
         quit(logMethod);

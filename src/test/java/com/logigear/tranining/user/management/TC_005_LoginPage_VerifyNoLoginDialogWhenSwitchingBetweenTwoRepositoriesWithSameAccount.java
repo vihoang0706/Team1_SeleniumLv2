@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 import static java.lang.Thread.sleep;
 
 public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount extends TestBase {
-    LoginPage loginPage = new LoginPage();
-    DashboardPage dashboardPage = new DashboardPage();
+    private LoginPage loginPage = null;
+    private DashboardPage dashboardPage = null;
 
     @Test
     public void TC_005() {

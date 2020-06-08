@@ -22,7 +22,7 @@ public class Constants {
     public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid";
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String RESOURCES_PATH = PROJECT_PATH + "\\src\\main\\resources\\";
-    public static final String OUTPUT_PATH = PROJECT_PATH + "/test-output/testReport.html";
+    public static final String OUTPUT_PATH = RESOURCES_PATH + "output/testReport.html";
     public static final String TEST_CONFIGURATION = RESOURCES_PATH + "configuration/Configuration.properties";
 
     //Run parameters

@@ -1,5 +1,6 @@
 package com.logigear.training.utility;
 
+import com.logigear.training.driverManagement.DriverManager;
 import com.logigear.training.utility.webdrivers.DriverFactory;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -21,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.Set;
 
 import static com.logigear.training.common.Constants.*;
 
@@ -35,6 +38,7 @@ public class Utility {
     public static String reportLocation = OUTPUT_PATH + "report-" + timeStampString + "/";
     public static String reportFilePath = reportLocation + "report-" + timeStampString + ".html";
     public static Log log4j;
+    public static String subWindowHandler = null;
     public static ExtentReports report = null;
     public static ExtentHtmlReporter htmlReporter = null;
     public static ConfigFileReader configFileReader = null;
@@ -51,7 +55,7 @@ public class Utility {
         try {
             switch (RUN_ON.toLowerCase()) {
                 case "grid":
-                    Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER, logTest));
+                    //Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER, logTest));
                     maximizeWindow();
                     break;
                 default:
@@ -59,7 +63,9 @@ public class Utility {
                     maximizeWindow();
                     break;
             }
-        }
+        }  catch (Exception e) {
+
+    }
     }
 
 //    public static void log4jConfiguration() {
@@ -109,6 +115,16 @@ public class Utility {
         } catch (SkipException ex) {
             logTest.fail(MarkupHelper.createLabel(description + "</br>" + getStackTrade(ex.getStackTrace()), ExtentColor.RED));
             Assert.fail(description);
+        }
+    }
+
+    public static void navigateToTestSite(ExtentTest logTest, String url) throws IOException {
+        try {
+            //logInfo(logTest, "Navigate to site: " + url);
+            Utility.getDriver().navigate().to(url);
+            maximizeWindow();
+        } catch (Exception e) {
+
         }
     }
 
@@ -244,7 +260,7 @@ public class Utility {
             String buildURL = System.getProperty("buildURL");
             String jobURL = System.getProperty("jobURL");
             if (buildURL != null && jobURL != null) {
-                return jobURL + "ws/" + reportFilePath.substring(reportFilePath.indexOf("ST-UIAutomation"));
+                return jobURL + "ws/" + reportFilePath.substring(reportFilePath.indexOf("Team1-SeleLV2"));
             } else {
                 return reportFilePath;
             }
@@ -276,4 +292,28 @@ public class Utility {
 //            log4j.error("log4jConfiguration method - ERROR: " + e);
 //        }
 //    }
+
+    public static void clearField(By by) {
+        Utility.getDriver().findElement(by).clear();
+    }
+
+    public static String getWindowHandle(WebDriver driver) {
+        // get all the window handles after the popup window appears
+        Set<String> afterPopup = driver.getWindowHandles();
+
+        Iterator<String> iterator = afterPopup.iterator();
+        while (iterator.hasNext())
+            subWindowHandler = iterator.next();
+
+        return subWindowHandler;
+    }
+    public static void switchToWindowHandle() throws IOException {
+        try {
+            String popupWidowHandle = getWindowHandle(Utility.getDriver());
+            Utility.getDriver().switchTo().window(popupWidowHandle);
+            maximizeWindow();
+        } catch (Exception e) {
+            //log4j.error("switchToWindowHandle method - ERROR - " + e);
+        }
+    }
 }

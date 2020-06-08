@@ -9,7 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword extends TestBase {
-    LoginPage loginPage = new LoginPage();
+    private LoginPage loginPage = null;
 
     @Test
     public void TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword() {

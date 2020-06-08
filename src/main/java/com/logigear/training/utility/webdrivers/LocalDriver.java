@@ -5,7 +5,6 @@ import com.logigear.training.utility.Utility;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.IOException;
 
@@ -28,9 +27,6 @@ public class LocalDriver extends Utility {
                     break;
                 case "firefox":
                     webDriver = new FirefoxDriver();
-                    break;
-                case "safari":
-                    webDriver = new SafariDriver();
                     break;
                 default:
                     //log4j.error("Our framework does not support this platform: " + browser);
