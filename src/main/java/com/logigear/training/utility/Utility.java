@@ -1,5 +1,7 @@
 package com.logigear.training.utility;
 
+import com.logigear.training.utility.webdrivers.DriverFactory;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,9 +37,29 @@ public class Utility {
     public static Log log4j;
     public static ExtentReports report = null;
     public static ExtentHtmlReporter htmlReporter = null;
+    public static ConfigFileReader configFileReader = null;
 
     public static RemoteWebDriver getDriver() {
         return driver.get();
+    }
+
+    public static void setDriver(RemoteWebDriver webDriver) {
+        driver.set(webDriver);
+    }
+
+    public static void initializeDriver(ExtentTest logTest) throws IOException {
+        try {
+            switch (RUN_ON.toLowerCase()) {
+                case "grid":
+                    Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER, logTest));
+                    maximizeWindow();
+                    break;
+                default:
+                    Utility.setDriver(DriverFactory.createInstance(BROWSER, logTest));
+                    maximizeWindow();
+                    break;
+            }
+        }
     }
 
 //    public static void log4jConfiguration() {
@@ -55,12 +77,16 @@ public class Utility {
         return timestampStr;
     }
 
-    public static ExtentTest logStepInfo(ExtentTest logTest, String description) throws IOException {
+    public static ExtentTest logStepInfo(ExtentTest logTest, String description) {
         return logTest.createNode(description);
     }
 
     public static ExtentTest createNodeForExtentReport(ExtentTest parentTest, String description) {
         return parentTest.createNode(description);
+    }
+
+    public ExtentTest createTestForExtentReport(ExtentReports report, String description) {
+        return report.createTest(description);
     }
 
     public static void logInfo(ExtentTest logTest, String description) {
@@ -242,4 +268,12 @@ public class Utility {
             return "";
         }
     }
+
+//    public static void log4jConfiguration() {
+//        try {
+//            log4j = LogFactory.getLog(new Object().getClass());
+//        } catch (Exception e) {
+//            log4j.error("log4jConfiguration method - ERROR: " + e);
+//        }
+//    }
 }
