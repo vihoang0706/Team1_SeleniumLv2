@@ -1,9 +1,10 @@
-package com.logigear.training.common;
+package com.logigear.training.base;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.logigear.training.common.Constants;
 import com.logigear.training.driverManagement.DriverManager;
 import com.logigear.training.driverManagement.DriverType;
-import com.logigear.training.utility.Utility;
+import com.logigear.training.utilities.Utility;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 

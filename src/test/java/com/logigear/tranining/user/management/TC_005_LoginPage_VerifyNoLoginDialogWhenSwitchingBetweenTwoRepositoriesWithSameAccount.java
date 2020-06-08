@@ -1,9 +1,9 @@
 package com.logigear.tranining.user.management;
 
 import com.logigear.training.common.Constants;
-import com.logigear.training.common.TestBase;
-import com.logigear.training.page.DashboardPage;
-import com.logigear.training.page.LoginPage;
+import com.logigear.training.base.TestBase;
+import com.logigear.training.pages.DashboardPage;
+import com.logigear.training.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

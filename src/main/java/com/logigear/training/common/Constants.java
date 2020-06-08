@@ -2,11 +2,11 @@ package com.logigear.training.common;
 
 public class Constants {
     // AUT
-    public static final String AUT = "http://155e15c0d830.ngrok.io/TADashboard/login.jsp";
+    public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp#Repository";
     public static final int WAIT_TIME = 5;
 
     // Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v79.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
 
     // Login
     public static final String VALID_USERNAME = "test";

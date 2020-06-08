@@ -1,4 +1,4 @@
-package com.logigear.training.utility;
+package com.logigear.training.utilities;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
