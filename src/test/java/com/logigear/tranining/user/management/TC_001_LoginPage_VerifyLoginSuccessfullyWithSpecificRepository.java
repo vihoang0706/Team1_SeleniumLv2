@@ -1,6 +1,6 @@
 package com.logigear.tranining.user.management;
 
-import com.logigear.training.common.GlobalVariables;
+import com.logigear.training.common.Constants;
 import com.logigear.training.common.TestBase;
 import com.logigear.training.page.DashboardPage;
 import com.logigear.training.page.LoginPage;
@@ -14,10 +14,10 @@ public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository exte
     public void TC_001() {
 
         //Login to SampleRepository
-        loginPage.login(GlobalVariables.VALID_USERNAME, GlobalVariables.VALID_PASSWORD);
+        loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
         //Verify that user login to SampleRepository successfully
-        Assert.assertEquals(dashboardPage.getWelcomeAccount(), GlobalVariables.VALID_USERNAME);
-        Assert.assertEquals(dashboardPage.getRepository(), GlobalVariables.SAMPLE_REPOSITORY);
+        Assert.assertEquals(dashboardPage.getWelcomeAccount(), Constants.VALID_USERNAME);
+        Assert.assertEquals(dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
     }
 }

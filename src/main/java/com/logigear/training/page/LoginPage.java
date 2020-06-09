@@ -1,7 +1,7 @@
 package com.logigear.training.page;
 
-import com.logigear.training.common.Common;
-import com.logigear.training.driverManagement.DriverManager;
+import com.logigear.training.common.CommonMethods;
+import com.logigear.training.utility.Utility;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -13,26 +13,26 @@ public class LoginPage {
     private By btnLogin = By.className("btn-login");
 
     public void setTxtUsername(String username) {
-        DriverManager.getWebDriver().findElement(txtUsername).sendKeys(username);
+        Utility.getDriver().findElement(txtUsername).sendKeys(username);
     }
 
     public void setTxtPassword(String password) {
-        DriverManager.getWebDriver().findElement(txtPassword).sendKeys(password);
+        Utility.getDriver().findElement(txtPassword).sendKeys(password);
     }
 
     public void setCbbRepository(String repository){
-        Select dropdown = new Select(DriverManager.getWebDriver().findElement(cbbRepository));
+        Select dropdown = new Select(Utility.getDriver().findElement(cbbRepository));
         dropdown.selectByVisibleText(repository);
     }
 
     public void clickLogin() {
-        DriverManager.getWebDriver().findElement(btnLogin).click();
+        Utility.getDriver().findElement(btnLogin).click();
     }
 
     public void login(String username, String password) {
-        Common.clearField(txtUsername);
+        CommonMethods.clearField(txtUsername);
         this.setTxtUsername(username);
-        Common.clearField(txtPassword);
+        CommonMethods.clearField(txtPassword);
         this.setTxtPassword(password);
         this.clickLogin();
     }
@@ -42,7 +42,7 @@ public class LoginPage {
     }
 
     public String getErrorMessage() {
-        Alert alert = DriverManager.getWebDriver().switchTo().alert();
+        Alert alert = Utility.getDriver().switchTo().alert();
         String errorMessage = alert.getText();
         return errorMessage;
     }

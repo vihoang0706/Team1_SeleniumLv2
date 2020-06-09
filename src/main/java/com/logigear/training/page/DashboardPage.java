@@ -1,6 +1,6 @@
 package com.logigear.training.page;
 
-import com.logigear.training.driverManagement.DriverManager;
+import com.logigear.training.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -13,11 +13,11 @@ public class DashboardPage {
 
 
     protected WebElement getLblRepository() {
-        return DriverManager.getWebDriver().findElement(lblRepository);
+        return Utility.getDriver().findElement(lblRepository);
     }
 
     protected WebElement getSubMenu(String tabName) {
-        return DriverManager.getWebDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
+        return Utility.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
     }
 
     public String getRepository() {
@@ -25,18 +25,18 @@ public class DashboardPage {
     }
 
     public void logout() {
-        DriverManager.getWebDriver().findElement(lblWelcomeAccount).click();
-        DriverManager.getWebDriver().findElement(lnkLogout).click();
+        Utility.getDriver().findElement(lblWelcomeAccount).click();
+        Utility.getDriver().findElement(lnkLogout).click();
     }
 
     public String getWelcomeAccount() {
-        String username = DriverManager.getWebDriver().findElement(lblWelcomeAccount).getText();
+        String username = Utility.getDriver().findElement(lblWelcomeAccount).getText();
         return username;
     }
 
     public void switchRepository(String repo){
         this.getSubMenu("Repository").click();
-        DriverManager.getWebDriver().findElement(By.partialLinkText(repo)).click();
+        Utility.getDriver().findElement(By.partialLinkText(repo)).click();
 
 
     }
