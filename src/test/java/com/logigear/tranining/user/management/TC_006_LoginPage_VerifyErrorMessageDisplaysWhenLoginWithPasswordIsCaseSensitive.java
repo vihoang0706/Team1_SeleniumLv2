@@ -10,8 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 public class TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive extends TestBase {
-    private LoginPage loginPage = null;
-    private DashboardPage dashboardPage = null;
+    LoginPage loginPage = new LoginPage();
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Test
     public void TC_006_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive() {
@@ -20,7 +20,7 @@ public class TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsC
 
         System.out.println("VP: Observe the current page. Main page is displayed");
         String actualWelcomeUserName = dashboardPage.getWelcomeAccount();
-        Assert.assertEquals(actualWelcomeUserName, Constants.VALID_USERNAME);
+        Assert.assertEquals(actualWelcomeUserName,Constants.VALID_USERNAME);
 
         System.out.println("Logout TA Dashboard");
         dashboardPage.logout();
@@ -31,7 +31,7 @@ public class TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsC
         CommonMethods.waitForAlertPresent(); // Wait for Alert present
         System.out.println("VP: Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
+        Assert.assertEquals(actualErrorMessage,Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
     }
     @AfterClass
     public void PostCondition() {

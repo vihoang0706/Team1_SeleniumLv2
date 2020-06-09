@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 import static java.lang.Thread.sleep;
 
 public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount extends TestBase {
-    private LoginPage loginPage = null;
-    private DashboardPage dashboardPage = null;
+    LoginPage loginPage = new LoginPage();
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Test
     public void TC_005() {
@@ -34,10 +34,5 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
         catch(InterruptedException ie){
         }
         Assert.assertEquals(dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY_LV2);
-
-
-
-
-
     }
 }

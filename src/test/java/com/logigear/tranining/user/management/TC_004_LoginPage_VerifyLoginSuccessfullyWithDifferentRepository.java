@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository extends TestBase {
 
-    private LoginPage loginPage = null;
-    private DashboardPage dashboardPage = null;
+    LoginPage loginPage = new LoginPage();
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Test
     public void TC_001() {

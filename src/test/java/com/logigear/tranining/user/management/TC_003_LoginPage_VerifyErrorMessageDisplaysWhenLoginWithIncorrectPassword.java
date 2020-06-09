@@ -9,7 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword extends TestBase {
-    private LoginPage loginPage = null;
+    LoginPage loginPage = new LoginPage();
 
     @Test
     public void TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword() {
@@ -19,7 +19,7 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
         CommonMethods.waitForAlertPresent(); // Wait for Alert present
         System.out.println("Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
+        Assert.assertEquals(actualErrorMessage,Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
     }
 
     @AfterClass
