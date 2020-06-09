@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.logigear.training.base.TestListener"/>
+    </listeners>
+<!--    <parameter name="browserType" value="chrome" />-->
+<!--    <parameter name="appURL" value="https://google.com" />-->
+
+    <test name="Admin Tests">
+        <classes>
+            <class name="com.logigear.tranining.user.management.TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword" />
+            <class name="com.logigear.tranining.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository" />
+            <class name="com.logigear.tranining.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials" />
+        </classes>
+    </test>
+</suite>

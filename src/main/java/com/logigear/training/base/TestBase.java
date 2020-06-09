@@ -1,6 +1,10 @@
 package com.logigear.training.base;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.ChartLocation;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.logigear.training.common.Constants;
 import com.logigear.training.driverManagement.DriverManager;
 import com.logigear.training.driverManagement.DriverType;
@@ -8,14 +12,10 @@ import com.logigear.training.utilities.Utility;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase extends Utility {
-
-    public ExtentTest logClass = null;
-    public ExtentTest logMethod = null;
-    public ExtentTest logStep = null;
-
     @BeforeTest
     public void setup() {
         DriverManager.setDriverManager(DriverType.CHROME);
