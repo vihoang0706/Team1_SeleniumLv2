@@ -1,6 +1,5 @@
 package com.logigear.training.utility;
 
-import com.logigear.training.driverManagement.DriverManager;
 import com.logigear.training.utility.webdrivers.DriverFactory;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;

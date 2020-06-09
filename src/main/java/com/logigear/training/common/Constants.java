@@ -6,7 +6,7 @@ public class Constants {
     public static final int WAIT_TIME = 5;
 
     // Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v79.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
     public static final String GECKO_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
 
     // Login
