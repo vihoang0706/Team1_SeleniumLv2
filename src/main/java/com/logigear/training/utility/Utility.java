@@ -67,14 +67,6 @@ public class Utility {
     }
     }
 
-//    public static void log4jConfiguration() {
-//        try {
-//            log4j = LogFactory.getLog(new Object().getClass());
-//        } catch (Exception e) {
-//            log4j.error("log4jConfiguration method - ERROR: " + e);
-//        }
-//    }
-
     public static String generateTimeStampString(String pattern) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime now = LocalDateTime.now();
@@ -82,7 +74,7 @@ public class Utility {
         return timestampStr;
     }
 
-    public static ExtentTest logStepInfo(ExtentTest logTest, String description) {
+    public static ExtentTest logStepInfo(ExtentTest logTest, String description) throws IOException {
         return logTest.createNode(description);
     }
 
