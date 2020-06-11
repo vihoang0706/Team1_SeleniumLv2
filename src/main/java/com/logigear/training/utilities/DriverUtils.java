@@ -1,7 +1,6 @@
-package com.logigear.training.utility;
+package com.logigear.training.utilities;
 
-import com.logigear.training.utility.webdrivers.DriverFactory;
-import org.apache.commons.logging.LogFactory;
+import com.logigear.training.utilities.webdrivers.DriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,8 +25,7 @@ import java.util.Set;
 
 import static com.logigear.training.common.Constants.*;
 
-public class Utility {
-
+public class DriverUtils {
     public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
 
     //Initiate local variables for generating time stamp
@@ -58,7 +56,7 @@ public class Utility {
                     maximizeWindow();
                     break;
                 default:
-                    Utility.setDriver(DriverFactory.createInstance(BROWSER, logTest));
+                    DriverUtils.setDriver(DriverFactory.createInstance(BROWSER, logTest));
                     maximizeWindow();
                     break;
             }
@@ -100,7 +98,7 @@ public class Utility {
             captureScreenshot("FAILED screenshot: ", "fail-", logTest);
 
             // Update result on TestRails
-            String testInfo = "\n\n Report link: " + Utility.getReportLink();
+            String testInfo = "\n\n Report link: " + DriverUtils.getReportLink();
 
             throw new SkipException(description);
         } catch (SkipException ex) {
@@ -112,7 +110,7 @@ public class Utility {
     public static void navigateToTestSite(ExtentTest logTest, String url) throws IOException {
         try {
             //logInfo(logTest, "Navigate to site: " + url);
-            Utility.getDriver().navigate().to(url);
+            DriverUtils.getDriver().navigate().to(url);
             maximizeWindow();
         } catch (Exception e) {
 
@@ -122,8 +120,8 @@ public class Utility {
     public static boolean isElementClickable(WebElement elementName, int waitTime, ExtentTest logStep) throws IOException {
         try {
 
-            new WebDriverWait(Utility.getDriver(), waitTime).until(ExpectedConditions.visibilityOf(elementName));
-            new WebDriverWait(Utility.getDriver(), waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.visibilityOf(elementName));
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
 
             return true;
         } catch (Exception e) {
@@ -164,19 +162,19 @@ public class Utility {
 
     public static void waitForControl(WebElement controlName) {
         try {
-            new WebDriverWait(Utility.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+            new WebDriverWait(DriverUtils.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
         } catch (Exception ex) {
         }
     }
 
     public static void waitForControlToBeClickable(WebElement controlName) {
-        new WebDriverWait(Utility.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
-        new WebDriverWait(Utility.getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
+        new WebDriverWait(DriverUtils.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+        new WebDriverWait(DriverUtils.getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 
     public static void refreshPage() {
         try {
-            Utility.getDriver().navigate().refresh();
+            DriverUtils.getDriver().navigate().refresh();
         } catch (Exception e) {
 
         }
@@ -184,7 +182,7 @@ public class Utility {
 
     public static void scrollIntoView(WebElement controlName) {
         waitForControl(controlName);
-        JavascriptExecutor executor = (JavascriptExecutor) Utility.getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) DriverUtils.getDriver();
         executor.executeScript("arguments[0].scrollIntoView(true);", controlName);
     }
 
@@ -199,7 +197,7 @@ public class Utility {
 
     public static void maximizeWindow() throws IOException {
         try {
-            Utility.getDriver().manage().window().maximize();
+            DriverUtils.getDriver().manage().window().maximize();
         } catch (Exception e) {
 
         }
@@ -207,7 +205,7 @@ public class Utility {
 
     public static void quit(ExtentTest logTest) throws IOException {
         try {
-            Utility.getDriver().quit();
+            DriverUtils.getDriver().quit();
             logInfo(logTest, "Closed browser and released device");
         } catch (Exception e) {
 
@@ -222,7 +220,7 @@ public class Utility {
             screenshotName = screenshotName + generateTimeStampString("yyyy-MM-dd-HH-mm-ss") + ".png";
 
             // Capture screenshot (If driver == null, it means there is no window opens => Don't capture screenshot)
-            TakesScreenshot ts = (TakesScreenshot) Utility.getDriver();
+            TakesScreenshot ts = (TakesScreenshot) DriverUtils.getDriver();
             File source = ts.getScreenshotAs(OutputType.FILE);
             String dest = reportLocation + screenshotName;
             File destination = new File(dest);
@@ -230,7 +228,7 @@ public class Utility {
 
             // Add current URL to report
             if (getDriver() != null)
-                logTest.info("Page URL: " + Utility.getDriver().getCurrentUrl());
+                logTest.info("Page URL: " + DriverUtils.getDriver().getCurrentUrl());
 
             // Add screenshot to report
             String screenshotLink = "<a href=\"" + screenshotName + "\">" + screenshotName + "</a>";
@@ -285,7 +283,7 @@ public class Utility {
 //    }
 
     public static void clearField(By by) {
-        Utility.getDriver().findElement(by).clear();
+        DriverUtils.getDriver().findElement(by).clear();
     }
 
     public static String getWindowHandle(WebDriver driver) {
@@ -300,8 +298,8 @@ public class Utility {
     }
     public static void switchToWindowHandle() throws IOException {
         try {
-            String popupWidowHandle = getWindowHandle(Utility.getDriver());
-            Utility.getDriver().switchTo().window(popupWidowHandle);
+            String popupWidowHandle = getWindowHandle(DriverUtils.getDriver());
+            DriverUtils.getDriver().switchTo().window(popupWidowHandle);
             maximizeWindow();
         } catch (Exception e) {
             //log4j.error("switchToWindowHandle method - ERROR - " + e);

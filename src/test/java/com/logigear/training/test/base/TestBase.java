@@ -1,11 +1,14 @@
-package com.logigear.training.common;
+package com.logigear.training.test.base;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.logigear.training.utility.ConfigFileReader;
-import com.logigear.training.utility.Utility;
+import com.logigear.training.pages.DashboardPage;
+import com.logigear.training.pages.LoginPage;
+import com.logigear.training.utilities.ConfigFileReader;
+import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.utilities.controls.LGAlert;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -15,9 +18,10 @@ import java.util.*;
 import static com.logigear.training.common.Constants.*;
 
 
-public class TestBase extends Utility {
-
-
+public class TestBase extends DriverUtils {
+    public LoginPage loginPage = new LoginPage();
+    public LGAlert alert = new LGAlert();
+    public DashboardPage dashboardPage = new DashboardPage();
     public static boolean isTestSuiteExecutable = false;
     public boolean isTestCaseExecutable = false;
 
@@ -173,7 +177,7 @@ public class TestBase extends Utility {
         report.flush();
 
         // Update result to TestRails
-        String testInfo = "\n Report link: " + Utility.getReportLink();
+        String testInfo = "\n Report link: " + DriverUtils.getReportLink();
 
 
         logClass = null;
