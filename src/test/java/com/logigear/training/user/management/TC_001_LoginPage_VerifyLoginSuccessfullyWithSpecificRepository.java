@@ -1,18 +1,16 @@
-package com.logigear.tranining.user.management;
+package com.logigear.training.user.management;
 
 import com.logigear.training.common.Constants;
-import com.logigear.training.common.TestBase;
-import com.logigear.training.page.DashboardPage;
-import com.logigear.training.page.LoginPage;
+import com.logigear.training.test.base.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository extends TestBase {
-    LoginPage loginPage = new LoginPage();
-    DashboardPage dashboardPage = new DashboardPage();
-    @Test
-    public void TC_001() {
+import java.io.IOException;
 
+public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository extends TestBase {
+    @Test
+    public void DA_LOGIN_TC001() throws IOException {
+        navigateToTestSite(logMethod,Constants.AUT);
         //Login to SampleRepository
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 

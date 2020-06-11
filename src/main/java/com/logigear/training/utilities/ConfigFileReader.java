@@ -1,4 +1,4 @@
-package com.logigear.training.utility;
+package com.logigear.training.utilities;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigFileReader extends Utility {
+public class ConfigFileReader extends DriverUtils {
     private Properties prop = null;
 
     //Constructor for ConfigFileReader class
