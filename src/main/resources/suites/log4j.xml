@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="logfile" class="org.apache.log4j.FileAppender">
+        <param name="File" value="automation.log.txt" />
+        <param name="Append" value="false" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%c] - %m%n" />
+        </layout>
+    </appender>
+
+    <category name="com.modules.depot_integration">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.idc_identify_customer_flow">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.tv_replacements">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.production_smoke_test">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.pop_upload_tool">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.reworks_refile_retry">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.faca">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.facv3">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.fraud_rules">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.automation_flowee_ready">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.faca_admin_ui.retire_admin2_update_claim">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.tma_portal">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.e2e_giftcard_creation">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.eu_login">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.appointments_parts_status_tools">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.template_render_tool">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.sparkpost_webhook_api">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <category name="com.modules.lr_tools">
+        <priority value="all" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logfile" />
+    </category>
+    <root>
+        <priority value ="warn" />
+    </root>
+</log4j:configuration>

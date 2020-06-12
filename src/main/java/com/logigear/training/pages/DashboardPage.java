@@ -1,9 +1,8 @@
-package com.logigear.training.page;
+package com.logigear.training.pages;
 
-import com.logigear.training.utility.Utility;
+import com.logigear.training.utilities.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class DashboardPage {
     private By lnkLogout = By.xpath("//a[.='Logout']");

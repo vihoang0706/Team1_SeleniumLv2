@@ -1,0 +1,11 @@
+{
+  "test": [
+    {
+      "No.": "Data1",
+      "TestDataPurpose": "Responsive Checkout Page | Coupon code",
+      "RunMode": "Y",
+      "TestingType": "Regression",
+      "TestType": "Positive"
+    }
+  ]
+}

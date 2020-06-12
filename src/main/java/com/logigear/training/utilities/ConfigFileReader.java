@@ -1,4 +1,4 @@
-package com.logigear.training.utility;
+package com.logigear.training.utilities;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigFileReader extends Utility {
+
     private Properties prop = null;
 
     //Constructor for ConfigFileReader class
@@ -16,6 +17,8 @@ public class ConfigFileReader extends Utility {
             prop = new Properties();
             prop.load(fis);
         } catch (Exception e) {
+            log4j.error("ConfigFileReader method - ERROR - " + e);
+            logException(logTestForTestBase, "ConfigFileReader method - ERROR", e);
         }
     }
 
@@ -25,19 +28,23 @@ public class ConfigFileReader extends Utility {
             prop = new Properties();
             prop.load(fis);
         } catch (Exception e) {
-            //log4j.error("ConfigFileReader method - ERROR - " + e);
+            log4j.error("ConfigFileReader method - ERROR - " + e);
         }
     }
 
+    /*
+     *  This method is used to get config values from configuration.properties file
+     *  Input: config parameter name
+     *  Output: config parameter value
+     */
     public String getDataFromConfigurationFile(String configParameter) {
         String configValue = null;
         try {
             configValue = prop.getProperty(configParameter).trim();
 
         } catch (Exception e) {
-            //log4j.error("getDataFromConfigurationFile method - ERROR - " + e);
+            log4j.error("getDataFromConfigurationFile method - ERROR - " + e);
         }
         return configValue;
     }
 }
-

@@ -6,7 +6,7 @@ public class Constants {
     public static final int WAIT_TIME = 5;
 
     // Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v79.exe";
     public static final String GECKO_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
 
     // Login
@@ -27,14 +27,7 @@ public class Constants {
 
     //Run parameters
     public static String RUN_ON = "Local";
-    public static String PLATFORM = "";
-    public static String PLATFORM_NAME = "";
-    public static String PLATFORM_VERSION = "";
-    public static String MANUFACTURER = "";
-    public static String MODEL = "";
     public static String BROWSER = "Chrome";
-    public static String BROWSER_VERSION = "latest";
-    public static String RESOLUTION = "1280x1024";
     public static String THREAD_COUNT = "1";
     public static int NUMBER_OF_REPORT = 30;
 

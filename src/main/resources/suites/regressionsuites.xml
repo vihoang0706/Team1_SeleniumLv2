@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="REGRESSION">
+    <listeners>
+        <listener class-name="com.common.SuiteAlterer"/>
+    </listeners>
+    <test name="RESGRESSION" parallel="classes">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <!-- Production smoke suite starts here -->
+            <class name="com.logigear.tranining.user.management.test"/>
+<!--            <class name="com.modules.production_smoke_test.C8185_Verify_transfer_email_claim_approval_email_and_cancellation_email"/>-->
+
+        </classes>
+    </test>
+</suite>
