@@ -2,7 +2,7 @@
   "test": [
     {
       "No.": "Data1",
-      "TestDataPurpose": "Responsive Checkout Page | Coupon code",
+      "TestDataPurpose": "Navigate to TA site",
       "RunMode": "Y",
       "TestingType": "Regression",
       "TestType": "Positive"
