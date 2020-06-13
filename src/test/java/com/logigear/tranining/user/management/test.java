@@ -17,7 +17,6 @@ import java.util.Hashtable;
 import static com.logigear.training.common.GlobalVariables.*;
 
 public class test extends TestBase {
-    //private BuyerCenterHomePage buyerCenterHomePage = null;
 
     @Test(dataProvider = "getDataForTest", priority = 1, description = "Responsive Checkout Page | Page title and Header")
     public void TC01(Hashtable<String, String> data) throws IOException {

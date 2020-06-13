@@ -7,12 +7,6 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.google.gson.*;
-//import com.perfecto.reportium.client.ReportiumClient;
-//import com.utility.database.Database;
-//import com.utility.database.QueryDatabase;
-//import com.utility.testrail.testrail.TestRailResultReporter;
-//import com.utility.webdrivers.DriverFactory;
-//import io.restassured.RestAssured;
 import com.logigear.training.utilities.webdrivers.DriverFactory;
 import org.apache.commons.io.FileUtils;
 
@@ -21,8 +15,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
@@ -50,8 +42,6 @@ import java.util.regex.Pattern;
 
 import static com.logigear.training.common.GlobalVariables.*;
 
-//import static com.common.GlobalVariables.*;
-
 public class Utility {
     public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
 
@@ -62,11 +52,9 @@ public class Utility {
 
     //Initiate variable for log4j
     public static Log log4j;
-    //public static ExcelReader excelReader = null;
     public static ConfigFileReader configFileReader = null;
 
     //Initiate local variables for generating time stamp
-
     public static String timeStampString = generateTimeStampString("yyyy-MM-dd-HH-mm-ss");
 
     //Initiate local variables for sending email
@@ -77,8 +65,6 @@ public class Utility {
 
     //Variable for generate random string
     static Calendar now = Calendar.getInstance();
-
-    // static EmailActions emailActions = new EmailActions();
 
     public static RemoteWebDriver getDriver() {
         return driver.get();
@@ -91,15 +77,6 @@ public class Utility {
     public static void initializeDriver(ExtentTest logTest) throws IOException {
         try {
             switch (RUN_ON.toLowerCase()) {
-//                case "perfectomobile":
-//                    Utility.setDriver(DriverFactory.createInstance(PLATFORM_NAME, PLATFORM_VERSION, MANUFACTURER, MODEL, BROWSER, BROWSER_VERSION, RESOLUTION, LOCATION, logTest));
-//                    break;
-//                case "sel-hub-1.qa":
-//                case "sel-hub-1.production":
-//                case "grid":
-//                    Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER,logTest));
-//                    maximizeWindow();
-//                    break;
                 default:
                     Utility.setDriver(DriverFactory.createInstance(BROWSER, logTest));
                     maximizeWindow();
@@ -533,9 +510,7 @@ public class Utility {
             // Report test fails and capture screenshot
             captureScreenshot("ERROR screenshot: ", "error-", logTest);
 
-            // Update result on TestRails
             String testInfo = "\n\n Report link: " + Utility.getReportLink();
-            //if (TESTRAIL_UPDATE) markTestCaseFailInTestRail(description.replace("<br/>", "\n") + testInfo, logTest);
 
             throw new SkipException(description);
         } catch (SkipException ex) {
@@ -549,9 +524,6 @@ public class Utility {
     }
 
     public static ExtentTest logStepInfo(ExtentTest logTest, String description, Object... args) throws IOException {
-//        if (RUN_ON.equalsIgnoreCase("PerfectoMobile")) {
-//            DigitalZoomReport.stepStart(description, (ReportiumClient) args[0]);
-//        }
         return logTest.createNode(description);
     }
 
@@ -573,15 +545,6 @@ public class Utility {
         }
     }
 
-    /**
-     * wait for a specific control in period time
-     *
-     * @param controlName Example:
-     *                    - @FindBy(id='NextButton')
-     *                    - WebElement nextButton;
-     *                    - waitForControl(nextButton) -> wait for the NEXT button during 60 seconds
-     * @author quoc.le
-     */
     public static void waitForControl(WebElement controlName) {
         try {
             new WebDriverWait(Utility.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
@@ -595,16 +558,6 @@ public class Utility {
         new WebDriverWait(Utility.getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 
-    /**
-     * wait for a specific control disappear
-     *
-     * @param controlName Example:
-     *                    - @FindBy(id='NextButton')
-     *                    - WebElement nextButton;
-     *                    - waitForControlDisAppear(nextButton, logTest)
-     * @CreatedBy: binh.le
-     * @On: 11/20/2017
-     */
     public static void waitForControlDisAppear(WebElement controlName, ExtentTest logTest) throws IOException {
         try {
             if (doesControlExist(controlName)) {
@@ -619,16 +572,6 @@ public class Utility {
         }
     }
 
-    /**
-     * wait for a specific control in period time
-     *
-     * @param controlName Example:
-     *                    - @FindBy(id='NextButton')
-     *                    - WebElement nextButton;
-     *                    - waitForControl(nextButton, 5) -> wait for the NEXT button during 5 seconds
-     * @CreatedBy: binh.le
-     * @On: 05/11/2017
-     */
     public static void waitForControl(WebElement controlName, ExtentTest logTest) throws IOException {
         try {
             for (int i = 0; i < WAIT_TIME / 12; i++) {
@@ -810,46 +753,6 @@ public class Utility {
         }
     }
 
-    /**
-     * Reading from Excel file for which test case to be executed methods
-     *
-     * @param sheetName   - Sheet name
-     * @param testName    - Test case name
-     * @param excelReader - An object of Excel
-     * @return true if test case has to be executed along with Runmode,
-     * otherwise return false.
-     * @author quoc.le
-     */
-
-//    public static boolean isTestCaseExecutable(String sheetName, String testName, ExcelReader excelReader) throws IOException {
-//        /* Handle for Precondition tests of IDC*/
-//        /* Get the test case ID only to compare*/
-//        if (testName.contains("_Pre_")) testName = testName.split("_")[0];
-//
-//        // As first row is a header, we are going to start looking for our test1
-//        // from row#2
-//        for (int rowNum = 2; rowNum <= excelReader.getRowCount(sheetName); rowNum++) {
-//            // Find out the test case we are looking for
-//            if (excelReader.getCellData(sheetName, "TestCaseId", rowNum).contains(testName)) {
-//                // Find out whether Runmode of test case is set to "Yes", then,
-//                // return true, otherwise return false
-//                RUN_MODE = excelReader.getCellData(sheetName, "RunMode", rowNum);
-//                return RUN_MODE.equalsIgnoreCase("Y");
-//            }
-//        }
-//        // Return false in case if we do not find out the test case which we are
-//        // looking for
-//        return false;
-//    }
-
-    /**
-     * Reading from Excel file for which test data to be executed methods
-     *
-     * @param data - test data row
-     * @return true if test data has to be executed along with Runmode,
-     * otherwise return false.
-     * @author quoc.le
-     */
 
     public static boolean isTestDataExecutable(Hashtable<String, String> data, ExtentTest logTest) throws IOException {
         boolean testDataRun = false;
@@ -892,7 +795,6 @@ public class Utility {
         return testDataRun;
     }
 
-    // ******** Reading from Excel starts here ****************//
 
     // Taking a screenshot
     public static void captureScreenshot(String screenshotName) {
@@ -937,70 +839,6 @@ public class Utility {
             log4j.info("Exception while taking screenshot: " + e.getMessage());
         }
     }
-    // ******** Reading from Excel ends here ****************//
-
-    /**
-     * Reading test data from the excel sheet for a specific test case
-     *
-     * @param testName
-     * @param excelSheet
-     * @param excelReader
-     * @return Test Data Object in Key Value pair.
-     * <p>
-     * Operations in Sequence: Find row number from where the test1
-     * starts Find number of columns in the test Find number of rows in
-     * the test Put the data into Hashtable Put Hashtable into an array
-     * Return array
-     * The action name is the same as other action. But it use override method when running.
-     */
-//    public static synchronized Object[][] getData(String testName, String excelSheet, ExcelReader excelReader) throws IOException {
-//        /* Handle for Precondition tests of IDC*/
-//        /* Get the test case ID only to compare*/
-//        if (testName.contains("_Pre_")) testName = testName.split("_")[0];
-//        int testStartRowNum = 0;
-//        // Find the row number from where test starts
-//        for (int rowNumber = 1; rowNumber <= excelReader.getRowCount(excelSheet); rowNumber++) {
-//            if (excelReader.getCellData(excelSheet, 0, rowNumber).contains(testName)) {
-//                testStartRowNum = rowNumber;
-//                break;
-//            }
-//        }
-//
-//        // Column will start in the next row of test case
-//        int colStartRowNum = testStartRowNum + 1;
-//        int totalCols = 0;
-//        // Find all the columns till we get empty ("")
-//        while (!excelReader.getCellData(excelSheet, totalCols, colStartRowNum).equals("")) {
-//            totalCols++;
-//        }
-//
-//        // Find out how many rows of data we have?
-//        // Data starts from 2nd row from the test1
-//        int dataStartRowNum = testStartRowNum + 2;
-//        int totalRows = 0;
-//        // Find all the rows till we get empty ("")
-//        while (!excelReader.getCellData(excelSheet, 0, dataStartRowNum + totalRows).equals("")) {
-//            totalRows++;
-//        }
-//
-//        // extract all the data
-//        Object[][] data = new Object[totalRows][1];
-//        int index = 0;
-//        Hashtable<String, String> table = null;
-//        // Navigate through all the data rows one by one and add the data into
-//        // Hashtable.
-//        for (int rowNumber = dataStartRowNum; rowNumber < (dataStartRowNum + totalRows); rowNumber++) {
-//            table = new Hashtable<String, String>();
-//            // Get all the cells data from each row
-//            for (int columnNumber = 0; columnNumber < totalCols; columnNumber++) {
-//                table.put(excelReader.getCellData(excelSheet, columnNumber, colStartRowNum),
-//                        excelReader.getCellData(excelSheet, columnNumber, rowNumber));
-//            }
-//            data[index][0] = table;
-//            index++;
-//        }
-//        return data;
-//    }
 
     /**
      * @param anything
@@ -1035,14 +873,7 @@ public class Utility {
         }
     }
 
-    /**
-     * @param email - The email that requests to add random string alias
-     * @return return new email by adding random string alias
-     * @ActionName: generateRandomEmail
-     * @CreatedDate: 12/15/2016
-     * @Example: String newEmail = generateRandomEmail("automation@squaretrade.com");
-     * => newEmail = automation+c76533+20190305164008+4128@squaretrade.com
-     */
+
     public static String generateRandomEmail(String email) {
         if (email.contains("@")) {
             String[] parts = email.split("@");
@@ -1120,161 +951,6 @@ public class Utility {
             log4j.error("assertTrueFalse method - ERROR - " + e);
             logException(logTest, "assertTrueFalse method - ERROR", e);
         }
-    }
-
-    /**
-     * @param logTest - Extent report
-     * @ActionName insertCreditCardUsageDetails
-     */
-//    public static void insertCreditCardUsageDetails(String warrantyOrDeductible, String warrantyOrDeductibleAmount, String rpidOrClaimId, String itemDescription, String cardType, String email, ExtentTest logTest) throws IOException {
-//        try {
-//            log4j.debug("insertCreditCardUsageDetails Details...start");
-//            logInfo(logTest, "insertCreditCardUsageDetails method starts");
-//
-//            String excelSheet = "CreditCardUsage";
-//            String qaPerson = "Automation-User";
-//            String refunded = "YES";
-//
-//            int totalNumberOfRows = excelReader.getRowCount(excelSheet);
-//            totalNumberOfRows++;
-//
-//            String srNo = String.valueOf(totalNumberOfRows - 1);
-//
-//            //Set row number
-//            excelReader.setCellData(excelSheet, 0, totalNumberOfRows, "" + srNo);
-//            logInfo(logTest, "Setting Sr No: " + srNo);
-//
-//            //Set Date
-//            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-//            excelReader.setCellData(excelSheet, 1, totalNumberOfRows, timeStamp);
-//            logInfo(logTest, "Setting Date: " + timeStamp);
-//
-//            //Set QA Person
-//            excelReader.setCellData(excelSheet, 2, totalNumberOfRows, qaPerson);
-//            logInfo(logTest, "Setting QA Person: " + qaPerson);
-//
-//            //Set Refunded
-//            excelReader.setCellData(excelSheet, 3, totalNumberOfRows, refunded);
-//            logInfo(logTest, "Setting Refunded: " + refunded);
-//
-//            //Set Warranty OR Deductible
-//            excelReader.setCellData(excelSheet, 4, totalNumberOfRows, warrantyOrDeductible);
-//            logInfo(logTest, "Setting Warranty/Deductible: " + warrantyOrDeductible);
-//
-//            //Set Warranty/Part/Deductible Amount
-//            excelReader.setCellData(excelSheet, 5, totalNumberOfRows, warrantyOrDeductibleAmount);
-//            logInfo(logTest, "Setting Warranty/Deductible Amount: " + warrantyOrDeductibleAmount);
-//
-//            //Set RPID/ ClaimId
-//            excelReader.setCellData(excelSheet, 6, totalNumberOfRows, rpidOrClaimId);
-//            logInfo(logTest, "Setting RPID/Claim ID: " + rpidOrClaimId);
-//
-//            //Set Item Description
-//            excelReader.setCellData(excelSheet, 7, totalNumberOfRows, itemDescription);
-//            logInfo(logTest, "Setting Item Description: " + itemDescription);
-//
-//            //Set Card Type
-//            excelReader.setCellData(excelSheet, 8, totalNumberOfRows, cardType);
-//            logInfo(logTest, "Setting Card type: " + cardType);
-//
-//            //Set Email
-//            excelReader.setCellData(excelSheet, 9, totalNumberOfRows, email);
-//            logInfo(logTest, "Setting Email: " + email);
-//
-//            logInfo(logTest, "insertCreditCardUsageDetails method ends");
-//            log4j.debug("insertCreditCardUsageDetails...end");
-//        } catch (Exception e) {
-//            log4j.error("insertCreditCardUsageDetails - ERROR - " + e);
-//            logException(logTest, "insertCreditCardUsageDetails - ERROR", e);
-//        }
-//    }
-
-    /**
-     * @param logTest - Extent report
-     * @ActionName setCreditCardUsageDetailsCanceled
-     */
-//    public static void updateCreditCardUsageRefunded(String rpidOrClaimId, String refunded, ExtentTest logTest) throws IOException {
-//        try {
-//            log4j.debug("setCreditCardUsageDetailsCanceled...start");
-//            logInfo(logTest, "setCreditCardUsageDetailsCanceled method starts");
-//
-//            String excelSheet = "CreditCardUsage";
-//
-//            int rowNumberForRpidOrClaimId = 0;
-//
-//            for (int rowNumber = 1; rowNumber <= excelReader.getRowCount(excelSheet); rowNumber++) {
-//                if (excelReader.getCellData(excelSheet, 6, rowNumber).equals(rpidOrClaimId)) {
-//                    rowNumberForRpidOrClaimId = rowNumber;
-//                    break;
-//                }
-//            }
-//
-//            //Set Refunded
-//            excelReader.setCellData(excelSheet, 3, rowNumberForRpidOrClaimId, refunded);
-//            logInfo(logTest, "Setting Refunded: " + refunded);
-//
-//            logInfo(logTest, "setCreditCardUsageDetailsCanceled method ends");
-//            log4j.debug("setCreditCardUsageDetailsCanceled...end");
-//        } catch (Exception e) {
-//            log4j.error("setCreditCardUsageDetailsCanceled - ERROR - " + e);
-//            logException(logTest, "setCreditCardUsageDetailsCanceled - ERROR", e);
-//        }
-//    }
-
-    //For Testrail - PASS
-//    public static void markTestCasePassInTestRail(String description, ExtentTest logTest) throws IOException {
-//        if (TESTRAIL_UPDATE) {
-//            try {
-//                String testCaseId = logTest.getModel().getHierarchicalName().split("_")[0].replace("C", "");
-//                TestRailResultReporter.addResult(testCaseId, "pass", description);
-//                logInfo(logTest, "Marked test case: C" + testCaseId + " as PASSED");
-//            } catch (Exception e) {
-//                logException(logTest, "Fail to update result to Testrails: ", e);
-//            }
-//        }
-//    }
-
-    //For Testrail - FAIL
-//    public static void markTestCaseFailInTestRail(String description, ExtentTest logTest) throws IOException {
-//        if (TESTRAIL_UPDATE) {
-//            try {
-//                String testCaseId = logTest.getModel().getHierarchicalName().split("_")[0].replace("C", "");
-//                TestRailResultReporter.addResult(testCaseId, "fail", description);
-//                logInfo(logTest, "Marked test case: C" + testCaseId + " as FAILED");
-//            } catch (Exception e) {
-//                logInfo(logTest, "Fail to update result to Testrails: " + e);
-//            }
-//        }
-//    }
-
-    public static WebElement getElementActionLink(List<WebElement> actionLinksList, String description, ExtentTest logTest) throws IOException {
-        WebElement elementLink = null;
-        try {
-            log4j.debug("getElementActionLink method...starts");
-
-            if (ENVIRONMENT.equalsIgnoreCase(PRODUCTION) || ENVIRONMENT.equalsIgnoreCase(TRAINING) || ENVIRONMENT.equalsIgnoreCase(TRAINING2) && !ENVIRONMENT.equalsIgnoreCase(TRAINING3)) {
-                log4j.info(actionLinksList.get(0).getText());
-                elementLink = actionLinksList.get(0);
-            } else {
-                for (int i = 0; i < actionLinksList.size(); i++) {
-                    log4j.info(actionLinksList.get(i).getText());
-                    if (actionLinksList.get(i).getText().toLowerCase().contains(ENVIRONMENT.toLowerCase())) {
-                        elementLink = actionLinksList.get(i);
-                        break;
-                    }
-                }
-            }
-            if (elementLink == null) {
-                log4j.info("Action link '" + description + "' on '" + ENVIRONMENT + "' environment can not be found...");
-                logFail(logTest, "Action link '" + description + "' on '" + ENVIRONMENT + "' environment can not be found...");
-            }
-
-            log4j.info("getElementActionLink method...ends");
-        } catch (Exception e) {
-            log4j.error("Action link '" + description + "' on '" + ENVIRONMENT + "' environment can not be found..." + e);
-            logException(logTest, "Action link '" + description + "' on '" + ENVIRONMENT + "' environment can not be found...", e);
-        }
-        return elementLink;
     }
 
     //Handle error when leaving page unexpected.
@@ -1600,19 +1276,6 @@ public class Utility {
             logException(logTest, "checkNewTabOpen method - ERROR", e);
         }
     }
-
-//    public static String readPayloadDataFromJsonFile(String filePath) throws IOException {
-//        String data = null;
-//        try {
-//            JSONParser parser = new JSONParser();
-//            JSONObject obj = (JSONObject) parser.parse(new java.io.FileReader(filePath));
-//            data = obj.toString();
-//
-//        } catch (Exception e) {
-//            log4j.error("clickButtonExit method - ERROR - " + e);
-//        }
-//        return data;
-//    }
 
     /***
      * Generate a 13-digits random number
@@ -1940,133 +1603,6 @@ public class Utility {
         }
         return true;
     }
-    public static void injectVisaCard() {
-        String visaCardString = System.getenv("VISA_CARD");
-        if (visaCardString != null) {
-            String[] cardInfo = visaCardString.split(",");
-
-            // Get CARD_NUMBER
-            VISA_CREDIT_CARD_NUMBER = cardInfo[0];
-
-            // Get EXPIRATION_MONTH
-            VISA_CREDIT_CARD_EXPIRATION_MONTH = cardInfo[1];
-
-            // Get EXPIRATION_YEAR
-            VISA_CREDIT_CARD_EXPIRATION_YEAR = cardInfo[2];
-
-            // Get EXPIRATION_DATE
-            VISA_CREDIT_CARD_EXPIRATION_DATE = cardInfo[3];
-
-            // Get CVV_NUMBER
-            VISA_CREDIT_CARD_CVV_NUMBER = cardInfo[4];
-        }
-    }
-
-    public static void injectMasterCard() {
-        String masterCard = System.getenv("MASTER_CARD");
-        if (masterCard != null) {
-            String[] cardInfo = masterCard.split(",");
-
-            // Get CARD_NUMBER
-            MASTER_CARD_CREDIT_CARD_NUMBER = cardInfo[0];
-
-            // Get EXPIRATION_MONTH
-            MASTER_CARD_CREDIT_CARD_EXPIRATION_MONTH = cardInfo[1];
-
-            // Get EXPIRATION_YEAR
-            MASTER_CARD_CREDIT_CARD_EXPIRATION_YEAR = cardInfo[2];
-
-            // Get EXPIRATION_DATE
-            MASTER_CARD_CREDIT_CARD_EXPIRATION_DATE = cardInfo[3];
-
-            // Get CVV_NUMBER
-            MASTER_CARD_CREDIT_CARD_CVV_NUMBER = cardInfo[4];
-        }
-    }
-
-    public static void injectAmexCard() {
-        String amexCard = System.getenv("AMEX_CARD");
-        if (amexCard != null) {
-            String[] cardInfo = amexCard.split(",");
-
-            // Get CARD_NUMBER
-            AMEX_CREDIT_CARD_NUMBER = cardInfo[0];
-
-            // Get EXPIRATION_MONTH
-            AMEX_CREDIT_CARD_EXPIRATION_MONTH = cardInfo[1];
-
-            // Get EXPIRATION_YEAR
-            AMEX_CREDIT_CARD_EXPIRATION_YEAR = cardInfo[2];
-
-            // Get EXPIRATION_DATE
-            AMEX_CREDIT_CARD_EXPIRATION_DATE = cardInfo[3];
-
-            // Get CVV_NUMBER
-            AMEX_CREDIT_CARD_CVV_NUMBER = cardInfo[4];
-        }
-    }
-
-    public static void injectDiscoverCard() {
-        String discoverCard = System.getenv("DISCOVER_CARD");
-        if (discoverCard != null) {
-            String[] cardInfo = discoverCard.split(",");
-
-            // Get CARD_NUMBER
-            DISCOVER_CREDIT_CARD_NUMBER = cardInfo[0];
-
-            // Get EXPIRATION_MONTH
-            DISCOVER_CREDIT_CARD_EXPIRATION_MONTH = cardInfo[1];
-
-            // Get EXPIRATION_YEAR
-            DISCOVER_CREDIT_CARD_EXPIRATION_YEAR = cardInfo[2];
-
-            // Get EXPIRATION_DATE
-            DISCOVER_CREDIT_CARD_EXPIRATION_DATE = cardInfo[3];
-
-            // Get CVV_NUMBER
-            DISCOVER_CREDIT_CARD_CVV_NUMBER = cardInfo[4];
-        }
-    }
-
-    public static void injectAutomationServiceAPIAuthenticationForAutomationUser() {
-        String automation_service_authentication = System.getenv("AUTOMATION_SERVICE_AUTHENTICATION_STANDARD");
-        if (automation_service_authentication != null) {
-            String[] authenticationInfo = automation_service_authentication.split(",");
-
-            GRANT_TYPE = authenticationInfo[0];
-
-            CLIENT_SECRET = authenticationInfo[1];
-
-            CLIENT_ID = authenticationInfo[2];
-
-            AUTOMATION_USERNAME = authenticationInfo[3];
-
-            AUTOMATION_PASSWORD = authenticationInfo[4];
-
-            AUTOMATION_SCOPE = authenticationInfo[5];
-
-        }
-    }
-
-    public static void injectAutomationServiceAPIAuthenticationForCsAgentUser() {
-        String automation_service_authentication = System.getenv("AUTOMATION_SERVICE_AUTHENTICATION_CSAGENT");
-        if (automation_service_authentication != null) {
-            String[] authenticationInfo = automation_service_authentication.split(",");
-
-            GRANT_TYPE = authenticationInfo[0];
-
-            CLIENT_SECRET = authenticationInfo[1];
-
-            CLIENT_ID = authenticationInfo[2];
-
-            CSAGENT_USERNAME = authenticationInfo[3];
-
-            CSAGENT_PASSWORD = authenticationInfo[4];
-
-            CSAGENT_SCOPE = authenticationInfo[5];
-
-        }
-    }
 
     public void inputCharactersOneByOne(WebElement controlName, String value)throws IOException{
         controlName.clear();
@@ -2231,76 +1767,6 @@ public class Utility {
         }
     }
 
-    /**
-     * @param logTest
-     * @param csvFileName
-     * @param arrayList
-     * @param database
-     * @param queryDatabase
-     * @ActionName: writeCancelledWarrantyInfoToCSV(logTest, String csvFileName, HashMap<String, Object> arrayList, Database database, QueryDatabase queryDatabase)
-     * @purpose: Query warranty info from database and write cancelled warranty info into CSV file with append mode
-     * @Author: Rooban
-     */
-//    public void writeCancelledWarrantyInfoToCSV(ExtentTest logTest, String csvFileName, List<String> arrayList, Database database, QueryDatabase queryDatabase) throws IOException {
-//        try {
-//            log4j.debug("Query warranty info from database and append the data in CSV file");
-//            for (int i = 0; i < arrayList.size(); i++) {
-//                List<HashMap<String,Object>> warrantyInfo = database.executeQueryAndGetListResult(logTest, WARRANTY, queryDatabase.GET_WARRANTY_INFO_PROD, arrayList.get(i));
-//
-//                if (warrantyInfo.get(0).get("status").toString().equals("Cancelled")) {
-//                    FileWriter csvWriter = new FileWriter(csvFileName, true);
-//                    csvWriter.append(warrantyInfo.get(0).get("id").toString() + ",");
-//                    csvWriter.append(warrantyInfo.get(0).get("price").toString() + ",");
-//                    csvWriter.append(warrantyInfo.get(0).get("currency_code").toString() + ",");
-//                    csvWriter.append(warrantyInfo.get(0).get("created").toString() + ",");
-//                    csvWriter.append(warrantyInfo.get(0).get("status").toString() + "\n");
-//                    csvWriter.flush();
-//                    csvWriter.close();
-//                }
-//            }
-//
-//            log4j.info("Query warranty info from database and append the data in CSV file...end");
-//        } catch (Exception e) {
-//            log4j.error("Query warranty info from database and append the data in CSV file - ERROR - " + e);
-//            logException(logTest, "Query warranty info from database and append the data in CSV file - ERROR - ", e);
-//        }
-//    }
-
-    /**
-     * @param logTest
-     * @ActionName: readDataFromTxtFile(logTest)
-     * @purpose: Write data into CSV file with append mode
-     * @Author: Rooban
-     * @return
-     */
-    public ArrayList<String> readExclusionWarrantyIDFromTxtFile(ExtentTest logTest) throws IOException {
-        ArrayList<String> warrantyList = new ArrayList<String>();
-        try {
-            log4j.debug("Read warranty id from cancel_warranty_exemption.txt file...start");
-            logInfo(logTest, "Read warranty id from cancel_warranty_exemption.txt file");
-
-            FileReader fileReader = new FileReader(CANCEL_WARRANTY_EXCLUSION_LIST);
-            BufferedReader buffReader = new BufferedReader(fileReader);
-
-            int count = 1;
-            String line = buffReader.readLine();
-            while(line != null){
-                if (count>1) {
-                    warrantyList.add(line);
-                }
-                line = buffReader.readLine();
-                count++;
-            }
-            buffReader.close();
-
-            log4j.info("Read warranty id from cancel_warranty_exemption.txt file...end");
-        } catch (Exception e) {
-            log4j.error("Read warranty id from cancel_warranty_exemption.txt file - ERROR - " + e);
-            logException(logTest, "Read warranty id from cancel_warranty_exemption.txt file - ERROR - ", e);
-        }
-        return warrantyList;
-    }
-
     public List<HashMap<String,Object>> excludeWarrantyIdFromCancellation(ExtentTest logTest, List<HashMap<String, Object>> warrantyInfoList, ArrayList<String> excludeWarrantyList) throws IOException {
         String index = "";
         List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
@@ -2397,30 +1863,6 @@ public class Utility {
         return false;
     }
 
-//    public static void validateResponseStatusCode(WebElement elementName, ExtentTest logStep) throws IOException {
-//        try {
-//            log4j.debug("validateResponseStatusCode method...start");
-//            String href = elementName.getAttribute("href");
-//            if (href.contains("%")) {
-//                href = href.replace("%C3%BC","ü");
-//                href = href.replace("%C3%B8","ø");
-//                href = href.replace("%C3%A5","å");
-//                href = href.replace("%C3%B3","ó");
-//                href = href.replace("%C3%A4","ä");
-//                href = href.replace("%C3%AD","í");
-//                href = href.replace("%C3%A3","ã");
-//            }
-//            RestAssured.useRelaxedHTTPSValidation();
-//            int statusCode = RestAssured.get(href).statusCode();
-//            if (statusCode != 200) logFailSoftAssert(logStep, href + " gave a response status code: " + statusCode + "instead of 200");
-//            else logPass(logStep, href + " gave a response status code: " + statusCode);
-//            log4j.info("validateResponseStatusCode method...end");
-//        } catch (Exception e) {
-//            logException(logStep, "validate Response Status Code - ERROR", e);
-//            log4j.info("validate Response Status Code - ERROR", e);
-//        }
-//    }
-
     /**
      * @param logTest
      * @param expected
@@ -2470,7 +1912,6 @@ public class Utility {
 
             // Update result on TestRails
             String testInfo = "\n\n Report link: " + Utility.getReportLink();
-            //if (TESTRAIL_UPDATE) markTestCaseFailInTestRail(description.replace("<br/>", "\n") + testInfo, logTest);
             throw new SkipException(description);
         } catch (SkipException ex) {
             logTest.fail(MarkupHelper.createLabel(description + "</br>" + getStackTrade(ex.getStackTrace()), ExtentColor.RED));
