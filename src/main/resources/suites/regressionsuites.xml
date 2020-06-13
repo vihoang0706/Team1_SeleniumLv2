@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="REGRESSION">
     <listeners>
-        <listener class-name="com.common.SuiteAlterer"/>
+        <listener class-name="com.logigear.training.common.SuiteAlterer"/>
     </listeners>
     <test name="RESGRESSION" parallel="classes">
         <parameter name="browser" value="chrome"/>

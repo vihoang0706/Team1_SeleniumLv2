@@ -45,5 +45,17 @@ public class GlobalVariables {
     public static final String CHROME_DRIVER_WIN = ".\\src\\main\\resources\\drivers\\chromedriver_v83.exe";
     public static final String GECKO_DRIVER_WIN = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
 
+    // Login
+    public static final String VALID_USERNAME = "test";
+    public static final String VALID_PASSWORD = "TEST";
+    public static final String INVALID_PASSWORD = "abc";
+    public static final String INVALID_USERNAME = "abc";
+    public static final String SAMPLE_REPOSITORY = "SampleRepository";
+    public static final String SAMPLE_REPOSITORY_LV2 = "SampleRepositoryLV2";
+    public static final String LOWERCASE_PASSWORD = "test";
+
+    // Messages
+    public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid";
+
 }
 

@@ -18,11 +18,11 @@ import static com.logigear.training.common.GlobalVariables.*;
 
 public class test extends TestBase {
 
-    @Test(dataProvider = "getDataForTest", priority = 1, description = "Responsive Checkout Page | Page title and Header")
+    @Test(dataProvider = "getDataForTest", priority = 1, description = "Open TA site")
     public void TC01(Hashtable<String, String> data) throws IOException {
         if (isTestCaseExecutable && isTestDataExecutable(data, logMethod)) {
             try {
-                logStep = logStepInfo(logMethod, "Step #1. Go to Checkout page for");
+                logStep = logStepInfo(logMethod, "Step #1. Navigate to TA site");
                 navigateToTestSite(logMethod, AUT);
 
 
