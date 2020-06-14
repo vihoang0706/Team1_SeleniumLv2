@@ -1,7 +1,8 @@
 package com.logigear.training.utilities;
 
 import com.logigear.training.common.Constants;
-import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,17 +11,27 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Set;
+import org.apache.commons.logging.Log;
 
 import static com.logigear.training.common.Constants.*;
 
 public class DriverUtils {
     public static String subWindowHandler = null;
+    public static Log log4j;
 
     public static String generateTimeStampString(String pattern) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime now = LocalDateTime.now();
         String timestampStr = dtf.format(now);
         return timestampStr;
+    }
+
+    public static void log4jConfiguration() {
+        try {
+            log4j = LogFactory.getLog(new Object().getClass());
+        } catch (Exception e) {
+            log4j.error("log4jConfiguration method - ERROR: " + e);
+        }
     }
 
     public static void navigateToTestSite(String url) {
@@ -136,5 +147,9 @@ public class DriverUtils {
             maximizeWindow();
         } catch (Exception e) {
         }
+    }
+
+    public static ExtentTest logStepInfo(ExtentTest logTest, String description, Object... args) throws IOException {
+        return logTest.createNode(description);
     }
 }
