@@ -1,6 +1,6 @@
 package com.logigear.training.utilities;
 
-import com.aventstack.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.ExtentTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;

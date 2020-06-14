@@ -9,7 +9,7 @@ public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository ext
 
     @Test
     public void DA_LOGIN_TC004() {
-
+        navigateToTestSite(Constants.AUT);
         //Login with SampleRepository
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
