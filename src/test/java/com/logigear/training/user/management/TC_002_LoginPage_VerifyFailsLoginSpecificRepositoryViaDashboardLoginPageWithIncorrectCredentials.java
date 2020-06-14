@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 public class TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials extends TestBase {
     @Test
     public void DA_LOGIN_TC002() {
+        navigateToTestSite(Constants.AUT);
         System.out.println("Login with invalid username and invalid password");
         loginPage.login(Constants.INVALID_USERNAME, Constants.INVALID_PASSWORD);
 

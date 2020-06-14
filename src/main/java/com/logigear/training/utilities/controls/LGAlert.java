@@ -8,17 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LGAlert {
     public  void waitForAlertPresent() {
-        WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), Constants.WAIT_TIME);
+        WebDriverWait wait = new WebDriverWait(Constants.DRIVER, Constants.WAIT_TIME);
         wait.until(ExpectedConditions.alertIsPresent());
     }
 
     public void acceptAlert() {
-        Alert alert = DriverUtils.getDriver().switchTo().alert();
+        Alert alert = Constants.DRIVER.switchTo().alert();
         alert.accept();
     }
 
     public String getText() {
-        Alert alert = DriverUtils.getDriver().switchTo().alert();
+        Alert alert = Constants.DRIVER.switchTo().alert();
         String text = alert.getText();
         return text;
     }

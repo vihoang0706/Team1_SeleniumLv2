@@ -9,7 +9,7 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
 
     @Test
     public void DA_LOGIN_TC005() {
-
+        navigateToTestSite(Constants.AUT);
         //Variables
         String repo = "SampleRepositoryLV2";
 

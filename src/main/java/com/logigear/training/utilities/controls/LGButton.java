@@ -1,5 +1,6 @@
 package com.logigear.training.utilities.controls;
 
+import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ public class LGButton {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
+            this.runtimeElement = Constants.DRIVER.findElement(this.locator);
         }
         return this.runtimeElement;
     }
@@ -25,7 +26,7 @@ public class LGButton {
     }
 
     public void clickElementAtPoint() {
-        Actions action = new Actions(DriverUtils.getDriver());
+        Actions action = new Actions(Constants.DRIVER);
         action.moveByOffset(1144,612).perform();
         action.click();
     }

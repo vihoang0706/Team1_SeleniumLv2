@@ -10,7 +10,7 @@ import java.io.IOException;
 public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository extends TestBase {
     @Test
     public void DA_LOGIN_TC001() throws IOException {
-        navigateToTestSite(logMethod,Constants.AUT);
+        navigateToTestSite(Constants.AUT);
         //Login to SampleRepository
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 

@@ -10,6 +10,7 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
 
     @Test
     public void DA_LOGIN_TC003() {
+        navigateToTestSite(Constants.AUT);
         System.out.println("Login with valid username and invalid password");
         loginPage.login(Constants.VALID_USERNAME, Constants.INVALID_PASSWORD);
 

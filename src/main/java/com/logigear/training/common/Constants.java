@@ -1,6 +1,9 @@
 package com.logigear.training.common;
 
+import org.openqa.selenium.WebDriver;
+
 public class Constants {
+    public static WebDriver DRIVER;
     // AUT
     public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp";
     public static final int WAIT_TIME = 5;
@@ -8,6 +11,7 @@ public class Constants {
     // Path
     public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
     public static final String GECKO_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
+    public static final String IE_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\IEDriverServer.exe";
 
     // Login
     public static final String VALID_USERNAME = "test";
@@ -32,7 +36,7 @@ public class Constants {
     public static String PLATFORM_VERSION = "";
     public static String MANUFACTURER = "";
     public static String MODEL = "";
-    public static String BROWSER = "Chrome";
+    public static String BROWSER = "CHROME";
     public static String BROWSER_VERSION = "latest";
     public static String RESOLUTION = "1280x1024";
     public static String THREAD_COUNT = "1";

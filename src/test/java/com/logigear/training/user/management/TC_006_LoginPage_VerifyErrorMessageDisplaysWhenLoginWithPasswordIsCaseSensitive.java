@@ -10,6 +10,7 @@ public class TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsC
 
     @Test
     public void DA_LOGIN_TC006() {
+        navigateToTestSite(Constants.AUT);
         System.out.println("Login with the account has uppercase password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 

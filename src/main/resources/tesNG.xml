@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!-- ................................................................. -->
+<!-- SAMPLE testng.xml file with  ReportNG integration                 -->
+<!-- ................................................................. -->
+<suite name="test-suite">
+
+    <test name="test1">
+        <classes>
+            <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>
+            <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>
+            <class name="com.logigear.training.user.management.TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword"/>
+            <class name="com.logigear.training.user.management.TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository"/>
+            <class name="com.logigear.training.user.management.TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount"/>
+        </classes>
+
+    </test>
+
+<!--    <listeners>-->
+<!--        <listener class-name="org.uncommons.reportng.HTMLReporter"/>-->
+<!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>-->
+<!--    </listeners>-->
+
+</suite>
