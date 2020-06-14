@@ -16,10 +16,7 @@ public class TestBase extends DriverUtils {
     public LoginPage loginPage = new LoginPage();
     public LGAlert alert = new LGAlert();
     public DashboardPage dashboardPage = new DashboardPage();
-
     DriverManager driverManager;
-
-    @Parameters({ "browser" })
     @BeforeClass
     public void setup() {
         driverManager = DriverManagerFactory.getDriverManager(Constants.BROWSER);

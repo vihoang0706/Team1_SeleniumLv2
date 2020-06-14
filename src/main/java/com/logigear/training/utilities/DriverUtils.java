@@ -1,15 +1,10 @@
 package com.logigear.training.utilities;
 
 import com.logigear.training.common.Constants;
+import com.relevantcodes.extentreports.ExtentReports;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import org.apache.commons.io.FileUtils;
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,16 +14,7 @@ import java.util.Set;
 import static com.logigear.training.common.Constants.*;
 
 public class DriverUtils {
-    //Initiate local variables for generating time stamp
-    public static String timeStampString = generateTimeStampString("yyyy-MM-dd-HH-mm-ss");
-
-    //Initiate local variables for sending email
-    public static String reportLocation = OUTPUT_PATH + "report-" + timeStampString + "/";
-    public static String reportFilePath = reportLocation + "report-" + timeStampString + ".html";
     public static String subWindowHandler = null;
-    public static ExtentReports report = null;
-    public static ExtentHtmlReporter htmlReporter = null;
-    public static ConfigFileReader configFileReader = null;
 
     public static String generateTimeStampString(String pattern) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
@@ -43,7 +29,7 @@ public class DriverUtils {
             maximizeWindow();
     }
 
-    public static boolean isElementClickable(WebElement elementName, int waitTime, ExtentTest logStep) throws IOException {
+    public static boolean isElementClickable(WebElement elementName, int waitTime) throws IOException {
         try {
 
             new WebDriverWait(Constants.DRIVER, waitTime).until(ExpectedConditions.visibilityOf(elementName));
@@ -118,54 +104,6 @@ public class DriverUtils {
 
         }
     }
-
-    public static void captureScreenshot(String detail, String screenshotName, ExtentTest logTest) throws IOException {
-        try {
-            sleep(2);
-
-            // Get screenshot name
-            screenshotName = screenshotName + generateTimeStampString("yyyy-MM-dd-HH-mm-ss") + ".png";
-
-            // Capture screenshot (If driver == null, it means there is no window opens => Don't capture screenshot)
-            TakesScreenshot ts = (TakesScreenshot) Constants.DRIVER;
-            File source = ts.getScreenshotAs(OutputType.FILE);
-            String dest = reportLocation + screenshotName;
-            File destination = new File(dest);
-            FileUtils.copyFile(source, destination);
-
-            // Add current URL to report
-            if (Constants.DRIVER != null)
-                logTest.info("Page URL: " + Constants.DRIVER.getCurrentUrl());
-
-            // Add screenshot to report
-            String screenshotLink = "<a href=\"" + screenshotName + "\">" + screenshotName + "</a>";
-            if (logTest.getStatus() == Status.ERROR)
-                logTest.error(detail + screenshotLink).addScreenCaptureFromPath(screenshotName);
-            else if (logTest.getStatus() == Status.FAIL)
-                logTest.fail(detail + screenshotLink).addScreenCaptureFromPath(screenshotName);
-            else
-                logTest.pass(detail + screenshotLink).addScreenCaptureFromPath(screenshotName);
-        } catch (Exception e) {
-
-        }
-    }
-
-    /* Generate report detail section */
-    public static String getReportLink() {
-        try {
-            String buildURL = System.getProperty("buildURL");
-            String jobURL = System.getProperty("jobURL");
-            if (buildURL != null && jobURL != null) {
-                return jobURL + "ws/" + reportFilePath.substring(reportFilePath.indexOf("Team1-SeleLV2"));
-            } else {
-                return reportFilePath;
-            }
-        } catch (Exception ex) {
-
-        }
-        return "";
-    }
-
     public static String getStackTrade(StackTraceElement[] stackTradeElements) {
         try {
             String stackTrade = "";
