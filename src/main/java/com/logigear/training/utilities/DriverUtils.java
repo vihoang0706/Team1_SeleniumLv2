@@ -1,7 +1,7 @@
 package com.logigear.training.utilities;
 
-import com.logigear.training.common.Constants;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
@@ -14,6 +14,16 @@ import static com.logigear.training.common.Constants.*;
 
 public class DriverUtils {
     public static String subWindowHandler = null;
+    protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+
+    public static WebDriver getDriver() {
+        //Get driver from ThreadLocalMap
+        System.out.println(driver.get());
+        return driver.get();
+    }
+    public static void setDriver(RemoteWebDriver webDriver) {
+        driver.set(webDriver);
+    }
 
     public static String generateTimeStampString(String pattern) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
@@ -24,15 +34,15 @@ public class DriverUtils {
 
     public static void navigateToTestSite(String url) {
             //logInfo(logTest, "Navigate to site: " + url);
-            Constants.DRIVER.navigate().to(url);
+            getDriver().navigate().to(url);
             maximizeWindow();
     }
 
     public static boolean isElementClickable(WebElement elementName, int waitTime) throws IOException {
         try {
 
-            new WebDriverWait(Constants.DRIVER, waitTime).until(ExpectedConditions.visibilityOf(elementName));
-            new WebDriverWait(Constants.DRIVER, waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
+            new WebDriverWait(getDriver(), waitTime).until(ExpectedConditions.visibilityOf(elementName));
+            new WebDriverWait(getDriver(), waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
 
             return true;
         } catch (Exception e) {
@@ -59,19 +69,19 @@ public class DriverUtils {
 
     public static void waitForControl(WebElement controlName) {
         try {
-            new WebDriverWait(Constants.DRIVER, WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+            new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
         } catch (Exception ex) {
         }
     }
 
     public static void waitForControlToBeClickable(WebElement controlName) {
-        new WebDriverWait(Constants.DRIVER, WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
-        new WebDriverWait(Constants.DRIVER, WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 
     public static void refreshPage() {
         try {
-            Constants.DRIVER.navigate().refresh();
+            getDriver().navigate().refresh();
         } catch (Exception e) {
 
         }
@@ -79,7 +89,7 @@ public class DriverUtils {
 
     public static void scrollIntoView(WebElement controlName) {
         waitForControl(controlName);
-        JavascriptExecutor executor = (JavascriptExecutor) Constants.DRIVER;
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("arguments[0].scrollIntoView(true);", controlName);
     }
 
@@ -93,7 +103,7 @@ public class DriverUtils {
     }
 
     public static void maximizeWindow() {
-        Constants.DRIVER.manage().window().maximize();
+        getDriver().manage().window().maximize();
     }
     public static String getStackTrade(StackTraceElement[] stackTradeElements) {
         try {
@@ -122,8 +132,8 @@ public class DriverUtils {
     }
     public static void switchToWindowHandle() throws IOException {
         try {
-            String popupWidowHandle = getWindowHandle(Constants.DRIVER);
-            Constants.DRIVER.switchTo().window(popupWidowHandle);
+            String popupWidowHandle = getWindowHandle(getDriver());
+            getDriver().switchTo().window(popupWidowHandle);
             maximizeWindow();
         } catch (Exception e) {
         }
