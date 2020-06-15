@@ -1,7 +1,6 @@
 package com.logigear.training.utilities;
 
 import com.logigear.training.common.Constants;
-import com.relevantcodes.extentreports.ExtentReports;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -95,14 +94,6 @@ public class DriverUtils {
 
     public static void maximizeWindow() {
         Constants.DRIVER.manage().window().maximize();
-    }
-
-    public static void quit() throws IOException {
-        try {
-            Constants.DRIVER.quit();
-        } catch (Exception e) {
-
-        }
     }
     public static String getStackTrade(StackTraceElement[] stackTradeElements) {
         try {

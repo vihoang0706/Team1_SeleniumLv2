@@ -13,7 +13,6 @@ public class ExtentManager {
     public synchronized static ExtentReports getReporter() {
         if (extent == null) {
             //Set HTML reporting file location
-            String workingDir = System.getProperty("user.dir");
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 extent = new ExtentReports(reportFilePath, true);
             }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+    <suite name="Suite">
+        <test name="UserManagement">
+            <parameter name="browser" value="chrome"/>
+            <classes>
+                <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>
+                <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>
+            </classes>
+        </test> <!-- Test -->
+    <listeners>
+        <listener class-name="com.logigear.training.utilities.listeners.TestListener"/>
+        <listener class-name="com.logigear.training.utilities.listeners.AnnotationTransformer"/>
+    </listeners>
+</suite>

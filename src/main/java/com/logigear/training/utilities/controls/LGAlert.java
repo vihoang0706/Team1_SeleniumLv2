@@ -1,7 +1,6 @@
 package com.logigear.training.utilities.controls;
 
 import com.logigear.training.common.Constants;
-import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

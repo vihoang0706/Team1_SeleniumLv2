@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Method;
 
 public class TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials extends TestBase {
-    @Test(priority = 1, description = "VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials")
+    @Test( description = "Verify Fails Login Specific Repository Via Dashboard Login Page With Incorrect Credentials")
     public void DA_LOGIN_TC002(Method method) {
         //ExtentReports Description
-        ExtentTestManager.startTest(method.getName(), "VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials");
+        ExtentTestManager.startTest(method.getName(), "Verify Fails Login Specific Repository Via Dashboard Login Page With Incorrect Credentials");
         navigateToTestSite(Constants.AUT);
         System.out.println("Login with invalid username and invalid password");
         loginPage.login(Constants.INVALID_USERNAME, Constants.INVALID_PASSWORD);

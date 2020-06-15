@@ -46,10 +46,6 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         System.out.println("I am in onTestFailure method " + getTestMethodName(iTestResult) + " failed");
 
-        //Get driver from BaseTest and assign to local webDriver variable.
-//        Object testClass = iTestResult.getInstance();
-//        WebDriver webDriver = ((TestBase) testClass).getWebDriver();
-
         //Take base64Screenshot screenshot.
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) Constants.DRIVER).
                 getScreenshotAs(OutputType.BASE64);

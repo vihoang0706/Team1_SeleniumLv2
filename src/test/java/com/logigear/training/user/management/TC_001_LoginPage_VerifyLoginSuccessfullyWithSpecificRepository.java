@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Method;
 
 public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository extends TestBase {
-    @Test(priority = 0, description = "Verify Login Successfully With Specific Repository")
+    @Test(description = "Verify Login Successfully With Specific Repository")
     public void DA_LOGIN_TC001(Method method){
         //ExtentReports Description
         ExtentTestManager.startTest(method.getName(), "Verify Login Successfully With Specific Repository");

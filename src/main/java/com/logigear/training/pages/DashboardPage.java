@@ -1,7 +1,6 @@
 package com.logigear.training.pages;
 
 import com.logigear.training.common.Constants;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;
 import org.openqa.selenium.By;
@@ -11,7 +10,7 @@ public class DashboardPage {
     LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
-    LGLabel  lblSubMenu = new LGLabel(By.xpath("//a[contains(text(),'%s')]"));
+    LGLabel lblSubMenu = new LGLabel(By.xpath("//a[contains(text(),'%s')]"));
 
     protected WebElement getSubMenu(String tabName) {
         return lblSubMenu.formatDynamicLocator(tabName);
