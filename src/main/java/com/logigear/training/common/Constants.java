@@ -1,9 +1,6 @@
 package com.logigear.training.common;
 
-import org.openqa.selenium.WebDriver;
-
 public class Constants {
-    public static WebDriver DRIVER;
     // AUT
     public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp";
     public static final int WAIT_TIME = 5;
