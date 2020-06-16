@@ -1,6 +1,7 @@
 package com.logigear.training.utilities.controls;
 
 import com.logigear.training.common.Constants;
+import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +17,7 @@ public class LGLabel {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = Constants.DRIVER.findElement(this.locator);
+            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
         }
         return this.runtimeElement;
     }
@@ -31,11 +32,11 @@ public class LGLabel {
     }
 
     public void waitForElementVisible() {
-        WebDriverWait wait = new WebDriverWait(Constants.DRIVER, Constants.WAIT_TIME);
+        WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), Constants.WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOfElementLocated(this.locator));
     }
 
     public WebElement formatDynamicLocator(String tabName) {
-        return Constants.DRIVER.findElement(By.xpath(String.format(tabName, this.locator)));
+        return DriverUtils.getDriver().findElement(By.xpath(String.format(tabName, this.locator)));
     }
 }

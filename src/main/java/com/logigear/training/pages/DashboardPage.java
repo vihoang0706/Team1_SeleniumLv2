@@ -1,6 +1,7 @@
 package com.logigear.training.pages;
 
 import com.logigear.training.common.Constants;
+import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;
 import org.openqa.selenium.By;
@@ -32,6 +33,6 @@ public class DashboardPage {
 
     public void switchRepository(String repo){
         this.getSubMenu("Repository").click();
-        Constants.DRIVER.findElement(By.partialLinkText(repo)).click();
+        DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
     }
 }

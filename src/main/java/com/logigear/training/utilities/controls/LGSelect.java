@@ -1,6 +1,6 @@
 package com.logigear.training.utilities.controls;
 
-import com.logigear.training.common.Constants;
+import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -15,7 +15,7 @@ public class LGSelect {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = Constants.DRIVER.findElement(this.locator);
+            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
         }
         return this.runtimeElement;
     }

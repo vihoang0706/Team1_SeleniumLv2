@@ -4,6 +4,7 @@ import com.logigear.training.common.Constants;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.reports.ExtentTestManager;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import java.lang.reflect.Method;
@@ -21,7 +22,7 @@ public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository exte
         Assert.assertEquals(dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
     }
 
-    @AfterTest
+    @AfterMethod
     public void PostCondition() {
         dashboardPage.logout();
     }
