@@ -1,6 +1,5 @@
 package com.logigear.training.pages;
 
-import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;

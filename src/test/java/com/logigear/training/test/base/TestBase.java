@@ -1,31 +1,89 @@
 package com.logigear.training.test.base;
 
-import com.logigear.training.pages.DashboardPage;
-import com.logigear.training.pages.LoginPage;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
-import com.logigear.training.utilities.controls.LGAlert;
-import com.logigear.training.utilities.webdrivers.*;
 import org.testng.annotations.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class TestBase extends DriverUtils{
-    public LoginPage loginPage = new LoginPage();
-    public LGAlert alert = new LGAlert();
-    public DashboardPage dashboardPage = new DashboardPage();
+    public ExtentTest logMethod = null;
+    public static ExtentTest logSuite = null;
+    public String testCaseName;
+    public ExtentTest logClass = null;
+    public String testNameWithStatus;
+    @BeforeSuite()
+    public synchronized void beforeSuite() throws IOException {
+
+        // Initial test report
+        try {
+            htmlReporter = new ExtentHtmlReporter(reportFilePath);
+            htmlReporter.loadXMLConfig(new File(Constants.PROJECT_PATH + "\\src\\main\\resources\\suites/config.xml"));
+            report = new ExtentReports();
+            report.attachReporter(htmlReporter);
+            logSuite = createTestForExtentReport(report, "Initial Setup");
+        } catch (Exception e) {
+
+        }
+
+        // Create report folder
+        logInfo(logSuite, "Report folder: " + reportLocation);
+        File folder = new File(reportLocation);
+        folder.mkdirs();
+    }
+
+    @BeforeClass
+    public synchronized void beforeClass() throws IOException {
+        // Get test case class name
+        testCaseName = this.getClass().getSimpleName();
+    }
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(String browsername) {
-        this.setDriver(new DriverManagerFactory().createInstance(browsername));
-        maximizeWindow();
-    }
-    @AfterMethod
-    public void tearDown() {
-        getDriver().quit();
+    public synchronized void beforeMethod(String browsername) throws IOException{
+        report.setSystemInfo("Browser", browsername);
+        initializeDriver(browsername, logMethod);
+        logClass = createTestForExtentReport(report, testCaseName);
     }
 
-    @AfterClass void terminate () {
-        //Remove the ThreadLocalMap element
-        driver.remove();
+    @AfterMethod
+    public synchronized void afterMethod() throws IOException {
+        quit(logMethod);
+        logMethod = null;
+    }
+
+    @AfterClass()
+    public synchronized void afterClass() throws IOException {
+
+        List statusHierarchy = Arrays.asList(
+                Status.FATAL,
+                Status.FAIL,
+                Status.ERROR,
+                Status.WARNING,
+                Status.PASS,
+                Status.SKIP,
+                Status.DEBUG,
+                Status.INFO
+        );
+
+        report.config().statusConfigurator().setStatusHierarchy(statusHierarchy);
+
+        // Save test result to HTML file after each test class
+        report.flush();
+
+        // Update result to TestRails
+//        String testInfo = "\n Report link: " + DriverUtils.getReportLink();
+
+
+        logClass = null;
+
     }
 }
