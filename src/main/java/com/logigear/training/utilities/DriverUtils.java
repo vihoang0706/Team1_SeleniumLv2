@@ -61,8 +61,9 @@ public class DriverUtils {
 
     public static void quit(ExtentTest logTest) throws IOException {
         try {
+            DriverUtils.getDriver().close();
             DriverUtils.getDriver().quit();
-            logInfo(logTest, "Closed browser and released device");
+            logInfo(logTest, "Closed browser and released driver");
         } catch (Exception e) {
 
         }
@@ -92,6 +93,10 @@ public class DriverUtils {
             maximizeWindow();
     }
 
+    /**
+     * wait for a specific time
+     * @param timeout
+     */
     public static void sleep(long timeout) {
         try {
             Thread.sleep(timeout * 1000);
@@ -100,6 +105,15 @@ public class DriverUtils {
         }
     }
 
+    /**
+     * wait for a specific control in period time
+     *
+     * @param controlName Example:
+     *                    - @FindBy(id='NextButton')
+     *                    - WebElement nextButton;
+     *
+     *
+     **/
     public static void waitForControl(WebElement controlName) {
         try {
             new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
@@ -110,6 +124,7 @@ public class DriverUtils {
     public static void maximizeWindow() {
         getDriver().manage().window().maximize();
     }
+
     public static String getStackTrade(StackTraceElement[] stackTradeElements) {
         try {
             String stackTrade = "";
@@ -125,6 +140,11 @@ public class DriverUtils {
         }
     }
 
+    /**
+     * @Action name: waitForPageLoaded()
+     * @Example: waitForPageLoaded()
+     * @Purpose: wait until page is loaded completed
+     */
     public static void waitForPageLoaded() {
         ExpectedCondition<Boolean> expectation = new
                 ExpectedCondition<Boolean>() {
@@ -140,6 +160,15 @@ public class DriverUtils {
             Assert.fail("Timeout waiting for Page Load Request to complete.");
         }
     }
+
+    /**
+     *
+     * @param detail
+     * @param screenshotName
+     * @param logTest
+     * @throws IOException
+     */
+
     public static void captureScreenshot(String detail, String screenshotName, ExtentTest logTest) throws IOException {
         try {
             sleep(2);
@@ -187,10 +216,23 @@ public class DriverUtils {
         return "";
     }
 
+    /**
+     * @Action: logPass
+     * @Purpose: return report passed log that contain <span> ticket
+     * @param logTest
+     * @param description
+     */
     public static void logPass(ExtentTest logTest, String description) {
         logTest.pass(MarkupHelper.createLabel(description, ExtentColor.GREEN));
     }
 
+    /**
+     * @Action name: logFail(arg1, agr2)
+     * @Purpose: return report failed log that contain <span> ticket
+     * @param logTest
+     * @param description
+     * @throws IOException
+     */
     public static void logFail(ExtentTest logTest, String description) throws IOException {
         try {
             // Report test fails and capture screenshot
@@ -205,6 +247,14 @@ public class DriverUtils {
             Assert.fail(description);
         }
     }
+
+    /**
+     * @Action: verifyExpectedAndActualResults
+     * @param logTest
+     * @param expected
+     * @param actual
+     * @throws IOException
+     */
     public static void verifyExpectedAndActualResults(ExtentTest logTest, String expected, String actual) throws IOException {
         try {
             if (actual.trim().equalsIgnoreCase(expected)) {

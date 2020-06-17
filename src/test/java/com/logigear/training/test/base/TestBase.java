@@ -20,13 +20,14 @@ public class TestBase extends DriverUtils{
     public String testCaseName;
     public ExtentTest logClass = null;
     public String testNameWithStatus;
+
     @BeforeSuite()
     public synchronized void beforeSuite() throws IOException {
 
         // Initial test report
         try {
             htmlReporter = new ExtentHtmlReporter(reportFilePath);
-            htmlReporter.loadXMLConfig(new File(Constants.PROJECT_PATH + "\\src\\main\\resources\\suites/config.xml"));
+            htmlReporter.loadXMLConfig(new File(Constants.PROJECT_PATH + "\\src\\main\\resources\\suites/reporttheme.xml"));
             report = new ExtentReports();
             report.attachReporter(htmlReporter);
             logSuite = createTestForExtentReport(report, "Initial Setup");
