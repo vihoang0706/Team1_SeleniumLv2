@@ -16,16 +16,23 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
 
     @Test
     public void DA_LOGIN_TC003() {
-        logClass.log(Status.INFO, "Navigate to Dashboard login page" + Constants.AUT);
+
+        //Main Steps
+        logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
         navigateToTestSite(Constants.AUT);
+
         DriverUtils.waitForPageLoaded();
-        System.out.println("Login with valid username and invalid password");
+
+        logClass.log(Status.INFO, "Step #2. Login with valid username and invalid password");
         loginPage.login(Constants.VALID_USERNAME, Constants.INVALID_PASSWORD);
 
-        alert.waitForAlertPresent(); // Wait for Alert present
-        System.out.println("Verify that Dashboard Error message \"Username or password is invalid\" appears");
+        // Wait for Alert present
+        alert.waitForAlertPresent();
+
+        logClass.log(Status.INFO, "Step #3. Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
         Assert.assertEquals(actualErrorMessage,Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
+
     }
 
     @AfterMethod

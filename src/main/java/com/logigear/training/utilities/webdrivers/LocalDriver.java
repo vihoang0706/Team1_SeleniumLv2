@@ -18,6 +18,7 @@ import static com.logigear.training.common.Constants.GECKO_DRIVER_LOCATION;
 
 public class LocalDriver extends DriverUtils {
     public RemoteWebDriver webDriver;
+
     public synchronized RemoteWebDriver initialDriver(String browser, ExtentTest logTest) throws IOException {
         try {
             // Set chrome driver path

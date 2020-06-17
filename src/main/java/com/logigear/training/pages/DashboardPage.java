@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class DashboardPage {
+
     LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
