@@ -7,14 +7,13 @@ import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword extends TestBase {
     public LoginPage loginPage = new LoginPage();
     public LGAlert alert = new LGAlert();
 
-    @Test
+    @Test(description = "Verify that user fails to log in specific repository successfully via Dashboard login page with correct username and incorrect password")
     public void DA_LOGIN_TC003() {
 
         //Main Steps
@@ -33,12 +32,7 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
         String actualErrorMessage = loginPage.getErrorMessage();
         Assert.assertEquals(actualErrorMessage,Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
 
-    }
-
-    @AfterMethod
-    public void PostCondition() {
-        System.out.println("Close message");
+        logClass.log(Status.INFO, "Clean up");
         alert.acceptAlert();
     }
-
 }

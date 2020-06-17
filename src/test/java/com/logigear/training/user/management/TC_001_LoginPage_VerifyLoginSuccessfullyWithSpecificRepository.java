@@ -6,7 +6,6 @@ import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -32,10 +31,8 @@ public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository exte
         logClass.log(Status.INFO, "Step #4. Verify that Dashboard Main page appears");
         DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getWelcomeAccount(),Constants.VALID_USERNAME);
         DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
-    }
 
-    @AfterMethod
-    public void PostCondition() {
+        logClass.log(Status.INFO, "Clean up");
         dashboardPage.logout();
     }
 }

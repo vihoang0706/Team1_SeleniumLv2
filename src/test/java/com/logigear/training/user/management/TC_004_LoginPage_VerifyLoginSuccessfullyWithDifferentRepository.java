@@ -13,7 +13,7 @@ public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository ext
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
 
-    @Test
+    @Test(description = "Verify that user is able to log in different repositories successfully after logging out current repository")
     public void DA_LOGIN_TC004() {
 
         //Main Steps

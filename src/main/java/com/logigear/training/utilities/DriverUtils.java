@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 import static com.logigear.training.common.Constants.*;
 
 public class DriverUtils {
-    protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+    protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
     //Initiate local variables for generating time stamp
     public static String timeStampString = generateTimeStampString("yyyy-MM-dd-HH-mm-ss");
     //Initiate local variables for sending email
@@ -59,14 +59,9 @@ public class DriverUtils {
         }
     }
 
-    public static void quit(ExtentTest logTest) throws IOException {
-        try {
-            DriverUtils.getDriver().close();
-            DriverUtils.getDriver().quit();
-            logInfo(logTest, "Closed browser and released driver");
-        } catch (Exception e) {
-
-        }
+    public static void quit(){
+        DriverUtils.getDriver().close();
+        DriverUtils.getDriver().quit();
     }
 
     public static void logInfo(ExtentTest logTest, String description) {
@@ -89,7 +84,7 @@ public class DriverUtils {
     }
 
     public static void navigateToTestSite(String url) {
-            getDriver().navigate().to(url);
+            DriverUtils.getDriver().navigate().to(url);
             maximizeWindow();
     }
 
@@ -240,7 +235,7 @@ public class DriverUtils {
 
             // Update result on TestRails
             String testInfo = "\n\n Report link: " + DriverUtils.getReportLink();
-
+            System.out.println(testInfo);
             throw new SkipException(description);
         } catch (SkipException ex) {
             logTest.fail(MarkupHelper.createLabel(description + "</br>" + getStackTrade(ex.getStackTrace()), ExtentColor.RED));

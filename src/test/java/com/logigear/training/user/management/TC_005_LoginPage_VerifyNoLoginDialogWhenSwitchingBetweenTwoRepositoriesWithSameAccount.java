@@ -13,7 +13,7 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
 
-    @Test
+    @Test(description = "Verify that there is no Login dialog when switching between 2 repositories with the same account")
     public void DA_LOGIN_TC005() {
 
         //Main Steps
@@ -34,10 +34,7 @@ public class TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoReposito
 
         logClass.log(Status.INFO, "Step #4. Observe the current page: There is no Login Repository dialog");
         logClass.log(Status.INFO, "Step #5. Observe the current page: The Repository menu displays name of switched repository");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ie) {
-        }
+        DriverUtils.sleep(5);
         Assert.assertEquals(dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY_LV2);
     }
 }

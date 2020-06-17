@@ -13,9 +13,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 
-import static com.logigear.training.common.Constants.CHROME_DRIVER_LOCATION;
-import static com.logigear.training.common.Constants.GECKO_DRIVER_LOCATION;
-
 public class LocalDriver extends DriverUtils {
     public RemoteWebDriver webDriver;
 
@@ -25,12 +22,12 @@ public class LocalDriver extends DriverUtils {
             switch (browser.toLowerCase()) {
                 case "chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_LOCATION);
+                    System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_LOCATION);
                     this.webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    System.setProperty("webdriver.gecko.driver", GECKO_DRIVER_LOCATION);
+                    System.setProperty("webdriver.gecko.driver", Constants.GECKO_DRIVER_LOCATION);
                     this.webDriver = new FirefoxDriver(firefoxOptions);
                     break;
                 case "ie":

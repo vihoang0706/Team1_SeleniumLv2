@@ -8,7 +8,7 @@ public class Constants {
     public static final int WAIT_TIME = 5;
 
     // Driver Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v79.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
     public static final String GECKO_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
     public static final String IE_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\IEDriverServer.exe";
 
@@ -22,7 +22,7 @@ public class Constants {
     public static final String LOWERCASE_PASSWORD = "test";
 
     // Messages
-    public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid";
+    public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid123";
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String RESOURCES_PATH = PROJECT_PATH + "\\src\\main\\resources\\";
     public static final String OUTPUT_PATH = RESOURCES_PATH + "output/";

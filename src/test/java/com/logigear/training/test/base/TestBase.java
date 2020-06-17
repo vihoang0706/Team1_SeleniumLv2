@@ -57,8 +57,7 @@ public class TestBase extends DriverUtils{
 
     @AfterMethod
     public synchronized void afterMethod() throws IOException {
-        quit(logMethod);
-        logMethod = null;
+        quit();
     }
 
     @AfterClass()
