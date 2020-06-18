@@ -23,6 +23,7 @@ public class Constants {
 
     // Messages
     public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid123";
+    public static final String EMPTY_USERNAME_AND_PASSWORD_MSG = "Please enter username!";
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String RESOURCES_PATH = PROJECT_PATH + "\\src\\main\\resources\\";
     public static final String OUTPUT_PATH = RESOURCES_PATH + "output/";
