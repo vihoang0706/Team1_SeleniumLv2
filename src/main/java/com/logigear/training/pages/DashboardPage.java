@@ -11,10 +11,15 @@ public class DashboardPage {
     LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
-    LGLabel lblSubMenu = new LGLabel(By.xpath("//a[contains(text(),'%s')]"));
+    private String lblSubMenu = "//a[contains(text(),'%s')]";
+    public By lblGlobalSetting = By.xpath("//li[@class='mn-setting']/a");
 
     protected WebElement getSubMenu(String tabName) {
-        return lblSubMenu.formatDynamicLocator(tabName);
+        return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,tabName)));
+    }
+
+    public WebElement getGlobalSetting() {
+        return DriverUtils.getDriver().findElement(lblGlobalSetting);
     }
 
     public String getRepository() {
@@ -34,5 +39,10 @@ public class DashboardPage {
     public void switchRepository(String repo){
         this.getSubMenu("Repository").click();
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
+    }
+
+    public void goToAddPage() {
+        DriverUtils.getDriver().findElement(lblGlobalSetting).click();
+        this.getSubMenu("Add Page").click();
     }
 }
