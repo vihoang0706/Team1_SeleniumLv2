@@ -33,8 +33,9 @@ public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog ex
         DriverUtils.sleep(5);
 
         logClass.log(Status.INFO, "Step #4. Try to go to Global Setting -> Add page again");
-        boolean isElementClickable = DriverUtils.isElementClickable(dashboardPage.lblGlobalSetting);
-        System.out.println(isElementClickable);
+        boolean doesControlExist = DriverUtils.doesControlExist(dashboardPage.getGlobalSetting());
+        System.out.println(doesControlExist);
+        Assert.assertEquals(doesControlExist, false);
 
     }
 }

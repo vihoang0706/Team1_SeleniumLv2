@@ -45,4 +45,5 @@ public class DashboardPage {
         DriverUtils.getDriver().findElement(lblGlobalSetting).click();
         this.getSubMenu("Add Page").click();
     }
+
 }
