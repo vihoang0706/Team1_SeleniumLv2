@@ -230,10 +230,10 @@ public class DriverUtils {
      * @throws IOException
      * */
 
-    public static boolean isElementClickable(By elementName) throws IOException {
+    public static boolean isElementClickable(WebElement elementName, int waitTime) throws IOException {
         try {
-            WebDriverWait wait3 = new WebDriverWait(DriverUtils.getDriver(), 10);
-            wait3.until(ExpectedConditions.invisibilityOfElementLocated(elementName));
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.visibilityOf(elementName));
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
             return true;
         } catch (Exception e) {
 
@@ -253,7 +253,7 @@ public class DriverUtils {
 
     public static boolean doesControlExist(WebElement control){
         try {
-            return control.isDisplayed();
+            return control.isSelected();
 
         } catch (Exception e) {
             return false;
