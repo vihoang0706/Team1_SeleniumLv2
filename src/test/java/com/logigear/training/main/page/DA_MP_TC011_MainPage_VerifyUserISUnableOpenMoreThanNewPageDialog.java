@@ -6,9 +6,7 @@ import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
-import com.logigear.training.utilities.controls.LGAlert;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -16,7 +14,7 @@ import java.io.IOException;
 public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends TestBase {
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
-    public LGAlert alert = new LGAlert();
+
     @Test
     public void DA_MP_TC011() throws IOException {
         //Main Steps
@@ -31,9 +29,10 @@ public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog ex
         dashboardPage.goToAddPage();
 
         DriverUtils.sleep(5);
-        dashboardPage.goToAddPage();
         logClass.log(Status.INFO, "Step #4. Try to go to Global Setting -> Add page again");
-        boolean isElementClickable = DriverUtils.isElementClickable(dashboardPage.lblGlobalSetting,5);
-        System.out.println(isElementClickable);
+        dashboardPage.goToAddPage();
+
+        logClass.log(Status.INFO, "Step #5. Observe the current page->User cannot go to Global Setting -> Add page while \"New Page\" dialog appears.\n");
+        DriverUtils.verifyExpectedAndActualResults(logClass, dashboardPage.isDialogDisplayed(),"Add Page");
     }
 }
