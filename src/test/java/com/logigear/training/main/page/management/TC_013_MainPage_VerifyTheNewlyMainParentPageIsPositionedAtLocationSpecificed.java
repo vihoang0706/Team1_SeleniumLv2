@@ -1,4 +1,4 @@
-package com.logigear.training.main.page;
+package com.logigear.training.main.page.management;
 
 import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
@@ -6,6 +6,7 @@ import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -26,21 +27,30 @@ public class TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationS
 
         logClass.log(Status.INFO, "Step #3. Wait for page load");
         DriverUtils.waitForPageLoaded();
+//
+//        logClass.log(Status.INFO, "Step #4. Go to Global Setting -> Add page");
+//        dashboardPage.goToAddPage();
+//
+//        DriverUtils.waitForPageLoaded();
+//        logClass.log(Status.INFO, "Step #5. Add first page");
+//        dashboardPage.addPage("Page1");
+//
+//        DriverUtils.waitForPageLoaded();
+//        logClass.log(Status.INFO, "Step #6. Go to Global Setting -> Add page");
+//        dashboardPage.goToAddPage();
+//
+//        DriverUtils.waitForPageLoaded();
+//        logClass.log(Status.INFO, "Step #7. Add second page with specific display after");
+//        dashboardPage.selectDisplayAfter("Page1");
+//        dashboardPage.addPage("Page2");
+//
+//        logClass.log(Status.INFO, "Step #8.  Check \"Another Test\" page is positioned besides the \"Test\" page");
+//        DriverUtils.waitForPageLoaded();
+//        dashboardPage.checkPositionOfPage("Demo1","Demo2");
+        DriverUtils.getDriver().findElement(By.xpath("//a[.='Overview']")).click();
+        String id = dashboardPage.getIdPage();
+        System.out.println(id);
 
-        logClass.log(Status.INFO, "Step #4. Go to Global Setting -> Add page");
-        dashboardPage.goToAddPage();
-
-        DriverUtils.getDriver().switchTo().frame("New Page");
-
-        logClass.log(Status.INFO, "Step #5. Add first page");
-        dashboardPage.addPage("Page1");
-
-        logClass.log(Status.INFO, "Step #6. Go to Global Setting -> Add page");
-        dashboardPage.goToAddPage();
-
-        logClass.log(Status.INFO, "Step #7. Add second page with specific display after");
-        dashboardPage.selectDisplayAfter("Page1");
-        dashboardPage.addPage("Page2");
     }
 }
 

@@ -5,6 +5,9 @@ import com.logigear.training.utilities.controls.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class DashboardPage {
 
@@ -12,9 +15,9 @@ public class DashboardPage {
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
     private String lblSubMenu = "//a[contains(text(),'%s')]";
-    public By lblGlobalSetting = By.xpath("//li[@class='mn-setting']/a");
-    LGTextBox txtPageName = new LGTextBox(By.id("#name"));
-    LGButton btnOk = new LGButton(By.id("#OK"));
+    LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
+    LGTextBox txtPageName = new LGTextBox(By.id("name"));
+    LGButton btnOk = new LGButton(By.id("OK"));
     LGSelect cbbDisplayAfter = new LGSelect(By.xpath("//select[@id='afterpage']/option[contains(text(),'%s')]"));
 
     protected WebElement getSubMenu(String tabName) {
@@ -41,7 +44,7 @@ public class DashboardPage {
     }
 
     public void goToAddPage() {
-        DriverUtils.getDriver().findElement(lblGlobalSetting).click();
+        lblGlobalSetting.click();
         this.getSubMenu("Add Page").click();
     }
 
@@ -60,5 +63,30 @@ public class DashboardPage {
 
     public void selectDisplayAfter(String pageName) {
        cbbDisplayAfter.select(pageName);
+    }
+
+    public void checkPositionOfPage(String namePage, String anotherPage) {
+        List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
+        System.out.println(links.size());
+        int i=0;
+        for(WebElement element:links){
+            if(element.getText().equalsIgnoreCase(namePage)) {
+                System.out.println("Section "+i+":"+element.getText());
+                Assert.assertEquals(links.get(i+1).getText(),anotherPage);
+                break;
+            }
+            i++;
+        }
+    }
+
+    public String getIdPage() {
+        String url = DriverUtils.getDriver().getCurrentUrl();
+        String partUrl1[] = url.split("TADashboard/");
+        String partUrl2[] = partUrl1[1].split(".page");
+        return partUrl2[0];
+    }
+
+    public void deletePage(String Page) {
+
     }
 }
