@@ -49,9 +49,9 @@ public class TestBase extends DriverUtils{
 
     @BeforeMethod
     @Parameters({"browser"})
-    public synchronized void beforeMethod(String browsername) throws IOException{
-        report.setSystemInfo("Browser", browsername);
-        initializeDriver(browsername, logMethod);
+    public synchronized void beforeMethod(String browserName) throws IOException{
+        report.setSystemInfo("Browser", browserName);
+        initializeDriver(browserName, logMethod);
         logClass = createTestForExtentReport(report, testCaseName);
     }
 
@@ -76,13 +76,7 @@ public class TestBase extends DriverUtils{
 
         report.config().statusConfigurator().setStatusHierarchy(statusHierarchy);
 
-        // Save test result to HTML file after each test class
         report.flush();
-
-        // Update result to TestRails
-//        String testInfo = "\n Report link: " + DriverUtils.getReportLink();
-
-
         logClass = null;
 
     }

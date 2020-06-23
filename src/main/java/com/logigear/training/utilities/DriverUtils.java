@@ -120,21 +120,6 @@ public class DriverUtils {
         getDriver().manage().window().maximize();
     }
 
-    public static String getStackTrade(StackTraceElement[] stackTradeElements) {
-        try {
-            String stackTrade = "";
-            for (StackTraceElement element : stackTradeElements) {
-                stackTrade += element.toString() + "</br>";
-                // Get stacktrade from comm.module level only
-                if (element.toString().startsWith("com.logigear.tranining.user.management"))
-                    break;
-            }
-            return stackTrade;
-        } catch (Exception ex) {
-            return "";
-        }
-    }
-
     /**
      * @Action name: waitForPageLoaded()
      * @Example: waitForPageLoaded()
@@ -194,23 +179,6 @@ public class DriverUtils {
 
         }
     }
-
-    /* Generate report detail section */
-    public static String getReportLink() {
-        try {
-            String buildURL = System.getProperty("buildURL");
-            String jobURL = System.getProperty("jobURL");
-            if (buildURL != null && jobURL != null) {
-                return jobURL + "ws/" + reportFilePath.substring(reportFilePath.indexOf("Team1-SeleLV2"));
-            } else {
-                return reportFilePath;
-            }
-        } catch (Exception ex) {
-
-        }
-        return "";
-    }
-
     /**
      * @Action: logPass
      * @Purpose: return report passed log that contain <span> ticket
@@ -232,13 +200,7 @@ public class DriverUtils {
         try {
             // Report test fails and capture screenshot
             captureScreenshot("FAILED screenshot: ", "fail-", logTest);
-
-            // Update result on TestRails
-            String testInfo = "\n\n Report link: " + DriverUtils.getReportLink();
-            System.out.println(testInfo);
-            throw new SkipException(description);
         } catch (SkipException ex) {
-            logTest.fail(MarkupHelper.createLabel(description + "</br>" + getStackTrade(ex.getStackTrace()), ExtentColor.RED));
             Assert.fail(description);
         }
     }
@@ -259,6 +221,41 @@ public class DriverUtils {
             }
         } catch (Exception e) {
 
+        }
+    }
+
+    /**
+     * @Action: isElementClickable
+     * @param elementName
+     * @throws IOException
+     * */
+
+    public static boolean isElementClickable(By elementName, int waitTime) throws IOException {
+        try {
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.invisibilityOfElementLocated(elementName));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public static void checkControlExist(ExtentTest logTest, WebElement elementName, String objectName) throws IOException {
+        try {
+            waitForControl(elementName);
+            if (!doesControlExist(elementName)) logFail(logTest, objectName + " does not exist.");
+            else logPass(logTest, objectName + " exists.");
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static boolean doesControlExist(WebElement control){
+        try {
+            return control.isSelected();
+
+        } catch (Exception e) {
+            return false;
         }
     }
 }
