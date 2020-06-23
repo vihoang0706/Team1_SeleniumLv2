@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
+import sun.rmi.runtime.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -230,13 +231,12 @@ public class DriverUtils {
      * @throws IOException
      * */
 
-    public static boolean isElementClickable(WebElement elementName, int waitTime) throws IOException {
+    public static boolean isElementClickable(By elementName, int waitTime) throws IOException {
         try {
-            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.visibilityOf(elementName));
-            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.elementToBeClickable(elementName));
+            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.invisibilityOfElementLocated(elementName));
             return true;
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
         return false;
     }

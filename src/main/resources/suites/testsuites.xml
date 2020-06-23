@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
     <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
     <suite name="Suite">
         <test name="UserManagement" parallel="classes" thread-count="1">
@@ -15,4 +16,21 @@
                 <class name="com.logigear.training.main.page.DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
             </classes>
         </test> <!-- Test -->
+=======
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="UserManagement" parallel="classes" thread-count="1">
+        <!--            parameter value: chrome, firefox, ie"-->
+        <parameter name="browser" value="chrome"/>
+        <classes>
+<!--            <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>-->
+<!--            <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>-->
+<!--            <class name="com.logigear.training.user.management.TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword"/>-->
+<!--            <class name="com.logigear.training.user.management.TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository"/>-->
+<!--            <class name="com.logigear.training.user.management.TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount"/>-->
+<!--            <class name="com.logigear.training.user.management.TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive"/>-->
+            <class name="com.logigear.training.main.page.DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
+        </classes>
+    </test> <!-- Test -->
+>>>>>>> 5ed2abd... Update test script
 </suite>

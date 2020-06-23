@@ -4,6 +4,7 @@ import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
 public class DashboardPage {
@@ -42,8 +43,12 @@ public class DashboardPage {
     }
 
     public void goToAddPage() {
-        DriverUtils.getDriver().findElement(lblGlobalSetting).click();
-        this.getSubMenu("Add Page").click();
+        try {
+            DriverUtils.getDriver().findElement(lblGlobalSetting).click();
+            this.getSubMenu("Add Page").click();
+        } catch (ElementClickInterceptedException e) {
+            System.out.println("Element is not interacted");
+        }
     }
 
 }
