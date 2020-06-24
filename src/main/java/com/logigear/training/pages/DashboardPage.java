@@ -12,9 +12,10 @@ public class DashboardPage {
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
     LGLabel lblSubMenu = new LGLabel(By.xpath("//a[contains(text(),'%s')]"));
+    LGLink lblGlobalSetting = new LGLink(By.xpath("//li[@class='mn-setting']"));
 
     protected WebElement getSubMenu(String tabName) {
-        return lblSubMenu.formatDynamicLocator(tabName);
+        return DriverUtils.getDriver().findElement(By.xpath(String.format(tabName, lblSubMenu)));
     }
 
     public String getRepository() {
@@ -34,5 +35,10 @@ public class DashboardPage {
     public void switchRepository(String repo){
         this.getSubMenu("Repository").click();
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
+    }
+
+    public void goToAddPage() {
+        lblGlobalSetting.click();
+        this.getSubMenu("Add Page").click();
     }
 }

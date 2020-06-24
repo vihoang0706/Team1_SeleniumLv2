@@ -8,7 +8,7 @@ public class Constants {
     public static final int WAIT_TIME = 5;
 
     // Driver Path
-    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
+    public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v83.exe";
     public static final String GECKO_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\geckodriver.exe";
     public static final String IE_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\IEDriverServer.exe";
 

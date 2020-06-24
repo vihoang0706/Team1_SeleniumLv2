@@ -6,6 +6,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.webdrivers.DriverManagerFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -148,7 +149,7 @@ public class DriverUtils {
                     }
                 };
         try {
-            Thread.sleep(1000);
+            Thread.sleep(WAIT_TIME);
             WebDriverWait wait = new WebDriverWait(getDriver(), 30);
             wait.until(expectation);
         } catch (Throwable error) {
