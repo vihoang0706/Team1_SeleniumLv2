@@ -5,7 +5,7 @@ public class Constants {
     public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp";
 
     //Time
-    public static final int WAIT_TIME = 5;
+    public static final int WAIT_TIME = 60;
 
     // Driver Path
     public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver_v83.exe";

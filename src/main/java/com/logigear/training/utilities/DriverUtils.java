@@ -150,7 +150,7 @@ public class DriverUtils {
                 };
         try {
             Thread.sleep(WAIT_TIME);
-            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 60);
             wait.until(expectation);
         } catch (Throwable error) {
             Assert.fail("Timeout waiting for Page Load Request to complete.");

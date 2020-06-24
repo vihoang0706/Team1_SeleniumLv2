@@ -8,6 +8,7 @@ import com.logigear.training.pages.NewPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -32,15 +33,21 @@ public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverview
 
         logClass.log(Status.INFO, "Step #2. Login with empty username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
+        sleep(5);
 
-        // Wait for page loads completely
+        //-Wait for page loads completely
         DriverUtils.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
+        dashboardPage = PageFactory.initElements(DriverUtils.getDriver(), DashboardPage.class);
         dashboardPage.goToAddPage();
 
+        //Wait for page loads completely
+        DriverUtils.waitForPageLoaded();
+
         logClass.log(Status.INFO, "Step #4. Enter Page Name field ");
-        newPage.enterNewPageInfo(pageName, "Select parent", "2", "Overview", false);
+        newPage = PageFactory.initElements(DriverUtils.getDriver(), NewPage.class);
+        newPage.enterNewPageInfo(pageName, null, null, null, false);
 
         logClass.log(Status.INFO, "Step #5. Click OK button");
         newPage.clickButton("OK");
