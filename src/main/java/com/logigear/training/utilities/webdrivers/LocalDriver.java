@@ -1,8 +1,8 @@
 package com.logigear.training.utilities.webdrivers;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,21 +22,20 @@ public class LocalDriver extends DriverUtils {
             switch (browser.toLowerCase()) {
                 case "chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_LOCATION);
+                    WebDriverManager.chromedriver().arch32().version("83.0.4103.14").setup();
                     this.webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    System.setProperty("webdriver.gecko.driver", Constants.GECKO_DRIVER_LOCATION);
+                    WebDriverManager.firefoxdriver().setup();
                     this.webDriver = new FirefoxDriver(firefoxOptions);
                     break;
                 case "ie":
                     InternetExplorerOptions options = new InternetExplorerOptions();
-                    System.setProperty("webdriver.ie.driver", Constants.IE_DRIVER_LOCATION);
+                    WebDriverManager.iedriver().setup();
                     this.webDriver = new InternetExplorerDriver(options);
                 default:
-                    //log4j.error("Our framework does not support this platform: " + browser);
-//                    logFail(logTest, "Our framework does not support this platform: " + browser);
+                    logFail(logTest, "Our framework does not support this platform: " + browser);
                     break;
             }
         } catch (Exception e) {

@@ -4,7 +4,6 @@ import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class DashboardPage {
     LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
     LGTextBox txtPageName = new LGTextBox(By.id("name"));
     LGButton btnOk = new LGButton(By.id("OK"));
-    LGSelect cbbDisplayAfter = new LGSelect(By.xpath("//select[@id='afterpage']/option[contains(text(),'%s')]"));
+    LGSelect cbbDisplayAfter = new LGSelect(By.id("afterpage"));
 
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,tabName)));
@@ -45,11 +44,32 @@ public class DashboardPage {
 
     public void goToAddPage() {
         lblGlobalSetting.click();
+        DriverUtils.waitForControl(this.getSubMenu("Add Page"));
         this.getSubMenu("Add Page").click();
     }
 
+    public void goToAction(String action, String pageId) {
+        switch (action) {
+            case "Edit":
+                clickOnPage(pageId);
+                lblGlobalSetting.click();
+                this.getSubMenu("Edit").click();
+                break;
+            case "Delete":
+               deletePage(pageId);
+                break;
+        }
+    }
+
+
     public void addPage(String pageName) {
         this.setPageName(pageName);
+        this.clickOk();
+    }
+
+    public void addPage(String pageName,String displayAfter) {
+        this.setPageName(pageName);
+        this.selectDisplayAfter(displayAfter);
         this.clickOk();
     }
 
@@ -65,28 +85,42 @@ public class DashboardPage {
        cbbDisplayAfter.select(pageName);
     }
 
-    public void checkPositionOfPage(String namePage, String anotherPage) {
+    public boolean isPositionOfThisPageNextAnotherPage(String namePage, String anotherPage) {
         List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
         System.out.println(links.size());
-        int i=0;
-        for(WebElement element:links){
-            if(element.getText().equalsIgnoreCase(namePage)) {
-                System.out.println("Section "+i+":"+element.getText());
-                Assert.assertEquals(links.get(i+1).getText(),anotherPage);
-                break;
+        boolean check = true;
+        for (int i=0; i<links.size();i++) {
+            if (links.get(i).getText().equalsIgnoreCase(namePage)) {
+                int nextPage = i+1;
+                if (links.get(nextPage).getText().equalsIgnoreCase(anotherPage)) {
+                    System.out.println("Section " + i + ":" + links.get(i+1).getText());
+                    check = true;
+                } else {
+                    check = false;
+                }
             }
-            i++;
-        }
+        } return check;
     }
 
     public String getIdPage() {
         String url = DriverUtils.getDriver().getCurrentUrl();
         String partUrl1[] = url.split("TADashboard/");
         String partUrl2[] = partUrl1[1].split(".page");
+        System.out.println(partUrl2[0]);
         return partUrl2[0];
     }
 
-    public void deletePage(String Page) {
+    public void clickOnPage(String pageId) {
+        String lnkDynamicPage = "//a[@href='/TADashboard/"+pageId+".page']";
+        System.out.println(lnkDynamicPage);
+        DriverUtils.getDriver().findElement(By.xpath(lnkDynamicPage)).click();
 
+    }
+
+    public void deletePage(String pageId) {
+        clickOnPage(pageId);
+        lblGlobalSetting.click();
+        DriverUtils.waitForControl(this.getSubMenu("Delete"));
+        this.getSubMenu("Delete").click();
     }
 }

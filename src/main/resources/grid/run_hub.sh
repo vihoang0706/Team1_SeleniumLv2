@@ -1,0 +1,1 @@
+java -jar .\src\main\resources\grid\selenium-server-standalone-3.141.59.jar -role hub -hubConfig .\src\main\resources\grid\grid_hub.json
