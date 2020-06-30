@@ -3,14 +3,15 @@
     <suite name="Suite">
         <test name="UserManagement" parallel="classes" thread-count="1">
 <!--            parameter value: chrome, firefox, ie"-->
+<!--            <parameter name="runOn" value=""/>-->
             <parameter name="browser" value="chrome"/>
             <classes>
-<!--                <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>-->
-<!--                <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>-->
-<!--                <class name="com.logigear.training.user.management.TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword"/>-->
-<!--                <class name="com.logigear.training.user.management.TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository"/>-->
-<!--                <class name="com.logigear.training.user.management.TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount"/>-->
-<!--                <class name="com.logigear.training.user.management.TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive"/>-->
+                <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>
+                <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>
+                <class name="com.logigear.training.user.management.TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPassword"/>
+                <class name="com.logigear.training.user.management.TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository"/>
+                <class name="com.logigear.training.user.management.TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount"/>
+                <class name="com.logigear.training.user.management.TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive"/>
                 <class name="com.logigear.training.main.page.management.TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationSpecificed"/>
             </classes>
         </test> <!-- Test -->

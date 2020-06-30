@@ -2,6 +2,7 @@ package com.logigear.training.main.page.management;
 
 import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
+import com.logigear.training.pages.AddPage;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationSpecificed extends TestBase {
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
+    public AddPage addPage = new AddPage();
 
     @Test(description = "Verify that the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu")
     public void DA_LOGIN_TC013() throws IOException {
@@ -32,24 +34,29 @@ public class TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationS
 
         DriverUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #5. Add first page");
-        dashboardPage.addPage("Page1");
+        addPage.enterNewPageInfo("Page1",null,null,null,null);
+        addPage.clickButton("ok");
+
         DriverUtils.sleep(5);
         String idPage1 = dashboardPage.getIdPage();
         System.out.println(idPage1);
         DriverUtils.sleep(5);
         logClass.log(Status.INFO, "Step #6. Go to Global Setting -> Add page");
+        AddPage addPage1 = new AddPage();
         DashboardPage dashboardPage1 = new DashboardPage();
         dashboardPage1.goToAddPage();
 
         DriverUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #7. Add second page with specific display after");
-        dashboardPage1.addPage("Page2","Page1");
+        addPage1.enterNewPageInfo("Page2",null,null,"Page1",null);
+        addPage1.clickButton("ok");
+
         DriverUtils.sleep(5);
         String idPage2 = dashboardPage1.getIdPage();
         System.out.println(idPage2);
         logClass.log(Status.INFO, "Step #8.  Check \"Another Test\" page is positioned besides the \"Test\" page");
         DriverUtils.waitForPageLoaded();
-        boolean isPositionOfThisPageNextAnotherPage = dashboardPage.isPositionOfThisPageNextAnotherPage("Page1","Page2");
+        boolean isPositionOfThisPageNextAnotherPage = dashboardPage1.isPositionOfThisPageNextAnotherPage("Page1","Page2");
         System.out.println(isPositionOfThisPageNextAnotherPage);
         DriverUtils.verifyExpectedAndActualResults(logClass,String.valueOf(isPositionOfThisPageNextAnotherPage),"true");
 
@@ -58,8 +65,8 @@ public class TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationS
         dashboardPage2.deletePage(idPage1);
 
         DriverUtils.sleep(5);
-
-        dashboardPage2.deletePage(idPage1);
+        DashboardPage dashboardPage3 = new DashboardPage();
+        dashboardPage3.deletePage(idPage2);
 
     }
 }

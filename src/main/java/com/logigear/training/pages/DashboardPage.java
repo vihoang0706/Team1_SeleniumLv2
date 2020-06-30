@@ -15,10 +15,7 @@ public class DashboardPage {
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
     private String lblSubMenu = "//a[contains(text(),'%s')]";
     LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
-    LGTextBox txtPageName = new LGTextBox(By.id("name"));
-    LGButton btnOk = new LGButton(By.id("OK"));
-    LGSelect cbbDisplayAfter = new LGSelect(By.id("afterpage"));
-
+    LGAlert alert = new LGAlert();
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,tabName)));
     }
@@ -61,30 +58,6 @@ public class DashboardPage {
         }
     }
 
-
-    public void addPage(String pageName) {
-        this.setPageName(pageName);
-        this.clickOk();
-    }
-
-    public void addPage(String pageName,String displayAfter) {
-        this.setPageName(pageName);
-        this.selectDisplayAfter(displayAfter);
-        this.clickOk();
-    }
-
-    public void setPageName(String pageName) {
-        txtPageName.enter(pageName);
-    }
-
-    public void clickOk() {
-        btnOk.click();
-    }
-
-    public void selectDisplayAfter(String pageName) {
-       cbbDisplayAfter.select(pageName);
-    }
-
     public boolean isPositionOfThisPageNextAnotherPage(String namePage, String anotherPage) {
         List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
         System.out.println(links.size());
@@ -122,5 +95,7 @@ public class DashboardPage {
         lblGlobalSetting.click();
         DriverUtils.waitForControl(this.getSubMenu("Delete"));
         this.getSubMenu("Delete").click();
+        alert.waitForAlertPresent();
+        alert.acceptAlert();
     }
 }

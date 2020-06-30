@@ -6,7 +6,9 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.webdrivers.DriverManagerFactory;
+import com.logigear.training.utilities.webdrivers.GridManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,14 +23,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.logigear.training.common.Constants.*;
-
 public class DriverUtils {
     protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
     //Initiate local variables for generating time stamp
     public static String timeStampString = generateTimeStampString("yyyy-MM-dd-HH-mm-ss");
     //Initiate local variables for sending email
-    public static String reportLocation = OUTPUT_PATH + "report-" + timeStampString + "/";
+    public static String reportLocation = Constants.OUTPUT_PATH + "report-" + timeStampString + "/";
     public static String reportFilePath = reportLocation + "report-" + timeStampString + ".html";
     public static ExtentReports report = null;
     public static ExtentHtmlReporter htmlReporter = null;
@@ -38,15 +38,14 @@ public class DriverUtils {
     }
 
     public static void setDriver(RemoteWebDriver webDriver) {
-
         driver.set(webDriver);
     }
 
     public static void initializeDriver(String browser, ExtentTest logTest) throws IOException {
         try {
-            switch (RUN_ON.toLowerCase()) {
+            switch (Constants.RUN_ON.toLowerCase()) {
                 case "grid":
-                    //Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER, logTest));
+                    DriverUtils.setDriver(new GridManager().createInstanceGrid(browser, logTest));
                     maximizeWindow();
                     break;
                 default:
@@ -111,7 +110,7 @@ public class DriverUtils {
      **/
     public static void waitForControl(WebElement controlName) {
         try {
-            new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+            new WebDriverWait(getDriver(), Constants.WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
         } catch (Exception ex) {
         }
     }
@@ -260,5 +259,26 @@ public class DriverUtils {
         } catch (Exception e) {
 
         }
+    }
+    public static boolean doesControlExist(WebElement control){
+        try {
+            return control.isDisplayed();
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static void checkControlExist(ExtentTest logTest, WebElement elementName, String objectName) throws IOException {
+        try {
+            waitForControl(elementName);
+            if (!doesControlExist(elementName)) logFail(logTest, objectName + " does not exist.");
+            else logPass(logTest, objectName + " exists.");
+        } catch (Exception e) {
+        }
+    }
+
+    public static void waitForControlToBeClickable(WebElement controlName) {
+        new WebDriverWait(getDriver(), Constants.WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+        new WebDriverWait(getDriver(), Constants.WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 }

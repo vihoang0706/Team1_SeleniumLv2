@@ -4,21 +4,21 @@
       "browserName": "chrome",
       "platform": "WINDOWS",
       "maxInstances": 1,
-      "version": "ANY",
+      "version": "83",
       "seleniumProtocol": "WebDriver"
     },
     {
       "browserName": "firefox",
       "platform": "WINDOWS",
       "maxInstances": 1,
-      "version": "ANY",
+      "version": "77",
       "seleniumProtocol": "WebDriver"
     },
     {
       "browserName": "internet explorer",
       "platform": "WINDOWS",
       "maxInstances": 1,
-      "version": "ANY"
+      "version": "11"
     }],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
   "maxSession": 5,
@@ -30,7 +30,7 @@
   "nodeStatusCheckTimeout": 5000,
   "nodePolling": 5000,
   "role": "node",
-  "host": "",
+  "host": "192.168.1.14",
   "unregisterIfStillDownAfter": 60000,
   "downPollingLimit": 2,
   "debug": false,
