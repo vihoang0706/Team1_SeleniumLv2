@@ -6,16 +6,17 @@ import com.logigear.training.utilities.controls.LGLink;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class DashboardPage {
+public class DashboardPage extends DriverUtils {
 
     LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
     LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
-    LGLabel lblSubMenu = new LGLabel(By.xpath("//a[contains(text(),'%s')]"));
+    LGLink lblSubMenu = new LGLink(By.xpath("//a[contains(text(),'%s')]"));
     LGLink lblGlobalSetting = new LGLink(By.xpath("//li[@class='mn-setting']"));
+    private String subMenuLink = "//a[contains(text(),'%s')]";
 
-    protected WebElement getSubMenu(String tabName) {
-        return DriverUtils.getDriver().findElement(By.xpath(String.format(tabName, lblSubMenu)));
+    private WebElement getSubMenu(String tabName) {
+        return DriverUtils.getDriver().findElement(By.xpath((String.format(subMenuLink, tabName))));
     }
 
     public String getRepository() {

@@ -8,10 +8,13 @@ import com.logigear.training.pages.NewPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+
+import static com.logigear.training.common.Constants.WAIT_TIME;
 
 public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverviewPageSuccessfully extends TestBase {
 
@@ -36,18 +39,20 @@ public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverview
         sleep(5);
 
         //-Wait for page loads completely
-        DriverUtils.waitForPageLoaded();
+        loginPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
         dashboardPage = PageFactory.initElements(DriverUtils.getDriver(), DashboardPage.class);
         dashboardPage.goToAddPage();
 
         //Wait for page loads completely
-        DriverUtils.waitForPageLoaded();
+        dashboardPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #4. Enter Page Name field ");
         newPage = PageFactory.initElements(DriverUtils.getDriver(), NewPage.class);
+        newPage.checkAddPageModalDisplay(logMethod);
         newPage.enterNewPageInfo(pageName, null, null, null, false);
+        newPage.sleep(WAIT_TIME);
 
         logClass.log(Status.INFO, "Step #5. Click OK button");
         newPage.clickButton("OK");

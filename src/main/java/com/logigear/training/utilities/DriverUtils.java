@@ -262,4 +262,37 @@ public class DriverUtils {
 
         }
     }
+
+    public static void refreshPage() {
+        try {
+            getDriver().navigate().refresh();
+            waitForPageLoaded();
+        } catch (Exception e) {
+        }
+    }
+
+    public static boolean doesControlExist(WebElement control){
+        try {
+            return control.isDisplayed();
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static void checkControlExist(ExtentTest logTest, WebElement elementName, String objectName) throws IOException {
+        try {
+            waitForControl(elementName);
+            if (!doesControlExist(elementName)) logFail(logTest, objectName + " does not exist.");
+            else logPass(logTest, objectName + " exists.");
+        } catch (Exception e) {
+        }
+    }
+
+    public static void waitForControlToBeClickable(WebElement controlName) {
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
+    }
+
+
 }
