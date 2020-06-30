@@ -8,13 +8,13 @@ import com.logigear.training.pages.NewPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 import static com.logigear.training.common.Constants.WAIT_TIME;
+
 
 public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverviewPageSuccessfully extends TestBase {
 
@@ -26,7 +26,7 @@ public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverview
     @Test(description = "Verify that user is able to add additional pages besides \"Overview\" page successfully")
     public void DA_MP_TC012() throws IOException {
 
-        String pageName = "hangTest";
+        String pageName = "hangTest2";
 
         //Main Steps
         logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
@@ -36,7 +36,7 @@ public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverview
 
         logClass.log(Status.INFO, "Step #2. Login with empty username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
-        sleep(5);
+        loginPage.sleep(WAIT_TIME);
 
         //-Wait for page loads completely
         loginPage.waitForPageLoaded();
@@ -52,10 +52,11 @@ public class TC_012_MainPage_VerifyUserIsAbleToAddAdditionalPagesBesidesOverview
         newPage = PageFactory.initElements(DriverUtils.getDriver(), NewPage.class);
         newPage.checkAddPageModalDisplay(logMethod);
         newPage.enterNewPageInfo(pageName, null, null, null, false);
-        newPage.sleep(WAIT_TIME);
 
         logClass.log(Status.INFO, "Step #5. Click OK button");
         newPage.clickButton("OK");
+
+        newPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #6. Check \"Test\" page is displayed besides \"Overview\" page");
 
