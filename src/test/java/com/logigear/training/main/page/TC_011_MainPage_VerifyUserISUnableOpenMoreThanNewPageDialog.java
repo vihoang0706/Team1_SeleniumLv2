@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends TestBase {
+public class TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends TestBase {
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
 

@@ -12,7 +12,8 @@
                 <class name="com.logigear.training.user.management.TC_005_LoginPage_VerifyNoLoginDialogWhenSwitchingBetweenTwoRepositoriesWithSameAccount"/>
                 <class name="com.logigear.training.user.management.TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsCaseSensitive"/>
                 <class name="com.logigear.training.user.management.TC_010_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithEmptyUsernameAndPassword"/>
-                <class name="com.logigear.training.main.page.DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
+                <class name="com.logigear.training.main.page.TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
+                <class name="com.logigear.training.main.page.TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOverviewPage"/>
             </classes>
         </test> <!-- Test -->
 </suite>

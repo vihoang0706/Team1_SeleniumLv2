@@ -9,7 +9,9 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class DashboardPage {
+import java.util.List;
+
+public class DashboardPage extends DriverUtils {
     public ExtentTest logTest;
     LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
     LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
@@ -19,7 +21,7 @@ public class DashboardPage {
     LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
 
     protected WebElement getSubMenu(String tabName) {
-        return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,tabName)));
+        return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
     }
 
     public WebElement getGlobalSetting() {
@@ -40,7 +42,7 @@ public class DashboardPage {
         return username;
     }
 
-    public void switchRepository(String repo){
+    public void switchRepository(String repo) {
         this.getSubMenu("Repository").click();
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
     }
@@ -59,4 +61,33 @@ public class DashboardPage {
         return actualTitle;
     }
 
+
+    public void openNewAddedPage(String namePage) {
+        WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
+        List<WebElement> pagesList = pageUL.findElements(By.tagName("li"));
+        for (WebElement li : pagesList) {
+            if (li.getText().equals(namePage)){
+                li.click();
+            }
+        }
+    }
+
+//    public Boolean checkNewAddedPageShowsAfterOverview(String addedPage) {
+//        WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
+//        List<WebElement> pagesList = pageUL.findElements(By.tagName("li"));
+//        if (getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li")).getText().equals("Overview")) {
+//
+//        }
+//        for (int i = 1; i <= pagesList.size(); i++) {
+//            WebElement pageName = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li"));
+//            if (pageName.getText().equals(addedPage)) {
+//                System.out.println(i);
+//            }
+//
+//
+//        }
+//
+//        return true;
+//
+//    }
 }
