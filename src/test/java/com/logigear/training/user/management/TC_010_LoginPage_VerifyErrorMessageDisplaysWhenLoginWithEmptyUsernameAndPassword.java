@@ -33,7 +33,7 @@ public class TC_010_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithEmptyUserna
         alert.waitForAlertPresent();
 
         logClass.log(Status.INFO, "Step #3. Verify that Dashboard Error message \"Please enter username!\" appears");
-        DriverUtils.verifyExpectedAndActualResults(logClass,loginPage.getErrorMessage(),Constants.EMPTY_USERNAME_AND_PASSWORD_MSG);
+        loginPage.verifyExpectedAndActualResults(logClass,loginPage.getErrorMessage(),Constants.EMPTY_USERNAME_AND_PASSWORD_MSG);
 
         logClass.log(Status.INFO, "Clean up");
         alert.acceptAlert();

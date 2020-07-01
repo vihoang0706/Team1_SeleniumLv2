@@ -26,11 +26,11 @@ public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository exte
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
         logClass.log(Status.INFO, "Step #3. Wait for page load");
-        DriverUtils.waitForPageLoaded();
+        loginPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #4. Verify that Dashboard Main page appears");
-        DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getWelcomeAccount(),Constants.VALID_USERNAME);
-        DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
+        dashboardPage.verifyExpectedAndActualResults(logClass,dashboardPage.getWelcomeAccount(),Constants.VALID_USERNAME);
+        dashboardPage.verifyExpectedAndActualResults(logClass,dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
 
         logClass.log(Status.INFO, "Clean up");
         dashboardPage.logout();

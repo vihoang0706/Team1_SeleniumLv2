@@ -23,7 +23,7 @@ public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository ext
 
         logClass.log(Status.INFO, "Step #2. Login with SampleRepository");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
-        DriverUtils.waitForPageLoaded();
+        loginPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #3. Logout");
         dashboardPage.logout();
@@ -37,7 +37,7 @@ public class TC_004_LoginPage_VerifyLoginSuccessfullyWithDifferentRepository ext
         lgPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
         DashboardPage dbPage = new DashboardPage();
-        DriverUtils.waitForPageLoaded();
+        dbPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #6. Verify that user login to SampleRepositoryLV2 successfully");
         Assert.assertEquals(dbPage.getWelcomeAccount(), Constants.VALID_USERNAME);

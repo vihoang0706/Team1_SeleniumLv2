@@ -25,7 +25,7 @@ public class TC_006_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithPasswordIsC
         logClass.log(Status.INFO, "Step #2. Login with valid username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
-        DriverUtils.waitForPageLoaded();
+        dashboardPage.waitForPageLoaded();
 
         logClass.log(Status.INFO,"Step #3. Observe the current page. Main page is displayed");
         String actualWelcomeUserName = dashboardPage.getWelcomeAccount();
