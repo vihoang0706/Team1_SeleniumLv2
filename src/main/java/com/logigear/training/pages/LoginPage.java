@@ -1,12 +1,13 @@
 package com.logigear.training.pages;
 
+import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import com.logigear.training.utilities.controls.LGButton;
 import com.logigear.training.utilities.controls.LGSelect;
 import com.logigear.training.utilities.controls.LGTextBox;
 import org.openqa.selenium.By;
 
-public class LoginPage {
+public class LoginPage extends DriverUtils {
     LGSelect cbbRepository = new LGSelect(By.id("repository"));
     LGTextBox txtUsername = new LGTextBox(By.id("username"));
     LGTextBox txtPassword = new LGTextBox(By.id("password"));

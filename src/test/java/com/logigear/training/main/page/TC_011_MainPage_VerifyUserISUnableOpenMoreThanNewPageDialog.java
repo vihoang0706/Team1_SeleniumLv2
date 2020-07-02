@@ -11,12 +11,13 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends TestBase {
+public class TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends TestBase {
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
 
     @Test
     public void DA_MP_TC011() throws IOException {
+
         //Main Steps
         logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
         navigateToTestSite(Constants.AUT);
@@ -33,6 +34,6 @@ public class DA_MP_TC011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog ex
         dashboardPage.goToAddPage();
 
         logClass.log(Status.INFO, "Step #5. Observe the current page->User cannot go to Global Setting -> Add page while \"New Page\" dialog appears.\n");
-        DriverUtils.verifyExpectedAndActualResults(logClass, dashboardPage.isDialogDisplayed(),"Add Page");
+        dashboardPage.verifyExpectedAndActualResults(logClass, dashboardPage.isDialogDisplayed(),"Add Page");
     }
 }

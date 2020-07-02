@@ -31,7 +31,7 @@ public class TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLogi
 
         logClass.log(Status.INFO, "Step #3. Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
-        DriverUtils.verifyExpectedAndActualResults(logClass, actualErrorMessage, Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
+        loginPage.verifyExpectedAndActualResults(logClass, actualErrorMessage, Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
 
         logClass.log(Status.INFO, "Clean up");
         alert.acceptAlert();

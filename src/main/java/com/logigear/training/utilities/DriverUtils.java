@@ -25,9 +25,11 @@ import static com.logigear.training.common.Constants.*;
 
 public class DriverUtils {
     protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
+
     //Initiate local variables for generating time stamp
     public static String timeStampString = generateTimeStampString("yyyy-MM-dd-HH-mm-ss");
-    //Initiate local variables for sending email
+
+    //Report
     public static String reportLocation = OUTPUT_PATH + "report-" + timeStampString + "/";
     public static String reportFilePath = reportLocation + "report-" + timeStampString + ".html";
     public static ExtentReports report = null;
@@ -258,4 +260,18 @@ public class DriverUtils {
             return false;
         }
     }
+
+    public static void refreshPage() {
+        try {
+            getDriver().navigate().refresh();
+            waitForPageLoaded();
+        } catch (Exception e) {
+        }
+    }
+
+    public static void waitForControlToBeClickable(WebElement controlName) {
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
+        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
+    }
+
 }
