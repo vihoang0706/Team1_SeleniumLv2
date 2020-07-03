@@ -49,7 +49,6 @@ public class AddPageForm extends DriverUtils {
             if (displayAfterOption != null) {
                 ddlDisplayAfter.select(displayAfterOption);
             }
-
             if (publicOption.equals("true")) {
                 chkPublic.isSelected();
             }
@@ -57,10 +56,7 @@ public class AddPageForm extends DriverUtils {
         }
     }
 
-
-
     public void clickButton(String buttonName){
-
         buttonName = buttonName.toLowerCase();
         if (buttonName.equals("ok")) {
             waitForControlToBeClickable(btnOK.getRuntimeElement());

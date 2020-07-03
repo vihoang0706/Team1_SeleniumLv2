@@ -48,10 +48,10 @@ public class TestBase extends DriverUtils{
     }
 
     @BeforeMethod
-    @Parameters({"browser"})
-    public synchronized void beforeMethod(String browserName) throws IOException{
+    @Parameters({"browser","runOn"})
+    public synchronized void beforeMethod(String browserName,String runOn) throws IOException{
         report.setSystemInfo("Browser", browserName);
-        initializeDriver(browserName, logMethod);
+        initializeDriver(browserName,runOn, logMethod);
         logClass = createTestForExtentReport(report, testCaseName);
     }
 

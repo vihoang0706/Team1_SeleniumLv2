@@ -44,11 +44,11 @@ public class DriverUtils {
         driver.set(webDriver);
     }
 
-    public static void initializeDriver(String browser, ExtentTest logTest) throws IOException {
+    public static void initializeDriver(String browser,String runOn, ExtentTest logTest) throws IOException {
         try {
-            switch (RUN_ON.toLowerCase()) {
+            switch (runOn) {
                 case "grid":
-                    //Utility.setDriver(DriverFactory.createInstanceGrid(BROWSER, logTest));
+                    DriverUtils.setDriver(new DriverManagerFactory().createInstanceGrid(browser,logTest));
                     maximizeWindow();
                     break;
                 default:
