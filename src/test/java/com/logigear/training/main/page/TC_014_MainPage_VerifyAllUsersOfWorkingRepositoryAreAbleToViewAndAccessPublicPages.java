@@ -2,10 +2,10 @@ package com.logigear.training.main.page;
 
 import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
+import com.logigear.training.pages.AddPageForm;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import org.testng.annotations.Test;
 
@@ -15,6 +15,7 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
+    public AddPageForm addPageForm = new AddPageForm();
     public LGAlert alert = new LGAlert();
     String pageName = "TdTesting";
 
@@ -33,13 +34,13 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
         dashboardPage.sleep(2);
         logClass.log(Status.INFO, "Step #4. Enter Page Name field");
-        dashboardPage.setPageName(pageName);
+        addPageForm.enterNewPageInfo(pageName, null, null, null, false);
 
         logClass.log(Status.INFO, "Step #5. Check Public checkbox");
-        dashboardPage.checkOnIsPublicCheckbox();
+        addPageForm.checkOnIsPublicCheckbox();
 
         logClass.log(Status.INFO, "Step #6. Click OK button");
-        dashboardPage.clickOk();
+        addPageForm.clickButton("ok");
         alert.waitForAlertPresent();
         alert.acceptAlert();
 
