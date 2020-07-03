@@ -2,6 +2,7 @@ package com.logigear.training.main.page;
 
 import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
+import com.logigear.training.pages.AddPageForm;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
@@ -16,6 +17,7 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
+    public AddPageForm addPageForm = new AddPageForm();
     public LGAlert alert = new LGAlert();
     String pageName = "TdTesting";
 
@@ -34,10 +36,10 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
         DriverUtils.sleep(2);
         logClass.log(Status.INFO, "Step #4. Enter Page Name field");
-        dashboardPage.setPageName(pageName);
+        addPageForm.enterNewPageInfo(pageName, null, null, null, false);
 
         logClass.log(Status.INFO, "Step #5. Check Public checkbox");
-        dashboardPage.checkOnIsPublicCheckbox();
+        addPageForm.checkOnIsPublicCheckbox();
 
         logClass.log(Status.INFO, "Step #6. Click OK button");
         dashboardPage.clickOk();
@@ -55,7 +57,7 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
         DriverUtils.sleep(2);
         DashboardPage dbPage = new DashboardPage();
         logClass.log(Status.INFO, "Step #8. Check newly added page is visible");
-//        Assert.assertTrue(dbPage.isPageDisplayed(pageName), "Page did not display");
-        DriverUtils.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
+        Assert.assertTrue(dbPage.isPageDisplayed(pageName), "Page did not display");
+//        DriverUtils.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
     }
 }

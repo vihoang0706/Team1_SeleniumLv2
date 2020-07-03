@@ -17,6 +17,7 @@ public class AddPageForm extends DriverUtils {
     public LGSelect ddlDisplayAfter = new LGSelect(By.xpath("//select [@id='afterpage']"));
     public LGButton btnOK = new LGButton(By.xpath("//input[@id='OK']"));
     public LGButton btnCancel = new LGButton(By.xpath("//input[@id='Cancel']"));
+    LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
 
     @FindBy(xpath = "//input[@id='ispublic']")
     public WebElement chkPublic;
@@ -57,7 +58,9 @@ public class AddPageForm extends DriverUtils {
         }
     }
 
-
+    public void checkOnIsPublicCheckbox() {
+        chbIsPublic.check();
+    }
 
     public void clickButton(String buttonName){
 

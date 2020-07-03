@@ -17,7 +17,6 @@ public class DashboardPage extends DriverUtils {
     private String lblSubMenu = "//a[contains(text(),'%s')]";
     public By lblGlobalSetting = By.xpath("//li[@class='mn-setting']/a");
     LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
-    LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
     LGTextBox txtPageName = new LGTextBox(By.id("name"));
     LGButton btnOk = new LGButton(By.id("OK"));
 
@@ -73,10 +72,6 @@ public class DashboardPage extends DriverUtils {
 
     protected WebElement getPageName(String pageName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,pageName)));
-    }
-
-    public void checkOnIsPublicCheckbox() {
-        chbIsPublic.check();
     }
 
     public String isDialogDisplayed() {
