@@ -91,15 +91,13 @@ public class DashboardPage extends DriverUtils {
     public boolean isPositionOfThisPageNextAnotherPage(String namePage, String anotherPage) {
         List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
         System.out.println(links.size());
-        boolean check = true;
+        boolean check = false;
         for (int i=0; i<links.size();i++) {
             if (links.get(i).getText().equalsIgnoreCase(namePage)) {
                 int nextPage = i+1;
                 if (links.get(nextPage).getText().equalsIgnoreCase(anotherPage)) {
                     System.out.println("Section " + i + ":" + links.get(i+1).getText());
                     check = true;
-                } else {
-                    check = false;
                 }
             }
         } return check;

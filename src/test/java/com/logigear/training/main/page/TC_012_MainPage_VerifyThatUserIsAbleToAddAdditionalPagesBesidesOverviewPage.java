@@ -16,7 +16,6 @@ import java.io.IOException;
 public class TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOverviewPage extends TestBase {
 
     public LoginPage loginPage = new LoginPage();
-    public LGAlert alert = new LGAlert();
     public DashboardPage dashboardPage = new DashboardPage();
     public AddPageForm addPageForm = new AddPageForm();
 
@@ -52,12 +51,20 @@ public class TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOver
 
         logClass.log(Status.INFO, "Step #5. Click OK button");
         addPageForm.clickButton("OK");
-
         addPageForm.waitForPageLoaded();
 
+        DashboardPage dbPage = new DashboardPage();
+        String idPage = dbPage.getIdPage();
+        System.out.println(idPage);
         logClass.log(Status.INFO, "Step #6. Check \"Test\" page is displayed besides \"Overview\" page");
 
+        boolean isPositionOfThisPageNextAnotherPage = dbPage.isPositionOfThisPageNextAnotherPage(pageName,"Overview");
+        System.out.println(isPositionOfThisPageNextAnotherPage);
+        dbPage.verifyExpectedAndActualResults(logClass,String.valueOf(isPositionOfThisPageNextAnotherPage),"true");
 
+        // Post condition
+        DashboardPage dashboardPage = new DashboardPage();
+        dashboardPage.deletePage(idPage);
     }
 }
 
