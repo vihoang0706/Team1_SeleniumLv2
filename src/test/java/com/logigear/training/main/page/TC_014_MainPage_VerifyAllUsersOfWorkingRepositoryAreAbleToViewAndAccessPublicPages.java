@@ -7,6 +7,7 @@ import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.controls.LGAlert;
+import com.logigear.training.utilities.DriverUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -27,12 +28,15 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
         logClass.log(Status.INFO, "Step #2. Log in specific repository with valid account");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
-
         loginPage.sleep(2);
         logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
         dashboardPage.sleep(2);
+        logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
+        dashboardPage.goToAddPage();
+
+        DriverUtils.sleep(2);
         logClass.log(Status.INFO, "Step #4. Enter Page Name field");
         addPageForm.enterNewPageInfo(pageName, null, null, null, false);
 

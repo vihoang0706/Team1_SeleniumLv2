@@ -21,6 +21,8 @@ public class DashboardPage extends DriverUtils {
     public LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
     LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
     LGAlert alert = new LGAlert();
+    LGTextBox txtPageName = new LGTextBox(By.id("name"));
+    LGButton btnOk = new LGButton(By.id("OK"));
 
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
@@ -45,6 +47,19 @@ public class DashboardPage extends DriverUtils {
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
     }
 
+    public void addPage(String pageName) {
+        this.setPageName(pageName);
+        this.clickOk();
+    }
+
+    public void setPageName(String pageName) {
+        txtPageName.enter(pageName);
+    }
+
+    public void clickOk() {
+        btnOk.click();
+    }
+
     public void goToAddPage() {
         try {
             lblGlobalSetting.click();
@@ -57,7 +72,6 @@ public class DashboardPage extends DriverUtils {
     protected WebElement getPageName(String pageName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,pageName)));
     }
-
 
     public String isDialogDisplayed() {
         String actualTitle = lblTitle.getText();
