@@ -4,6 +4,7 @@
         <test name="UserManagement" parallel="classes" thread-count="1">
 <!--            parameter value: chrome, firefox, ie"-->
             <parameter name="browser" value="chrome"/>
+            <parameter name="runOn" value="local"/>
             <classes>
                 <class name="com.logigear.training.user.management.TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository"/>
                 <class name="com.logigear.training.user.management.TC_002_LoginPage_VerifyFailsLoginSpecificRepositoryViaDashboardLoginPageWithIncorrectCredentials"/>
@@ -14,6 +15,7 @@
                 <class name="com.logigear.training.user.management.TC_010_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithEmptyUsernameAndPassword"/>
                 <class name="com.logigear.training.main.page.TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
                 <class name="com.logigear.training.main.page.TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOverviewPage"/>
+                <class name="com.logigear.training.main.page.TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationSpecific"/>
             </classes>
         </test> <!-- Test -->
 </suite>
