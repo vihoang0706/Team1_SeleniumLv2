@@ -2,12 +2,10 @@ package com.logigear.training.pages;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.logigear.training.utilities.DriverUtils;
-import com.logigear.training.utilities.controls.LGLabel;
-import com.logigear.training.utilities.controls.LGLink;
+import com.logigear.training.utilities.controls.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -19,6 +17,10 @@ public class DashboardPage extends DriverUtils {
     private String lblSubMenu = "//a[contains(text(),'%s')]";
     public By lblGlobalSetting = By.xpath("//li[@class='mn-setting']/a");
     LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
+    LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
+    LGTextBox txtPageName = new LGTextBox(By.id("name"));
+    LGButton btnOk = new LGButton(By.id("OK"));
+
 
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
@@ -47,6 +49,19 @@ public class DashboardPage extends DriverUtils {
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
     }
 
+    public void addPage(String pageName) {
+        this.setPageName(pageName);
+        this.clickOk();
+    }
+
+    public void setPageName(String pageName) {
+        txtPageName.enter(pageName);
+    }
+
+    public void clickOk() {
+        btnOk.click();
+    }
+
     public void goToAddPage() {
         try {
             DriverUtils.getDriver().findElement(lblGlobalSetting).click();
@@ -56,11 +71,18 @@ public class DashboardPage extends DriverUtils {
         }
     }
 
+    protected WebElement getPageName(String pageName) {
+        return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,pageName)));
+    }
+
+    public void checkOnIsPublicCheckbox() {
+        chbIsPublic.check();
+    }
+
     public String isDialogDisplayed() {
         String actualTitle = lblTitle.getText();
         return actualTitle;
     }
-
 
     public void openNewAddedPage(String namePage) {
         WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
@@ -90,4 +112,11 @@ public class DashboardPage extends DriverUtils {
 //        return true;
 //
 //    }
+    public boolean isPageDisplayed(String pageName) {
+        boolean result = false;
+        if (getPageName(pageName).isDisplayed()) {
+            result = true;
+        }
+        return result;
+    }
 }

@@ -14,6 +14,7 @@
                 <class name="com.logigear.training.user.management.TC_010_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithEmptyUsernameAndPassword"/>
                 <class name="com.logigear.training.main.page.TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
                 <class name="com.logigear.training.main.page.TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOverviewPage"/>
+                <class name="com.logigear.training.main.page.TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAccessPublicPages"/>
             </classes>
         </test> <!-- Test -->
 </suite>
