@@ -16,6 +16,7 @@
                 <class name="com.logigear.training.main.page.TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog"/>
                 <class name="com.logigear.training.main.page.TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOverviewPage"/>
                 <class name="com.logigear.training.main.page.TC_013_MainPage_VerifyTheNewlyMainParentPageIsPositionedAtLocationSpecific"/>
+                <class name="com.logigear.training.main.page.TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAccessPublicPages"/>
             </classes>
         </test> <!-- Test -->
 </suite>
