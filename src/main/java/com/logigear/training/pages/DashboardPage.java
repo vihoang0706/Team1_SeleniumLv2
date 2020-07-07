@@ -5,7 +5,6 @@ import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;
-import com.logigear.training.utilities.controls.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
@@ -21,8 +20,6 @@ public class DashboardPage extends DriverUtils {
     public LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
     LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
     LGAlert alert = new LGAlert();
-    LGTextBox txtPageName = new LGTextBox(By.id("name"));
-    LGButton btnOk = new LGButton(By.id("OK"));
 
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
@@ -45,19 +42,6 @@ public class DashboardPage extends DriverUtils {
     public void switchRepository(String repo) {
         this.getSubMenu("Repository").click();
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
-    }
-
-    public void addPage(String pageName) {
-        this.setPageName(pageName);
-        this.clickOk();
-    }
-
-    public void setPageName(String pageName) {
-        txtPageName.enter(pageName);
-    }
-
-    public void clickOk() {
-        btnOk.click();
     }
 
     public void goToAddPage() {
@@ -88,25 +72,6 @@ public class DashboardPage extends DriverUtils {
         }
     }
 
-//    public Boolean checkNewAddedPageShowsAfterOverview(String addedPage) {
-//        WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
-//        List<WebElement> pagesList = pageUL.findElements(By.tagName("li"));
-//        if (getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li")).getText().equals("Overview")) {
-//
-//        }
-//        for (int i = 1; i <= pagesList.size(); i++) {
-//            WebElement pageName = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li"));
-//            if (pageName.getText().equals(addedPage)) {
-//                System.out.println(i);
-//            }
-//
-//
-//        }
-//
-//        return true;
-//
-//    }
-
     public boolean isPositionOfThisPageNextAnotherPage(String namePage, String anotherPage) {
         List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
         System.out.println(links.size());
@@ -131,9 +96,7 @@ public class DashboardPage extends DriverUtils {
     }
 
     public void clickOnPage(String pageId) {
-        String lnkDynamicPage = "//a[@href='/TADashboard/"+pageId+".page']";
-        System.out.println(lnkDynamicPage);
-        DriverUtils.getDriver().findElement(By.xpath(lnkDynamicPage)).click();
+        getPage(pageId).click();
 
     }
 
@@ -146,9 +109,33 @@ public class DashboardPage extends DriverUtils {
         alert.acceptAlert();
     }
 
+    public void deleteChildPage(String parentPage, String childPage) {
+        clickOnPage(parentPage);
+        clickOnPage(childPage);
+        lblGlobalSetting.click();
+        waitForControl(this.getSubMenu("Delete"));
+        this.getSubMenu("Delete").click();
+        alert.waitForAlertPresent();
+        alert.acceptAlert();
+    }
+
+    protected WebElement getPage(String pageId) {
+        String lnkPage = "a[href='/TADashboard/"+pageId+".page']";
+        return getDriver().findElement(By.cssSelector(String.format(lnkPage, pageId)));
+    }
+
     public boolean isPageDisplayed(String pageName) {
         boolean result = false;
         if (getPageName(pageName).isDisplayed()) {
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean isChildPageDisplayed(String parentPage, String childPage) {
+        boolean result = false;
+        hoverOnElement(getPage(parentPage));
+        if (getPage(childPage).isDisplayed()) {
             result = true;
         }
         return result;

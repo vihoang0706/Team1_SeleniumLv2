@@ -9,6 +9,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.logigear.training.utilities.webdrivers.DriverManagerFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -222,7 +223,7 @@ public class DriverUtils {
                 logFail(logTest, "Expected Result: " + expected + "<br/>Actual Result: " + actual);
             }
         } catch (Exception e) {
-
+            System.out.println("The expected result and actual result does not match");
         }
     }
 
@@ -274,4 +275,13 @@ public class DriverUtils {
         new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 
+    public static void hoverOnElement(WebElement element) {
+        Actions action = new Actions(getDriver());
+        action.moveToElement(element).build().perform();
+    }
+
+    public static String randomData(String namePage) {
+        int randomNo = (int) (Math.random() * 100000);
+        return namePage + randomNo;
+    }
 }

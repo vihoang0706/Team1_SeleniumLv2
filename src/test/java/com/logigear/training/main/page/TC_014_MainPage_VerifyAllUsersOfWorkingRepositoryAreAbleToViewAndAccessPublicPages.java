@@ -18,7 +18,7 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
     public DashboardPage dashboardPage = new DashboardPage();
     public AddPageForm addPageForm = new AddPageForm();
     public LGAlert alert = new LGAlert();
-    String pageName = "TdTesting";
+    String pageName = "Testing";
 
     @Test(description = "Verify that 'Public' pages can be visible and accessed by all users of working repository")
     public void DA_MP_TC014() throws IOException {
@@ -37,22 +37,19 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
         dashboardPage.goToAddPage();
 
         DriverUtils.sleep(2);
-        logClass.log(Status.INFO, "Step #4. Enter Page Name field");
+        logClass.log(Status.INFO, "Step #4. Enter Page Name field and check Public checkbox");
         addPageForm.enterNewPageInfo(pageName, null, null, null, false);
 
-        logClass.log(Status.INFO, "Step #5. Check Public checkbox");
-        addPageForm.checkOnIsPublicCheckbox();
-
-        logClass.log(Status.INFO, "Step #6. Click OK button");
+        logClass.log(Status.INFO, "Step #5. Click OK button");
         addPageForm.clickButton("ok");
         alert.waitForAlertPresent();
         alert.acceptAlert();
 
-        logClass.log(Status.INFO, "Step #7. Click on Log out link");
+        logClass.log(Status.INFO, "Step #6. Click on Log out link");
         dashboardPage.logout();
 
         dashboardPage.sleep(2);
-        logClass.log(Status.INFO, "Step #8. Log in with another valid account");
+        logClass.log(Status.INFO, "Step #7. Log in with another valid account");
         LoginPage lgPage = new LoginPage();
         lgPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
@@ -60,5 +57,7 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
         DashboardPage dbPage = new DashboardPage();
         logClass.log(Status.INFO, "Step #8. Check newly added page is visible");
         dbPage.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
+
+        dashboardPage.logout();
     }
 }
