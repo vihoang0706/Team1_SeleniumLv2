@@ -274,4 +274,13 @@ public class DriverUtils {
         new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
     }
 
+    public static void goBackToPreviousPage(ExtentTest logTest) throws IOException {
+        try {
+            logInfo(logTest, "Back to previous page");
+            getDriver().navigate().back();
+            waitForPageLoaded();
+        } catch (Exception e) {
+        }
+    }
+
 }
