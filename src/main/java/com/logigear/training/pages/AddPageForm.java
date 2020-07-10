@@ -61,6 +61,10 @@ public class AddPageForm extends DriverUtils {
         chbIsPublic.check();
     }
 
+    public void uncheckIsPublicCheckbox() {
+        chbIsPublic.uncheck();
+    }
+
     public void clickButton(String buttonName){
         buttonName = buttonName.toLowerCase();
         if (buttonName.equals("ok")) {
