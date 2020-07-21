@@ -69,6 +69,15 @@ public class DashboardPage extends DriverUtils {
         }
     }
 
+    public void goToEditPage() {
+        try {
+            lblGlobalSetting.click();
+            this.getSubMenu("Edit").click();
+        } catch (ElementClickInterceptedException e) {
+            System.out.println("Element is not interacted");
+        }
+    }
+
     protected WebElement getPageName(String pageName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu,pageName)));
     }

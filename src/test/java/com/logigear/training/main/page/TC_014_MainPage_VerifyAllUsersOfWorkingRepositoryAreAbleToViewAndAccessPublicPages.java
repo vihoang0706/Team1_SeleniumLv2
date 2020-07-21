@@ -59,6 +59,6 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
         lgPage.sleep(2);
         DashboardPage dbPage = new DashboardPage();
         logClass.log(Status.INFO, "Step #8. Check newly added page is visible");
-        dbPage.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
+        dbPage.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isPageDisplayed(pageName)), "true");
     }
 }
