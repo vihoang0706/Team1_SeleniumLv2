@@ -2,12 +2,14 @@ package com.logigear.training.utilities.controls;
 
 import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class LGButton {
     WebElement runtimeElement;
     By locator;
+    WebDriver driver;
 
     public LGButton(By locator) {
         this.locator = locator;
@@ -15,7 +17,7 @@ public class LGButton {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
+            this.runtimeElement = driver.findElement(this.locator);
         }
         return this.runtimeElement;
     }

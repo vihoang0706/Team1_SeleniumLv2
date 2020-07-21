@@ -5,10 +5,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.IOException;
 
 public class DriverManagerFactory {
-    public static RemoteWebDriver createInstance(String browser, ExtentTest logTest) {
-        LocalDriver driver = new LocalDriver();
+    public DriverManager createInstance(String browser, ExtentTest logTest) {
+        DriverManager driverManager;
         try {
-            return driver.initialDriver(browser,logTest);
+            driverManager = LocalDriver.getDriverManager(logTest,browser);
+            return driverManager;
         } catch (IOException e) {
             e.printStackTrace();
         }

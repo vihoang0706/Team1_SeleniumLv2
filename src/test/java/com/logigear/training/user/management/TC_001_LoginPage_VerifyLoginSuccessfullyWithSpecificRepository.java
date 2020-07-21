@@ -12,25 +12,25 @@ import java.io.IOException;
 
 public class TC_001_LoginPage_VerifyLoginSuccessfullyWithSpecificRepository extends TestBase {
 
-    public LoginPage loginPage = new LoginPage();
-    public DashboardPage dashboardPage = new DashboardPage();
+    public LoginPage loginPage = new LoginPage(this.driver);
+    public DashboardPage dashboardPage = new DashboardPage(this.driver);
 
     @Test(description = "Verify Login Successfully With Specific Repository")
     public void DA_LOGIN_TC001() throws IOException {
 
         //Main Steps
         logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
-        navigateToTestSite(Constants.AUT);
+//        navigateToTestSite(Constants.AUT);
 
         logClass.log(Status.INFO, "Step #2. Login with valid username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
         logClass.log(Status.INFO, "Step #3. Wait for page load");
-        loginPage.waitForPageLoaded();
+        dashboardPage.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #4. Verify that Dashboard Main page appears");
-        dashboardPage.verifyExpectedAndActualResults(logClass,dashboardPage.getWelcomeAccount(),Constants.VALID_USERNAME);
-        dashboardPage.verifyExpectedAndActualResults(logClass,dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
+        DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getWelcomeAccount(),Constants.VALID_USERNAME);
+        DriverUtils.verifyExpectedAndActualResults(logClass,dashboardPage.getRepository(), Constants.SAMPLE_REPOSITORY);
 
         logClass.log(Status.INFO, "Clean up");
         dashboardPage.logout();

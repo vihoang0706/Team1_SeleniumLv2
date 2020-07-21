@@ -6,6 +6,10 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.utilities.webdrivers.DriverManager;
+import com.logigear.training.utilities.webdrivers.DriverManagerFactory;
+import com.logigear.training.utilities.webdrivers.LocalDriver;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -19,7 +23,8 @@ public class TestBase extends DriverUtils{
     public static ExtentTest logSuite = null;
     public String testCaseName;
     public ExtentTest logClass = null;
-    public String testNameWithStatus;
+    public WebDriver driver;
+    public DriverManager driverManager;
 
     @BeforeSuite()
     public synchronized void beforeSuite() throws IOException {
@@ -51,8 +56,19 @@ public class TestBase extends DriverUtils{
     @Parameters({"browser","runOn"})
     public synchronized void beforeMethod(String browserName,String runOn) throws IOException{
         report.setSystemInfo("Browser", browserName);
-        initializeDriver(browserName,runOn, logMethod);
+        switch (runOn) {
+            case "grid":
+                DriverUtils.setDriver(new DriverManagerFactory().createInstanceGrid(browserName,logMethod));
+                maximizeWindow();
+                break;
+            default:
+                driverManager = LocalDriver.getDriverManager(logMethod,browserName);
+                driver = driverManager.getDriver();
+                driver.get(Constants.AUT);
+        }
         logClass = createTestForExtentReport(report, testCaseName);
+        driver = driverManager.getDriver();
+        driver.navigate().to(Constants.AUT);
     }
 
     @AfterMethod

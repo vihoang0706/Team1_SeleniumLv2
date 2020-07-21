@@ -3,12 +3,14 @@ package com.logigear.training.utilities.controls;
 import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LGLabel {
     WebElement runtimeElement;
+    WebDriver driver;
     By locator;
 
     public LGLabel(By locator) {
@@ -17,7 +19,7 @@ public class LGLabel {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
+            this.runtimeElement = driver.findElement(this.locator);
         }
         return this.runtimeElement;
     }

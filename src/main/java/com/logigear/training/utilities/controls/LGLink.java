@@ -2,10 +2,12 @@ package com.logigear.training.utilities.controls;
 
 import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LGLink {
     WebElement runtimeElement;
+    WebDriver driver;
     By locator;
 
     public LGLink(By locator) {
@@ -14,7 +16,7 @@ public class LGLink {
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
+            this.runtimeElement = driver.findElement(this.locator);
         }
         return this.runtimeElement;
     }

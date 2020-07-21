@@ -35,12 +35,11 @@ public class DriverUtils {
     public static ExtentReports report = null;
     public static ExtentHtmlReporter htmlReporter = null;
 
-    public static WebDriver getDriver() {
+    public static RemoteWebDriver getDriver() {
         return driver.get();
     }
 
     public static void setDriver(RemoteWebDriver webDriver) {
-
         driver.set(webDriver);
     }
 
@@ -52,7 +51,8 @@ public class DriverUtils {
                     maximizeWindow();
                     break;
                 default:
-                    DriverUtils.setDriver(new DriverManagerFactory().createInstance(browser,logTest));
+                    DriverManagerFactory driverManagerFactory = new DriverManagerFactory();
+                    driverManagerFactory.createInstance(browser,logTest);
                     maximizeWindow();
                     break;
             }
@@ -102,47 +102,9 @@ public class DriverUtils {
         }
     }
 
-    /**
-     * wait for a specific control in period time
-     *
-     * @param controlName Example:
-     *                    - @FindBy(id='NextButton')
-     *                    - WebElement nextButton;
-     *
-     *
-     **/
-    public static void waitForControl(WebElement controlName) {
-        try {
-            new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
-        } catch (Exception ex) {
-        }
-    }
-
     public static void maximizeWindow() {
         getDriver().manage().window().maximize();
     }
-
-    /**
-     * @Action name: waitForPageLoaded()
-     * @Example: waitForPageLoaded()
-     * @Purpose: wait until page is loaded completed
-     */
-    public static void waitForPageLoaded() {
-        ExpectedCondition<Boolean> expectation = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
-                    }
-                };
-        try {
-            Thread.sleep(1000);
-            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-            wait.until(expectation);
-        } catch (Throwable error) {
-            Assert.fail("Timeout waiting for Page Load Request to complete.");
-        }
-    }
-
     /**
      *
      * @param detail
@@ -225,53 +187,4 @@ public class DriverUtils {
 
         }
     }
-
-    /**
-     * @Action: isElementClickable
-     * @param elementName
-     * @throws IOException
-     * */
-
-    public static boolean isElementClickable(By elementName, int waitTime) throws IOException {
-        try {
-            new WebDriverWait(DriverUtils.getDriver(), waitTime).until(ExpectedConditions.invisibilityOfElementLocated(elementName));
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
-    }
-
-    public static void checkControlExist(ExtentTest logTest, WebElement elementName, String objectName) throws IOException {
-        try {
-            waitForControl(elementName);
-            if (!doesControlExist(elementName)) logFail(logTest, objectName + " does not exist.");
-            else logPass(logTest, objectName + " exists.");
-        } catch (Exception e) {
-
-        }
-    }
-
-    public static boolean doesControlExist(WebElement control){
-        try {
-            return control.isSelected();
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public static void refreshPage() {
-        try {
-            getDriver().navigate().refresh();
-            waitForPageLoaded();
-        } catch (Exception e) {
-        }
-    }
-
-    public static void waitForControlToBeClickable(WebElement controlName) {
-        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
-        new WebDriverWait(getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
-    }
-
 }

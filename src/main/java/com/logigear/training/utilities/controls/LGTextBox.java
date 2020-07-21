@@ -1,20 +1,23 @@
 package com.logigear.training.utilities.controls;
 
-import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.pages.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LGTextBox {
+public class LGTextBox extends BasePage {
     WebElement runtimeElement;
     By locator;
+    WebDriver driver;
 
-    public LGTextBox(By locator) {
+    public LGTextBox(WebDriver driver, By locator) {
+        super(driver);
         this.locator = locator;
     }
 
     public WebElement getRuntimeElement() {
         if (runtimeElement == null) {
-            this.runtimeElement = DriverUtils.getDriver().findElement(this.locator);
+            this.runtimeElement = driver.findElement(this.locator);
         }
         return this.runtimeElement;
     }

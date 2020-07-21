@@ -1,26 +1,28 @@
 package com.logigear.training.pages;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.IOException;
 
-public class AddPageForm extends DriverUtils {
-
-    public LGTextBox txtPageName = new LGTextBox(By.xpath("//input[@id='name']"));
-    public LGSelect ddlParentPage = new LGSelect(By.xpath("//select[@id='parent']"));
-    public LGSelect ddlNumberColumn = new LGSelect(By.xpath("//select[@id='columnnumber']"));
-    public LGSelect ddlDisplayAfter = new LGSelect(By.xpath("//select [@id='afterpage']"));
-    public LGButton btnOK = new LGButton(By.xpath("//input[@id='OK']"));
-    public LGButton btnCancel = new LGButton(By.xpath("//input[@id='Cancel']"));
-    LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
-
+public class AddPageForm extends BasePage {
+    final LGTextBox txtPageName = new LGTextBox(getDriver(),By.xpath("//input[@id='name']"));
+    final LGSelect ddlParentPage = new LGSelect(By.xpath("//select[@id='parent']"));
+    final LGSelect ddlNumberColumn = new LGSelect(By.xpath("//select[@id='columnnumber']"));
+    final LGSelect ddlDisplayAfter = new LGSelect(By.xpath("//select [@id='afterpage']"));
+    final LGButton btnOK = new LGButton(By.xpath("//input[@id='OK']"));
+    final LGButton btnCancel = new LGButton(By.xpath("//input[@id='Cancel']"));
+    final LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
     @FindBy(xpath = "//input[@id='ispublic']")
     public WebElement chkPublic;
+
+    public AddPageForm(WebDriver driver) {
+        super(driver);
+    }
 
     public void checkAddPageModalDisplay(ExtentTest logTest) throws IOException {
         try {
@@ -70,7 +72,6 @@ public class AddPageForm extends DriverUtils {
             waitForControlToBeClickable(btnCancel.getRuntimeElement());
             btnCancel.click();
         }
-
     }
 }
 
