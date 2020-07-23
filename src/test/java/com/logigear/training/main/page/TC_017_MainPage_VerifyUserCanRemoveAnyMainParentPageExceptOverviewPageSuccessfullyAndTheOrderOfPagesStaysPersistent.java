@@ -6,7 +6,10 @@ import com.logigear.training.pages.AddPageForm;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
+import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.utilities.controls.LGAlert;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -64,12 +67,34 @@ public class TC_017_MainPage_VerifyUserCanRemoveAnyMainParentPageExceptOverviewP
         addPageForm.clickButton("OK");
         addPageForm.waitForPageLoaded();
 
-        logClass.log(Status.INFO, "Step #5. Click on Parent page -> Click Delete link");
+        logClass.log(Status.INFO, "Step #5. Click on Parent page ");
         DashboardPage dbPage1 = new DashboardPage();
-        String idPage = dbPage.getIdPage();
-        dbPage1.deletePage(idPage);
+        String idPage = dbPage1.getIdPage();
+        dbPage1.clickOnPage(idPage);
+
+        logClass.log(Status.INFO, "Step #6. Click Delete link");
+        dbPage1.lblGlobalSetting.click();
+        dbPage1.waitForControl(dbPage1.getSubMenu("Delete"));
+        dbPage1.getSubMenu("Delete").click();
 
         logClass.log(Status.INFO, "VP: Confirm message \"Are you sure you want to remove this page?\" appears");
+        LGAlert alert = new LGAlert();
+        Assert.assertTrue(alert.waitForAlertPresent());
+
+        logClass.log(Status.INFO, "Step #7. Click OK button");
+        alert.acceptAlert();
+
+        logClass.log(Status.INFO, "VP: Check warning message \"Can not delete page 'Test' since it has children page(s)\" appears");
+        Assert.assertTrue(alert.waitForAlertPresent());
+
+        logClass.log(Status.INFO, "Step #8. Click OK button");
+        alert.acceptAlert();
+
+        logClass.log(Status.INFO, "Step #9. Click on children page");
+        String idPage1 = dbPage1.getIdPage();
+        dbPage1.clickOnPage(idPage1);
+
+
 
 
 

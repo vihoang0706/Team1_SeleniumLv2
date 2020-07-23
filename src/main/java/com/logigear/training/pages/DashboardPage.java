@@ -24,7 +24,7 @@ public class DashboardPage extends DriverUtils {
     LGTextBox txtPageName = new LGTextBox(By.id("name"));
     LGButton btnOk = new LGButton(By.id("OK"));
 
-    protected WebElement getSubMenu(String tabName) {
+    public WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
     }
 
