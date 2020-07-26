@@ -4,7 +4,6 @@ import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,20 +14,10 @@ public class TC_003_LoginPage_VerifyErrorMessageDisplaysWhenLoginWithIncorrectPa
 
     @Test(description = "Verify that user fails to log in specific repository successfully via Dashboard login page with correct username and incorrect password")
     public void DA_LOGIN_TC003() {
-
-        //Main Steps
-        logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
-        navigateToTestSite(Constants.AUT);
-
-        DriverUtils.waitForPageLoaded();
-
-        logClass.log(Status.INFO, "Step #2. Login with valid username and invalid password");
+        logClass.log(Status.INFO, "Step #1. Login with valid username and invalid password");
         loginPage.login(Constants.VALID_USERNAME, Constants.INVALID_PASSWORD);
 
-        // Wait for Alert present
-        alert.waitForAlertPresent();
-
-        logClass.log(Status.INFO, "Step #3. Verify that Dashboard Error message \"Username or password is invalid\" appears");
+        logClass.log(Status.INFO, "Step #2. Verify that Dashboard Error message \"Username or password is invalid\" appears");
         String actualErrorMessage = loginPage.getErrorMessage();
         Assert.assertEquals(actualErrorMessage,Constants.INVALID_USERNAME_OR_PASSWORD_MSG);
 

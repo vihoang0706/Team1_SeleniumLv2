@@ -2,7 +2,7 @@ package com.logigear.training.common;
 
 public class Constants {
     // AUT
-    public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp";
+    public static final String AUT = "https://cc0de9b0c966.ngrok.io/TADashboard/login.jsp";
 
     //Time
     public static final int WAIT_TIME = 5;

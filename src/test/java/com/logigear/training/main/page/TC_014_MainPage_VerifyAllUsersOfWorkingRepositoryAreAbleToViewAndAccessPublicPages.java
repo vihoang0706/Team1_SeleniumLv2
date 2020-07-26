@@ -2,12 +2,13 @@ package com.logigear.training.main.page;
 
 import com.aventstack.extentreports.Status;
 import com.logigear.training.common.Constants;
+import com.logigear.training.model.PageInfo;
 import com.logigear.training.pages.AddPageForm;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
+import com.logigear.training.utilities.ExtentTestReport;
 import com.logigear.training.utilities.controls.LGAlert;
-import com.logigear.training.utilities.DriverUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -18,27 +19,24 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
     public DashboardPage dashboardPage = new DashboardPage();
     public AddPageForm addPageForm = new AddPageForm();
     public LGAlert alert = new LGAlert();
-    String pageName = "TdTesting";
+    String newPageName = "TdTesting";
 
     @Test(description = "Verify that 'Public' pages can be visible and accessed by all users of working repository")
     public void DA_MP_TC014() throws IOException {
-        //Main Steps
-        logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
-        navigateToTestSite(Constants.AUT);
-
-        logClass.log(Status.INFO, "Step #2. Log in specific repository with valid account");
+        logClass.log(Status.INFO, "Step #1. Log in specific repository with valid account");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
-        loginPage.sleep(2);
+
+        logClass.log(Status.INFO, "Step #2. Go to Global Setting -> Add page");
+        dashboardPage.goToAddPage();
+
         logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
-        dashboardPage.sleep(2);
-        logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
-        dashboardPage.goToAddPage();
-
-        DriverUtils.sleep(2);
         logClass.log(Status.INFO, "Step #4. Enter Page Name field");
-        addPageForm.enterNewPageInfo(pageName, null, null, null, false);
+        addPageForm.submitPageInformation(new PageInfo() {{
+            pageName = newPageName;
+            isPublic = false;
+        }});
 
         logClass.log(Status.INFO, "Step #5. Check Public checkbox");
         addPageForm.checkOnIsPublicCheckbox();
@@ -51,14 +49,12 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
         logClass.log(Status.INFO, "Step #7. Click on Log out link");
         dashboardPage.logout();
 
-        dashboardPage.sleep(2);
         logClass.log(Status.INFO, "Step #8. Log in with another valid account");
         LoginPage lgPage = new LoginPage();
         lgPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
-        lgPage.sleep(2);
         DashboardPage dbPage = new DashboardPage();
-        logClass.log(Status.INFO, "Step #8. Check newly added page is visible");
-        dbPage.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
+        logClass.log(Status.INFO, "Step #9. Check newly added page is visible");
+        ExtentTestReport.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");
     }
 }

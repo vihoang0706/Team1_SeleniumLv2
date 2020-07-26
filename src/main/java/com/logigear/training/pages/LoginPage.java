@@ -1,18 +1,22 @@
 package com.logigear.training.pages;
 
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import com.logigear.training.utilities.controls.LGButton;
 import com.logigear.training.utilities.controls.LGSelect;
 import com.logigear.training.utilities.controls.LGTextBox;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.By;
 
-public class LoginPage extends DriverUtils {
-    LGSelect cbbRepository = new LGSelect(By.id("repository"));
-    LGTextBox txtUsername = new LGTextBox(By.id("username"));
-    LGTextBox txtPassword = new LGTextBox(By.id("password"));
-    LGButton btnLogin = new LGButton(By.className("btn-login"));
-    LGAlert alert = new LGAlert();
+public class LoginPage extends BasePage {
+    final LGSelect cbbRepository = new LGSelect(By.id("repository"));
+
+    final LGTextBox txtUsername = new LGTextBox(By.id("username"));
+
+    final LGTextBox txtPassword = new LGTextBox(By.id("password"));
+
+    final LGButton btnLogin = new LGButton(By.className("btn-login"));
+
+    final LGAlert alert = new LGAlert();
 
     public void setTxtUsername(String username) {
         txtUsername.enter(username);
@@ -31,11 +35,13 @@ public class LoginPage extends DriverUtils {
     }
 
     public void login(String username, String password) {
+        WebDriverWaitUtils.waitForControl(txtUsername.getRuntimeElement());
         txtUsername.clearField();
         this.setTxtUsername(username);
         txtPassword.clearField();
         this.setTxtPassword(password);
         this.clickLogin();
+        WebDriverWaitUtils.waitForPageLoaded();
     }
 
     public void selectRepository (String repository) {
