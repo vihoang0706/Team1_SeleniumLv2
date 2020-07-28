@@ -8,6 +8,7 @@ import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class DashboardPage extends BasePage {
     public void logout() {
         lblWelcomeAccount.click();
         lnkLogout.click();
+        WebDriverWaitUtils.waitForPageLoaded();
     }
 
     public String getWelcomeAccount() {
@@ -54,6 +56,7 @@ public class DashboardPage extends BasePage {
         WebDriverWaitUtils.waitForControl(lblGlobalSetting.getRuntimeElement());
         try {
             lblGlobalSetting.click();
+            WebDriverWaitUtils.waitForControl(this.getSubMenu("Add Page"));
             this.getSubMenu("Add Page").click();
         } catch (ElementClickInterceptedException e) {
             System.out.println("Element is not interacted");
@@ -105,7 +108,17 @@ public class DashboardPage extends BasePage {
         lblGlobalSetting.click();
         WebDriverWaitUtils.waitForControl(this.getSubMenu("Delete"));
         this.getSubMenu("Delete").click();
-        alert.waitForAlertPresent();
+        WebDriverWaitUtils.waitForAlertPresent();
+        alert.acceptAlert();
+    }
+
+    public void deleteChildPage(String parentPage, String childPage) {
+        clickOnPage(parentPage);
+        clickOnPage(childPage);
+        lblGlobalSetting.click();
+        WebDriverWaitUtils.waitForControl(this.getSubMenu("Delete"));
+        this.getSubMenu("Delete").click();
+        WebDriverWaitUtils.waitForAlertPresent();
         alert.acceptAlert();
     }
 
@@ -115,5 +128,24 @@ public class DashboardPage extends BasePage {
             result = true;
         }
         return result;
+    }
+
+    protected WebElement getPage(String pageId) {
+        String lnkPage = "a[href='/TADashboard/"+pageId+".page']";
+        return DriverUtils.getDriver().findElement(By.cssSelector(String.format(lnkPage, pageId)));
+    }
+
+    public boolean isChildPageDisplayed(String parentPage, String childPage) {
+        boolean result = false;
+        hoverOnElement(getPage(parentPage));
+        if (getPage(childPage).isDisplayed()) {
+            result = true;
+        }
+        return result;
+    }
+
+    public static void hoverOnElement(WebElement element) {
+        Actions action = new Actions(DriverUtils.getDriver());
+        action.moveToElement(element).build().perform();
     }
 }

@@ -5,8 +5,8 @@ import com.logigear.training.common.Constants;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.ExtentTestReport;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,9 +20,11 @@ public class TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends
         logClass.log(Status.INFO, "Step #1. Login with valid username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
+        WebDriverWaitUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #2. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
+        WebDriverWaitUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #3. Try to go to Global Setting -> Add page again");
         dashboardPage.goToAddPage();
 

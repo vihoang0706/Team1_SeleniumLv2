@@ -2,7 +2,6 @@ package com.logigear.training.pages;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.logigear.training.model.PageInfo;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.*;
 import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.By;

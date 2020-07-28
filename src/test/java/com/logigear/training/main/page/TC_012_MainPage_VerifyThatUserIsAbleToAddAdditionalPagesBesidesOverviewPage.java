@@ -7,8 +7,8 @@ import com.logigear.training.pages.AddPageForm;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
-import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.ExtentTestReport;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -26,6 +26,7 @@ public class TC_012_MainPage_VerifyThatUserIsAbleToAddAdditionalPagesBesidesOver
         logClass.log(Status.INFO, "Step #1. Login with empty username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
+        WebDriverWaitUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #2. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 

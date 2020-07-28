@@ -1,6 +1,5 @@
 package com.logigear.training.utilities.webdrivers;
 import com.aventstack.extentreports.ExtentTest;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;

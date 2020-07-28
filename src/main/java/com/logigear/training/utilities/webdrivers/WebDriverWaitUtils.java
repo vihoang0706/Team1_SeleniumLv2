@@ -1,5 +1,6 @@
 package com.logigear.training.utilities.webdrivers;
 
+import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +26,8 @@ public class WebDriverWaitUtils {
                     }
                 };
         try {
-            Thread.sleep(1000);
-            WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), 30);
+            Thread.sleep(2000);
+            WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), 40);
             wait.until(expectation);
         } catch (Throwable error) {
             Assert.fail("Timeout waiting for Page Load Request to complete.");
@@ -53,5 +54,10 @@ public class WebDriverWaitUtils {
     public static void waitForControlToBeClickable(WebElement controlName) {
         new WebDriverWait(DriverUtils.getDriver(), WAIT_TIME).until(ExpectedConditions.visibilityOf(controlName));
         new WebDriverWait(DriverUtils.getDriver(), WAIT_TIME).until(ExpectedConditions.elementToBeClickable(controlName));
+    }
+
+    public static void waitForAlertPresent() {
+        WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), Constants.WAIT_TIME);
+        wait.until(ExpectedConditions.alertIsPresent());
     }
 }

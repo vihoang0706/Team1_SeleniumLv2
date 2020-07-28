@@ -8,7 +8,9 @@ import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
 import com.logigear.training.utilities.ExtentTestReport;
+import com.logigear.training.utilities.RandomString;
 import com.logigear.training.utilities.controls.LGAlert;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -19,16 +21,18 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
     public DashboardPage dashboardPage = new DashboardPage();
     public AddPageForm addPageForm = new AddPageForm();
     public LGAlert alert = new LGAlert();
-    String newPageName = "TdTesting";
+    String newPageName = RandomString.randomData("TdTesting");
 
     @Test(description = "Verify that 'Public' pages can be visible and accessed by all users of working repository")
     public void DA_MP_TC014() throws IOException {
         logClass.log(Status.INFO, "Step #1. Log in specific repository with valid account");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
+        WebDriverWaitUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #2. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
+        WebDriverWaitUtils.waitForPageLoaded();
         logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
@@ -43,16 +47,17 @@ public class TC_014_MainPage_VerifyAllUsersOfWorkingRepositoryAreAbleToViewAndAc
 
         logClass.log(Status.INFO, "Step #6. Click OK button");
         addPageForm.clickButton("ok");
-        alert.waitForAlertPresent();
         alert.acceptAlert();
 
         logClass.log(Status.INFO, "Step #7. Click on Log out link");
         dashboardPage.logout();
+        WebDriverWaitUtils.waitForPageLoaded();
 
         logClass.log(Status.INFO, "Step #8. Log in with another valid account");
         LoginPage lgPage = new LoginPage();
         lgPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
+        WebDriverWaitUtils.waitForPageLoaded();
         DashboardPage dbPage = new DashboardPage();
         logClass.log(Status.INFO, "Step #9. Check newly added page is visible");
         ExtentTestReport.verifyExpectedAndActualResults(logClass, String.valueOf(dbPage.isDialogDisplayed()), "true");

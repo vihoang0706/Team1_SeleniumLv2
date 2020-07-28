@@ -16,7 +16,7 @@ public class LoginPage extends BasePage {
 
     final LGButton btnLogin = new LGButton(By.className("btn-login"));
 
-    final LGAlert alert = new LGAlert();
+    LGAlert alert = new LGAlert();
 
     public void setTxtUsername(String username) {
         txtUsername.enter(username);
@@ -41,7 +41,6 @@ public class LoginPage extends BasePage {
         txtPassword.clearField();
         this.setTxtPassword(password);
         this.clickLogin();
-        WebDriverWaitUtils.waitForPageLoaded();
     }
 
     public void selectRepository (String repository) {
@@ -49,7 +48,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
-        alert.waitForAlertPresent(); // Wait for Alert present
+        WebDriverWaitUtils.waitForAlertPresent(); // Wait for Alert present
         String errorMessage = alert.getText();
         return errorMessage;
     }

@@ -81,14 +81,13 @@ public class TestBase extends ExtentTestReport {
         WebDriverWaitUtils.waitForPageLoaded();
     }
 
-    @AfterMethod
+    @AfterClass
     public synchronized void afterMethod() throws IOException {
-        DriverUtils.quit();
+        DriverUtils.getDriver().quit();
     }
 
-    @AfterClass()
+    @AfterSuite()
     public synchronized void afterClass() throws IOException {
-
         List statusHierarchy = Arrays.asList(
                 Status.FATAL,
                 Status.FAIL,
@@ -101,9 +100,7 @@ public class TestBase extends ExtentTestReport {
         );
 
         report.config().statusConfigurator().setStatusHierarchy(statusHierarchy);
-
         report.flush();
         logClass = null;
-
     }
 }

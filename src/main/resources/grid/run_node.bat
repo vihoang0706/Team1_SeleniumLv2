@@ -1,2 +1,0 @@
-set current_dir=%cd%
-java -Dwebdriver.chrome.driver=chromedriver.exe -Dwebdriver.gecko.driver=geckodriver.exe -jar %current_dir%\selenium-server-standalone-3.141.59.jar -role node -nodeConfig %current_dir%\node_win.json
