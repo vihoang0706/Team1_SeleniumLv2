@@ -5,8 +5,8 @@ import com.logigear.training.common.Constants;
 import com.logigear.training.pages.DashboardPage;
 import com.logigear.training.pages.LoginPage;
 import com.logigear.training.test.base.TestBase;
-import com.logigear.training.utilities.DriverUtils;
-import org.openqa.selenium.By;
+import com.logigear.training.utilities.ExtentTestReport;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -15,25 +15,20 @@ public class TC_011_MainPage_VerifyUserISUnableOpenMoreThanNewPageDialog extends
     public LoginPage loginPage = new LoginPage();
     public DashboardPage dashboardPage = new DashboardPage();
 
-    @Test
+    @Test(description = "Verify that user is unable open more than 1 \"New Page\" dialog")
     public void DA_MP_TC011() throws IOException {
-
-        //Main Steps
-        logClass.log(Status.INFO, "Step #1. Navigate to Dashboard login page");
-        navigateToTestSite(Constants.AUT);
-
-        logClass.log(Status.INFO, "Step #2. Login with valid username and password");
+        logClass.log(Status.INFO, "Step #1. Login with valid username and password");
         loginPage.login(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
-        DriverUtils.waitForPageLoaded();
-        logClass.log(Status.INFO, "Step #3. Go to Global Setting -> Add page");
+        WebDriverWaitUtils.waitForPageLoaded();
+        logClass.log(Status.INFO, "Step #2. Go to Global Setting -> Add page");
         dashboardPage.goToAddPage();
 
-        DriverUtils.sleep(5);
-        logClass.log(Status.INFO, "Step #4. Try to go to Global Setting -> Add page again");
+        WebDriverWaitUtils.waitForPageLoaded();
+        logClass.log(Status.INFO, "Step #3. Try to go to Global Setting -> Add page again");
         dashboardPage.goToAddPage();
 
-        logClass.log(Status.INFO, "Step #5. Observe the current page->User cannot go to Global Setting -> Add page while \"New Page\" dialog appears.\n");
-        dashboardPage.verifyExpectedAndActualResults(logClass, dashboardPage.isDialogDisplayed(),"Add Page");
+        logClass.log(Status.INFO, "Step #4. Observe the current page->User cannot go to Global Setting -> Add page while \"New Page\" dialog appears.\n");
+        ExtentTestReport.verifyExpectedAndActualResults(logClass, dashboardPage.isDialogDisplayed(),"Add Page");
     }
 }

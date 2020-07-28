@@ -2,10 +2,10 @@ package com.logigear.training.common;
 
 public class Constants {
     // AUT
-    public static final String AUT = "https://d7ec79cacfa4.ngrok.io/TADashboard/login.jsp";
+    public static final String AUT = "https://cc0de9b0c966.ngrok.io/TADashboard/login.jsp";
 
     //Time
-    public static final int WAIT_TIME = 5;
+    public static final int WAIT_TIME = 7;
 
     // Driver Path
     public static final String CHROME_DRIVER_LOCATION = ".\\src\\main\\resources\\drivers\\chromedriver.exe";
@@ -22,7 +22,7 @@ public class Constants {
     public static final String LOWERCASE_PASSWORD = "test";
 
     // Messages
-    public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid123";
+    public static final String INVALID_USERNAME_OR_PASSWORD_MSG = "Username or password is invalid";
     public static final String EMPTY_USERNAME_AND_PASSWORD_MSG = "Please enter username!";
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String RESOURCES_PATH = PROJECT_PATH + "\\src\\main\\resources\\";

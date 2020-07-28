@@ -1,40 +1,45 @@
 package com.logigear.training.pages;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.logigear.training.utilities.DriverUtils;
 import com.logigear.training.utilities.controls.LGAlert;
 import com.logigear.training.utilities.controls.LGLabel;
 import com.logigear.training.utilities.controls.LGLink;
-import com.logigear.training.utilities.controls.*;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class DashboardPage extends DriverUtils {
-    public ExtentTest logTest;
-    LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
-    LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
-    LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
-    private String lblSubMenu = "//a[contains(text(),'%s')]";
-    public LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
-    LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
-    LGAlert alert = new LGAlert();
-    LGTextBox txtPageName = new LGTextBox(By.id("name"));
-    LGButton btnOk = new LGButton(By.id("OK"));
+public class DashboardPage extends BasePage {
+    final LGLink lnkLogout = new LGLink(By.xpath("//a[.='Logout']"));
+
+    final LGLabel lblWelcomeAccount = new LGLabel(By.xpath("//a[@href='#Welcome']"));
+
+    final LGLabel lblRepository = new LGLabel(By.xpath("//a[@href='#Repository']/span"));
+
+    final String lblSubMenu = "//a[contains(text(),'%s')]";
+
+    final LGLabel lblGlobalSetting = new LGLabel(By.xpath("//li[@class='mn-setting']/a"));
+
+    final LGLabel lblTitle = new LGLabel(By.xpath("//h2[.='New Page']"));
+
+    final LGAlert alert = new LGAlert();
 
     protected WebElement getSubMenu(String tabName) {
         return DriverUtils.getDriver().findElement(By.xpath(String.format(lblSubMenu, tabName)));
     }
 
     public String getRepository() {
+        WebDriverWaitUtils.waitForControl(lblRepository.getRuntimeElement());
         return lblRepository.getText();
     }
 
     public void logout() {
         lblWelcomeAccount.click();
         lnkLogout.click();
+        WebDriverWaitUtils.waitForPageLoaded();
     }
 
     public String getWelcomeAccount() {
@@ -47,22 +52,11 @@ public class DashboardPage extends DriverUtils {
         DriverUtils.getDriver().findElement(By.partialLinkText(repo)).click();
     }
 
-    public void addPage(String pageName) {
-        this.setPageName(pageName);
-        this.clickOk();
-    }
-
-    public void setPageName(String pageName) {
-        txtPageName.enter(pageName);
-    }
-
-    public void clickOk() {
-        btnOk.click();
-    }
-
     public void goToAddPage() {
+        WebDriverWaitUtils.waitForControl(lblGlobalSetting.getRuntimeElement());
         try {
             lblGlobalSetting.click();
+            WebDriverWaitUtils.waitForControl(this.getSubMenu("Add Page"));
             this.getSubMenu("Add Page").click();
         } catch (ElementClickInterceptedException e) {
             System.out.println("Element is not interacted");
@@ -77,35 +71,6 @@ public class DashboardPage extends DriverUtils {
         String actualTitle = lblTitle.getText();
         return actualTitle;
     }
-
-    public void openNewAddedPage(String namePage) {
-        WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
-        List<WebElement> pagesList = pageUL.findElements(By.tagName("li"));
-        for (WebElement li : pagesList) {
-            if (li.getText().equals(namePage)){
-                li.click();
-            }
-        }
-    }
-
-//    public Boolean checkNewAddedPageShowsAfterOverview(String addedPage) {
-//        WebElement pageUL = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul"));
-//        List<WebElement> pagesList = pageUL.findElements(By.tagName("li"));
-//        if (getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li")).getText().equals("Overview")) {
-//
-//        }
-//        for (int i = 1; i <= pagesList.size(); i++) {
-//            WebElement pageName = getDriver().findElement(By.xpath("//div[@id='main-menu']//ul/li"));
-//            if (pageName.getText().equals(addedPage)) {
-//                System.out.println(i);
-//            }
-//
-//
-//        }
-//
-//        return true;
-//
-//    }
 
     public boolean isPositionOfThisPageNextAnotherPage(String namePage, String anotherPage) {
         List<WebElement> links = DriverUtils.getDriver().findElements(By.xpath("//div[@id=\"main-menu\"]//li/a[contains(@href, \"/TADashboard\")]"));
@@ -123,6 +88,7 @@ public class DashboardPage extends DriverUtils {
     }
 
     public String getIdPage() {
+        DriverUtils.sleep(5);
         String url = DriverUtils.getDriver().getCurrentUrl();
         String partUrl1[] = url.split("TADashboard/");
         String partUrl2[] = partUrl1[1].split(".page");
@@ -134,15 +100,25 @@ public class DashboardPage extends DriverUtils {
         String lnkDynamicPage = "//a[@href='/TADashboard/"+pageId+".page']";
         System.out.println(lnkDynamicPage);
         DriverUtils.getDriver().findElement(By.xpath(lnkDynamicPage)).click();
-
     }
 
     public void deletePage(String pageId) {
+        DriverUtils.sleep(5);
         clickOnPage(pageId);
         lblGlobalSetting.click();
-        DriverUtils.waitForControl(this.getSubMenu("Delete"));
+        WebDriverWaitUtils.waitForControl(this.getSubMenu("Delete"));
         this.getSubMenu("Delete").click();
-        alert.waitForAlertPresent();
+        WebDriverWaitUtils.waitForAlertPresent();
+        alert.acceptAlert();
+    }
+
+    public void deleteChildPage(String parentPage, String childPage) {
+        clickOnPage(parentPage);
+        clickOnPage(childPage);
+        lblGlobalSetting.click();
+        WebDriverWaitUtils.waitForControl(this.getSubMenu("Delete"));
+        this.getSubMenu("Delete").click();
+        WebDriverWaitUtils.waitForAlertPresent();
         alert.acceptAlert();
     }
 
@@ -152,5 +128,24 @@ public class DashboardPage extends DriverUtils {
             result = true;
         }
         return result;
+    }
+
+    protected WebElement getPage(String pageId) {
+        String lnkPage = "a[href='/TADashboard/"+pageId+".page']";
+        return DriverUtils.getDriver().findElement(By.cssSelector(String.format(lnkPage, pageId)));
+    }
+
+    public boolean isChildPageDisplayed(String parentPage, String childPage) {
+        boolean result = false;
+        hoverOnElement(getPage(parentPage));
+        if (getPage(childPage).isDisplayed()) {
+            result = true;
+        }
+        return result;
+    }
+
+    public static void hoverOnElement(WebElement element) {
+        Actions action = new Actions(DriverUtils.getDriver());
+        action.moveToElement(element).build().perform();
     }
 }

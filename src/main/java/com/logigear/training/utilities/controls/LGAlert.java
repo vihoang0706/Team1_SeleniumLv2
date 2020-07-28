@@ -1,19 +1,14 @@
 package com.logigear.training.utilities.controls;
 
-import com.logigear.training.common.Constants;
 import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LGAlert {
-    public void waitForAlertPresent() {
-        WebDriverWait wait = new WebDriverWait(DriverUtils.getDriver(), Constants.WAIT_TIME);
-        wait.until(ExpectedConditions.alertIsPresent());
-    }
 
     public void acceptAlert() {
+        WebDriverWaitUtils.waitForAlertPresent();
         Alert alert = DriverUtils.getDriver().switchTo().alert();
         alert.accept();
     }

@@ -2,6 +2,7 @@ package com.logigear.training.utilities.webdrivers;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.utilities.ExtentTestReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -35,7 +36,7 @@ public class LocalDriver extends DriverUtils {
                     WebDriverManager.iedriver().setup();
                     this.webDriver = new InternetExplorerDriver(options);
                 default:
-                    logFail(logTest, "Our framework does not support this platform: " + browser);
+                    ExtentTestReport.logFail(logTest, "Our framework does not support this platform: " + browser);
                     break;
             }
         } catch (Exception e) {

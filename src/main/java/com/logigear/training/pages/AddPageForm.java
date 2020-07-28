@@ -1,23 +1,29 @@
 package com.logigear.training.pages;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.logigear.training.utilities.DriverUtils;
+import com.logigear.training.model.PageInfo;
 import com.logigear.training.utilities.controls.*;
+import com.logigear.training.utilities.webdrivers.WebDriverWaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.IOException;
 
-public class AddPageForm extends DriverUtils {
+public class AddPageForm extends BasePage {
+    final LGTextBox txtPageName = new LGTextBox(By.xpath("//input[@id='name']"));
 
-    public LGTextBox txtPageName = new LGTextBox(By.xpath("//input[@id='name']"));
-    public LGSelect ddlParentPage = new LGSelect(By.xpath("//select[@id='parent']"));
-    public LGSelect ddlNumberColumn = new LGSelect(By.xpath("//select[@id='columnnumber']"));
-    public LGSelect ddlDisplayAfter = new LGSelect(By.xpath("//select [@id='afterpage']"));
-    public LGButton btnOK = new LGButton(By.xpath("//input[@id='OK']"));
-    public LGButton btnCancel = new LGButton(By.xpath("//input[@id='Cancel']"));
-    LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
+    final LGSelect ddlParentPage = new LGSelect(By.xpath("//select[@id='parent']"));
+
+    final LGSelect ddlNumberColumn = new LGSelect(By.xpath("//select[@id='columnnumber']"));
+
+    final LGSelect ddlDisplayAfter = new LGSelect(By.xpath("//select [@id='afterpage']"));
+
+    final LGButton btnOK = new LGButton(By.xpath("//input[@id='OK']"));
+
+    final LGButton btnCancel = new LGButton(By.xpath("//input[@id='Cancel']"));
+
+    final LGCheckbox chbIsPublic = new LGCheckbox(By.id("ispublic"));
 
     @FindBy(xpath = "//input[@id='ispublic']")
     public WebElement chkPublic;
@@ -30,32 +36,39 @@ public class AddPageForm extends DriverUtils {
         }
     }
 
-    public void enterNewPageInfo(String pagename, String parentOption, String columnOption, String displayAfterOption, Boolean publicOption) throws IOException {
+    public void enterNewPageInfo(PageInfo newPage) throws IOException {
         try {
-            waitForPageLoaded();
-            if (pagename != null) {
-                waitForControl(chkPublic);
+            WebDriverWaitUtils.waitForPageLoaded();
+            if (newPage.pageName != null) {
+                WebDriverWaitUtils.waitForControl(chkPublic);
                 txtPageName.clearField();
-                txtPageName.enter(pagename);
+                txtPageName.enter(newPage.pageName);
             }
 
-            if (parentOption != null) {
-                ddlParentPage.select(parentOption);
+            if (newPage.parentPage != null) {
+                ddlParentPage.select(newPage.parentPage);
             }
 
-            if (columnOption != null) {
-                ddlNumberColumn.select(columnOption);
+            if (newPage.columnNumber != null) {
+                ddlNumberColumn.select(newPage.columnNumber);
             }
 
-            if (displayAfterOption != null) {
-                ddlDisplayAfter.select(displayAfterOption);
+            if (newPage.position != null) {
+                ddlDisplayAfter.select(newPage.position);
             }
-            if (publicOption.equals("true")) {
+            if (newPage.isPublic==true) {
                 chkPublic.isSelected();
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
+
+    public void submitPageInformation(PageInfo newPage) throws IOException {
+        this.enterNewPageInfo(newPage);
+        this.clickButton("ok");
+    }
+
 
     public void checkOnIsPublicCheckbox() {
         chbIsPublic.check();
@@ -64,10 +77,10 @@ public class AddPageForm extends DriverUtils {
     public void clickButton(String buttonName){
         buttonName = buttonName.toLowerCase();
         if (buttonName.equals("ok")) {
-            waitForControlToBeClickable(btnOK.getRuntimeElement());
+            WebDriverWaitUtils.waitForControlToBeClickable(btnOK.getRuntimeElement());
             btnOK.click();
         } else if (buttonName.equals("cancel")){
-            waitForControlToBeClickable(btnCancel.getRuntimeElement());
+            WebDriverWaitUtils.waitForControlToBeClickable(btnCancel.getRuntimeElement());
             btnCancel.click();
         }
 
