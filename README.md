@@ -62,6 +62,13 @@ In case, you want to run test scripts by parallel, you can config file ```testsu
 On this file, you define all test cases you want to run on there.
 After that, right clicking on ```testsuites.xml``` and run test scripts.
 
+3. Usage
+- Common: Define test variables
+- Pages: Define all elements and method using into each page
+- Utilities: Define Control Wrapper, WebDrivers
+- Suites: Containing ReportTheme and TestSuites file to run 
+- Test: Includes all testcases
+
 ##Support
 Please contact us via Skype or send an message to address if you need to help:
 1. anhthaodinh98
