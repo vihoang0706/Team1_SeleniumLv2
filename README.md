@@ -1,4 +1,4 @@
-# Selenium Java
+#Selenium Java
 
 Selenium is an umbrella project encapsulating a variety of tools and libraries enabling web browser automation. 
 Selenium specifically provides infrastructure for the W3C WebDriver specification — a platform and language-neutral 
@@ -9,7 +9,16 @@ learn about how to build an automation framework by using Selenium.
 
 AUT(Application under Test): TA Dashboard
 
-## Requirements
+##Table of contents
+* [Selenium Java](#Selenium Java)
+* [Technology and Framework](##Technology and Framework)
+* [How to use this project](##How to use this project)
+* [How to run this project](##How to run this project)
+* [Support](##Support)
+
+##Technology and Framework
+Technology Used : Java, TestNG, Selenium, Maven
+Framework Used: Page Object Model
 
 1. Java 8
 2. IntelliJ IDEA ( It is an integrated development environment written in Java for developing computer software)
@@ -22,6 +31,12 @@ or any tools you prefer
 
 Firstly, you can clone the source code from the github on local by using the command line,
 or you can download the zip file.
+
+Github: https://github.com/vihoang0706/Team1_SeleniumLv2
+
+```bash
+git clone https://github.com/vihoang0706/Team1_SeleniumLv2.git 
+```
 
 After having the source code on the local, you import this project into the tool where you use writing the test script
 
@@ -47,5 +62,8 @@ In case, you want to run test scripts by parallel, you can config file ```testsu
 On this file, you define all test cases you want to run on there.
 After that, right clicking on ```testsuites.xml``` and run test scripts.
 
-##Framework structure
-Selenium project designed to Page Object Model pattern
+##Support
+Please contact us via Skype or send an message to address if you need to help:
+1. anhthaodinh98
+2. 3e569a459f94025c
+3. tranthithuhang_1991
